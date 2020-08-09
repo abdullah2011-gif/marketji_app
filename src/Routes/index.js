@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from '../screens/Login/Login.screen';
 import Dashboard from '../screens/Dashboard/Dashboard.screen';
+import Checkout from '../screens/Checkout/Checkout.screen';
 import { connect, useSelector } from 'react-redux';
 const Stack = createStackNavigator();
 export default function Routes() {
@@ -16,6 +17,7 @@ export default function Routes() {
                     :
                     <Stack.Navigator initialRouteName="Dashboard" headerMode="none">
                         <Stack.Screen name="Dashboard" component={Dashboard} />
+                        <Stack.Screen name="Checkout" component={Checkout} />
                     </Stack.Navigator>
                 }
             </NavigationContainer>

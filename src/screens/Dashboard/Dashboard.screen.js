@@ -17,7 +17,7 @@ import {login, logout} from '../../Redux/Actions/Auth';
 import color from '../../utills/Colors';
 import {width, height} from 'react-native-dimension';
 import {SliderBox} from 'react-native-image-slider-box';
-export default function Dashboard() {
+export default function Dashboard({navigation}) {
   const [images, setImages] = useState([
     'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
     'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
@@ -98,6 +98,7 @@ export default function Dashboard() {
                   <View style={{width: width(47.5), height: height(19.8)}}>
                     <TouchableOpacity
                     activeOpacity={0.8}
+                    onPress={()=>navigation.navigate('Checkout')}
                     style={{
                       width: '100%',
                       height: '75%',
