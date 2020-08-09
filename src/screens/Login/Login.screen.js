@@ -32,7 +32,7 @@ export default function Login() {
                 <TextInput secureTextEntry/>
                 <View style={styles.line} />
                 <Button title="Login" onPress={() => dispatch(login({ userName: 'John Doe' }))} />
-                <Text style={styles.forgot}>Forgot Your Password</Text>
+                <Text style={styles.forgot}>Forgot Your Password?</Text>
                 <Text onPress={()=>setIsLogin(false)} style={styles.signup}>Sign Up</Text>
                      </View>}
     {/* --------------------------------------------signup----------------------------------------------------------- */}
