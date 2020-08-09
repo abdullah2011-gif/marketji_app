@@ -63,8 +63,9 @@ export default function Login() {
                 <TextInput secureTextEntry/>
                 <View style={styles.signupLine} />
                 <Text style={styles.signupWith}>Sign Up with</Text>
-                <View style={{width:width(40),alignSelf:'center',marginTop:height(1),height:height(6),flexDirection:'row',justifyContent:'space-between'}}>
-
+                <View style={{width:width(30),alignSelf:'center',marginTop:height(1),height:height(6),flexDirection:'row',justifyContent:'space-between'}}>
+                  <Image source={require('../../assets/Google-Plus-Logo.png')}style={{width:width(15),height:height(5),resizeMode:'contain'}} />
+                  <Image source={require('../../assets/fbLogo.png')}style={{width:width(15),height:height(5),resizeMode:'contain'}} />
                 </View>
                 <View style={{width:width(50),alignSelf:'center'}}>
                 <Button title="Login" onPress={() => dispatch(login({ userName: 'John Doe' }))} />
