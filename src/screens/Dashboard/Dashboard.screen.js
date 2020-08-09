@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   SafeAreaView,
   StatusBar,
-  FlatList,Image
+  FlatList,
+  Image,
 } from 'react-native';
 import styles from './Dashboard.styles';
 import Button from '../../components/Button/Button.component';
@@ -49,12 +50,32 @@ export default function Dashboard() {
               <View style={styles.dot} />
               <View style={styles.dot} />
             </View>
-            <View style={{flexDirection:'row'}}>
-            <View style={styles.dot} />
-            <View style={{width:width(7),height:height(1.5),marginRight:width(1),borderTopColor:color.white,borderTopWidth:2,borderRightColor:color.white,borderRightWidth:2}} />
-            <View style={{width:width(7),height:height(1.5),marginLeft:width(1),borderTopColor:color.white,borderTopWidth:2,borderLeftColor:color.white,borderLeftWidth:2}} />
-            
-            <View style={styles.dot} />
+            <View style={{flexDirection: 'row'}}>
+              <View style={styles.dot} />
+              <View
+                style={{
+                  width: width(7),
+                  height: height(1.5),
+                  marginRight: width(1),
+                  borderTopColor: color.white,
+                  borderTopWidth: 2,
+                  borderRightColor: color.white,
+                  borderRightWidth: 2,
+                }}
+              />
+              <View
+                style={{
+                  width: width(7),
+                  height: height(1.5),
+                  marginLeft: width(1),
+                  borderTopColor: color.white,
+                  borderTopWidth: 2,
+                  borderLeftColor: color.white,
+                  borderLeftWidth: 2,
+                }}
+              />
+
+              <View style={styles.dot} />
             </View>
             <View style={{flexDirection: 'row'}}>
               <View style={styles.dot} />
@@ -62,19 +83,53 @@ export default function Dashboard() {
               <View style={styles.dot} />
             </View>
           </View>
-          <View style={{height:height(64)}}>
-          <FlatList
-          numColumns={2}
-          data={[{},{},{},{},{},{},{},{},{}]}
-          columnWrapperStyle={{marginBottom:height(2),justifyContent:'space-between',width:width(100)}}
-        contentContainerStyle={{marginTop:height(1)}}
-          renderItem={({item,index})=>{
-              return(<View style={{width:width(47.5),height:height(19.8)}}>
-                   <Image style={{width:'100%',height:'75%',borderTopRightRadius:index%2==0?width(5):0,borderBottomRightRadius:index%2==0?width(5):0,borderTopLeftRadius:index%2!=0?width(5):0,borderBottomLeftRadius:index%2!=0?width(5):0}} source={{uri:'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'}} />
-             <Text style={{paddingTop:height(1.5),textAlign:'center',color:color.white,fontSize:width(4.2)}}>Title</Text>
-              </View>)
-          }}
-          />
+          <View style={{height: height(64)}}>
+            <FlatList
+              numColumns={2}
+              data={[{}, {}, {}, {}, {}, {}, {}, {}, {}]}
+              columnWrapperStyle={{
+                marginBottom: height(2),
+                justifyContent: 'space-between',
+                width: width(100),
+              }}
+              contentContainerStyle={{marginTop: height(1)}}
+              renderItem={({item, index}) => {
+                return (
+                  <View style={{width: width(47.5), height: height(19.8)}}>
+                    <TouchableOpacity
+                    activeOpacity={0.8}
+                    style={{
+                      width: '100%',
+                      height: '75%',
+                    }}>
+                    <Image
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        borderTopRightRadius: index % 2 == 0 ? width(5) : 0,
+                        borderBottomRightRadius: index % 2 == 0 ? width(5) : 0,
+                        borderTopLeftRadius: index % 2 != 0 ? width(5) : 0,
+                        borderBottomLeftRadius: index % 2 != 0 ? width(5) : 0,
+                      }}
+                      source={{
+                        uri:
+                          'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+                      }}
+                    />
+                    </TouchableOpacity>
+                    <Text
+                      style={{
+                        paddingTop: height(1.5),
+                        textAlign: 'center',
+                        color: color.white,
+                        fontSize: width(4.2),
+                      }}>
+                      Title
+                    </Text>
+                  </View>
+                );
+              }}
+            />
           </View>
           <View
             style={{
@@ -82,19 +137,39 @@ export default function Dashboard() {
               justifyContent: 'space-between',
               paddingHorizontal: width(5),
               marginTop: height(2),
-              alignItems:'flex-end'
+              alignItems: 'flex-end',
             }}>
             <View style={{flexDirection: 'row'}}>
               <View style={styles.dot} />
               <View style={styles.dot} />
               <View style={styles.dot} />
             </View>
-            <View style={{flexDirection:'row',alignItems:'flex-end'}}>
-            <View style={styles.dot} />
-            <View style={{width:width(7),height:height(1.5),marginRight:width(1),borderBottomColor:color.white,borderBottomWidth:2,borderRightColor:color.white,borderRightWidth:2}} />
-            <View style={{width:width(7),height:height(1.5),marginLeft:width(1),borderBottomColor:color.white,borderBottomWidth:2,borderLeftColor:color.white,borderLeftWidth:2}} />
-            
-            <View style={styles.dot} />
+            <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
+              <View style={styles.dot} />
+              <View
+                style={{
+                  width: width(7),
+                  height: height(1.5),
+                  marginRight: width(1),
+                  borderBottomColor: color.white,
+                  borderBottomWidth: 2,
+                  borderRightColor: color.white,
+                  borderRightWidth: 2,
+                }}
+              />
+              <View
+                style={{
+                  width: width(7),
+                  height: height(1.5),
+                  marginLeft: width(1),
+                  borderBottomColor: color.white,
+                  borderBottomWidth: 2,
+                  borderLeftColor: color.white,
+                  borderLeftWidth: 2,
+                }}
+              />
+
+              <View style={styles.dot} />
             </View>
             <View style={{flexDirection: 'row'}}>
               <View style={styles.dot} />
