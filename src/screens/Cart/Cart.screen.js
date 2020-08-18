@@ -9,7 +9,7 @@ import {
   FlatList,
   Image,
 } from 'react-native';
-import styles from './Checkout.styles';
+import styles from './Cart.styles';
 import Button from '../../components/Button/Button.component';
 import TextInput from '../../components/TextInput/TextInput.component';
 import {useDispatch, useSelector} from 'react-redux';
@@ -22,9 +22,16 @@ export default function Dashboard() {
   const dispatch = useDispatch();
   const renderItem = ({item}) => {
     return (
+      <View  style={{
+        width: width(88),
+        alignSelf: 'center',
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+      }}>
       <View
         style={{
-          width: width(85),
+          width: width(75),
           alignSelf: 'center',
           alignItems: 'flex-end',
           paddingVertical: height(1),
@@ -58,8 +65,8 @@ export default function Dashboard() {
             <Image
               source={require('../../assets/minus.png')}
               style={{
-                height: width(0.2),
-                height: width(0.32),
+                height: width(0.01),
+                height: width(0.3),
                 resizeMode: 'contain',
               }}
             />
@@ -77,8 +84,8 @@ export default function Dashboard() {
             <Image
               source={require('../../assets/plus.png')}
               style={{
-                height: width(3),
-                height: width(3),
+                height: width(2.5),
+                height: width(2.5),
                 resizeMode: 'contain',
               }}
             />
@@ -106,6 +113,8 @@ export default function Dashboard() {
             />
             </View>
         </View>
+      </View>
+      <Image style={{width:width(7),height:height(5)}} source={require('../../assets/login-logo.png')} />
       </View>
     );
   };

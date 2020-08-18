@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "350261003171",
+    "firebase_url": "https://marketji.firebaseio.com",
+    "project_id": "marketji",
+    "storage_bucket": "marketji.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:350261003171:android:f651719f0163006dc55016",
+        "android_client_info": {
+          "package_name": "com.marketji"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "350261003171-marocch5lta2id8bohbp0n78473vv1j8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBG86uPTPCMX2ngUdXApuknhofaQPSHwcM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "350261003171-marocch5lta2id8bohbp0n78473vv1j8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

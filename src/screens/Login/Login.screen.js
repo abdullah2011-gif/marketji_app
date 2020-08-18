@@ -7,9 +7,67 @@ import { useDispatch,useSelector } from 'react-redux';
 import { login, logout } from '../../Redux/Actions/Auth';
 import color from '../../utills/Colors';
 import { width,height } from 'react-native-dimension';
+import { LoginManager } from "react-native-fbsdk";
+import { LoginButton, AccessToken } from 'react-native-fbsdk';
+import { GoogleSignin, statusCodes, } from '@react-native-community/google-signin';
+import axios from 'axios'
+GoogleSignin.configure({
+  //It is mandatory to call this method before attempting to call signIn()
+  // scopes: ['https://www.googleapis.com/auth/drive.readonly'],
+  offlineAccess:false,
+  // Repleace with your webClientId generated from Firebase console
+  webClientId: "350261003171-marocch5lta2id8bohbp0n78473vv1j8.apps.googleusercontent.com",
+});
 export default function Login() {
     const [isLogin,setIsLogin] = useState(true)
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+  const  googleSignIn = async () => {
+      try {
+        await GoogleSignin.hasPlayServices();
+        const userInfo = await GoogleSignin.signIn();
+        console.log('abc'+JSON.stringify(userInfo.user))
+        // this.setState({ userInfo });
+      } catch (error) {
+        if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+          // user cancelled the login flow
+        } else if (error.code === statusCodes.IN_PROGRESS) {
+          // operation (e.g. sign in) is in progress already
+        } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+          // play services not available or outdated
+        } else {
+          // some other error happened
+        }
+      }
+    };
+    const facebookLogin=()=>{
+        LoginManager.logInWithPermissions(["public_profile"]).then(
+           function(result) {
+             if (result.isCancelled) {
+               console.log("Login cancelled");
+             } else {
+               AccessToken.getCurrentAccessToken().then(
+                   (data) => {
+                     console.log(data.accessToken.toString()+'access token')
+                     axios.post(`http://192.168.43.43:3000/facebook`,{
+                         headers:{
+                             'access_token':data.accessToken.toString()
+                         }
+                     }).then(res=>{
+                         console.log(res)
+                     }).catch(e=>console.log(e))
+                   }
+                 )
+               console.log(
+                 "Login success with permissions: " +
+                   JSON.stringify(result)
+               );
+             }
+           },
+           function(error) {
+             console.log("Login fail with error: " + error);
+           }
+         );
+    }
         return (
             <React.Fragment>
             <SafeAreaView backgroundColor={color.background} />
@@ -64,9 +122,13 @@ export default function Login() {
                 <View style={styles.signupLine} />
                 <Text style={styles.signupWith}>Sign Up with</Text>
                 <View style={{width:width(30),alignSelf:'center',marginTop:height(1),height:height(6),alignItems:'center',flexDirection:'row',justifyContent:'space-between'}}>
+                <TouchableOpacity onPress={googleSignIn}>
                   <Image source={require('../../assets/Google-Plus-Logo.png')}style={{width:width(15),height:height(5),resizeMode:'contain'}} />
+                  </TouchableOpacity>
                 <View style={{height:height(3.5),borderRightColor:color.darkBlue,borderRightWidth:2}} />
+                 <TouchableOpacity onPress={facebookLogin}>
                   <Image source={require('../../assets/fbLogo.png')}style={{width:width(15),height:height(5),resizeMode:'contain'}} />
+               </TouchableOpacity>
                 </View>
                 <View style={{width:width(50),alignSelf:'center'}}>
                 <Button title="Signup" onPress={() => dispatch(login({ userName: 'John Doe' }))} />

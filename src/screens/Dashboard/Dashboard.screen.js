@@ -7,7 +7,7 @@ import {
   SafeAreaView,
   StatusBar,
   FlatList,
-  Image,
+  Image,ScrollView
 } from 'react-native';
 import styles from './Dashboard.styles';
 import Button from '../../components/Button/Button.component';
@@ -30,14 +30,22 @@ export default function Dashboard({navigation}) {
     <React.Fragment>
       <SafeAreaView backgroundColor={color.white} />
       <StatusBar barStyle={'dark-content'} backgroundColor={color.white} />
-      <SafeAreaView style={{flex: 1}}>
+      <SafeAreaView style={{flex: 1,backgroundColor:color.orange}}>
+        <ScrollView style={{height: height(89)}}>
+        <View style={{width:width(100),height:height(6),flexDirection:'row',justifyContent:'space-between',paddingHorizontal:width(5),alignItems:'center',backgroundColor:color.white}}>
+        
+        <Image style={{width:width(7),height:height(4)}} source={require('../../assets/hide.png')} />
+        
+        <Image style={{width:width(7),height:height(4)}} source={require('../../assets/hide.png')} />
+
+</View>
         <SliderBox
+        
           images={images}
           autoplay={true}
           sliderBoxHeight={height(25)}
           circleLoop={true}
         />
-        <View style={{height: height(75), backgroundColor: color.orange}}>
           <View
             style={{
               flexDirection: 'row',
@@ -83,7 +91,7 @@ export default function Dashboard({navigation}) {
               <View style={styles.dot} />
             </View>
           </View>
-          <View style={{height: height(64)}}>
+          {/* <View style={{height: height(55)}}> */}
             <FlatList
               numColumns={2}
               data={[{}, {}, {}, {}, {}, {}, {}, {}, {}]}
@@ -98,7 +106,7 @@ export default function Dashboard({navigation}) {
                   <View style={{width: width(47.5), height: height(19.8)}}>
                     <TouchableOpacity
                     activeOpacity={0.8}
-                    onPress={()=>navigation.navigate('Checkout')}
+                    onPress={()=>navigation.navigate('Products')}
                     style={{
                       width: '100%',
                       height: '75%',
@@ -131,13 +139,14 @@ export default function Dashboard({navigation}) {
                 );
               }}
             />
-          </View>
+        
+          </ScrollView>
           <View
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
               paddingHorizontal: width(5),
-              marginTop: height(2),
+              PaddingVertical: height(2),
               alignItems: 'flex-end',
             }}>
             <View style={{flexDirection: 'row'}}>
@@ -178,7 +187,21 @@ export default function Dashboard({navigation}) {
               <View style={styles.dot} />
             </View>
           </View>
-        </View>
+        {/* </View> */}
+        <View style={{width:width(100),height:height(6),marginTop:height(2),flexDirection:'row',justifyContent:'space-between',paddingHorizontal:width(5),alignItems:'center',backgroundColor:color.white}}>
+                   <Text onPress={()=>navigation.navigate('Cart')} style={{color:color.white,fontSize:width(4.4),backgroundColor:color.darkBlue,overflow:'hidden',borderRadius:width(1),paddingHorizontal:width(3),paddingVertical:height(0.6)}}>
+                 استكمال الشر
+                 </Text>
+                 <View style={{flexDirection:'row'}}>
+                   <Text style={{fontSize:width(4),fontWeight:'bold',color:color.orange,marginRight:width(2)}}>
+                     100{' '}
+                    <Text style={{fontSize:width(3)}}>
+                      JD
+                    </Text>
+                   </Text>
+                   <Image style={{width:width(7),height:height(4)}} source={require('../../assets/hide.png')} />
+                 </View>
+          </View>
       </SafeAreaView>
       <SafeAreaView backgroundColor={color.white} />
     </React.Fragment>

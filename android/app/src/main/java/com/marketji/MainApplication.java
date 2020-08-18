@@ -46,6 +46,14 @@ public class MainApplication extends Application implements ReactApplication {
     initializeFlipper(this); // Remove this line if you don't want Flipper enabled
   }
 
+  
+  // @Override
+  // public void onCreate() {
+  //   super.onCreate();
+  //   FacebookSdk.sdkInitialize(getApplicationContext());
+  //   AppEventsLogger.activateApp(this);
+  // }
+
   /**
    * Loads Flipper in React Native templates.
    *
