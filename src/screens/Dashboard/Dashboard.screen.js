@@ -25,6 +25,7 @@ export default function Dashboard({navigation}) {
     'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
   ]);
   const user = useSelector(state => state.Auth.user);
+  const [search,setSearch] = useState(false)
   const dispatch = useDispatch();
   return (
     <React.Fragment>
@@ -32,12 +33,15 @@ export default function Dashboard({navigation}) {
       <StatusBar barStyle={'dark-content'} backgroundColor={color.white} />
       <SafeAreaView style={{flex: 1,backgroundColor:color.orange}}>
         <ScrollView style={{height: height(89)}}>
-        <View style={{width:width(100),height:height(6),flexDirection:'row',justifyContent:'space-between',paddingHorizontal:width(5),alignItems:'center',backgroundColor:color.white}}>
+       <View style={{width:width(100),height:height(6),flexDirection:'row',justifyContent:'space-between',paddingHorizontal:width(5),alignItems:'center',backgroundColor:color.white}}>
+       {!search&&<><TouchableOpacity onPress={()=>setSearch(true)}>
+        <Image resizeMode='contain' style={{width:width(5),height:height(4)}} source={require('../../assets/search.png')} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={()=>navigation.openDrawer()}>
+        <Image resizeMode='contain' style={{width:width(5),height:height(4)}} source={require('../../assets/menu.png')} />
+        </TouchableOpacity></>}
+        {search&&<View style={{flexDirection:'row',alignItems:'center'}}><TouchableOpacity onPress={()=>setSearch(false)}><Image source={require('../../assets/back.png')} style={{width:width(3.5),marginRight:width(2.5),height:height(2),resizeMode:'contain'}} /></TouchableOpacity><TextInput placeholder='Search'/></View>}
         
-        <Image style={{width:width(7),height:height(4)}} source={require('../../assets/hide.png')} />
-        
-        <Image style={{width:width(7),height:height(4)}} source={require('../../assets/hide.png')} />
-
 </View>
         <SliderBox
         
@@ -199,7 +203,7 @@ export default function Dashboard({navigation}) {
                       JD
                     </Text>
                    </Text>
-                   <Image style={{width:width(7),height:height(4)}} source={require('../../assets/hide.png')} />
+                   <Image style={{width:width(5),resizeMode:'contain',height:height(4)}} source={require('../../assets/shopping-cart.png')} />
                  </View>
           </View>
       </SafeAreaView>

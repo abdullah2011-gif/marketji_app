@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   StatusBar,
-  FlatList,
+  FlatList,ScrollView,
   Image,
 } from 'react-native';
 import styles from './Cart.styles';
@@ -17,13 +17,15 @@ import {login, logout} from '../../Redux/Actions/Auth';
 import color from '../../utills/Colors';
 import {width, height} from 'react-native-dimension';
 import {SliderBox} from 'react-native-image-slider-box';
-export default function Dashboard() {
+export default function Dashboard({navigation}) {
+  
   const user = useSelector(state => state.Auth.user);
+  const [data,setData] = useState([{key:1,quantity:1}, {key:2,quantity:1}, {key:3,quantity:1}, {key:4,quantity:1}])
   const dispatch = useDispatch();
   const renderItem = ({item}) => {
     return (
       <View  style={{
-        width: width(88),
+        width: width(83),
         alignSelf: 'center',
         alignItems: 'center',
         flexDirection: 'row',
@@ -47,13 +49,19 @@ export default function Dashboard() {
             flexDirection: 'row',
             justifyContent: 'space-between',
           }}>
-          <TouchableOpacity>
-            <Image
+          <TouchableOpacity onPress={()=>setData(data.map(ite=>ite==item?({...ite,selected:!ite.selected}):ite))}>
+            {!item.selected?<Image
               source={require('../../assets/heart.png')}
               style={{width: width(5), height: width(5), resizeMode: 'contain'}}
-            />
+            />:
+            <Image
+              source={require('../../assets/fillheart.png')}
+              style={{width: width(5), height: width(5), resizeMode: 'contain'}}
+            />}
           </TouchableOpacity>
           <TouchableOpacity
+          disabled={item.quantity<2?true:false}
+          onPress={()=>setData(data.map(ite=>ite==item?({...ite,quantity:ite.quantity-1}):ite))}
             style={{
               backgroundColor: color.orange,
               width: width(5),
@@ -71,8 +79,9 @@ export default function Dashboard() {
               }}
             />
           </TouchableOpacity>
-          <Text style={{fontSize: width(4), color: color.darkBlue}}>1</Text>
+          <Text style={{fontSize: width(4), color: color.darkBlue}}>{item.quantity}</Text>
           <TouchableOpacity
+           onPress={()=>setData(data.map(ite=>ite==item?({...ite,quantity:ite.quantity+1}):ite))}
             style={{
               backgroundColor: color.green,
               width: width(5),
@@ -114,7 +123,9 @@ export default function Dashboard() {
             </View>
         </View>
       </View>
-      <Image style={{width:width(7),height:height(5)}} source={require('../../assets/login-logo.png')} />
+      <TouchableOpacity onPress={()=>setData(data.filter(ite=>ite!=item))}>
+      <Image style={{width:width(4),height:height(3.4),resizeMode:'contain'}} source={require('../../assets/close.png')} />
+      </TouchableOpacity>
       </View>
     );
   };
@@ -127,14 +138,28 @@ export default function Dashboard() {
           resizeMode="stretch"
           source={require('../../assets/upper_.png')}
           style={{flex: 1}}>
+            <ScrollView showsVerticalScrollIndicator={false} style={{marginTop: height(10)}}>
           <FlatList
-            data={[{}, {}, {}, {}]}
+            data={data}
             renderItem={renderItem}
-            contentContainerStyle={{marginTop: height(18)}}
+          contentContainerStyle={{marginTop:height(6)}}
             ItemSeparatorComponent={() => (
               <View style={{height: height(2.5)}} />
             )}
           />
+          <View style={styles.line} />
+                   <Text onPress={()=>navigation.navigate('Cart')} style={{color:color.white,fontSize:width(4.4),width:width(32),backgroundColor:color.orange,overflow:'hidden',borderRadius:width(1),alignSelf:'flex-end',marginRight:width(15),textAlign:'center',paddingVertical:height(1.5)}}>
+                 AlTabah (6)
+                 </Text>
+                 <View style={{width:width(80),alignSelf:'center',alignItems:'center',marginTop:height(1),flexDirection:'row',justifyContent:'space-between'}}>
+                 <Text style={{fontSize:width(5),fontWeight:'bold',color:color.darkBlue,textAlign:'center'}}>
+              5.99<Text style={{fontSize:width(3.5),color:color.darkBlue}}>  JD</Text>
+            </Text>
+            <Text style={{fontSize:width(4),color:color.darkBlue}}>Almajmuah</Text>
+                 </View>
+                 <View style={styles.line} />
+                 <Button title='Proceed' labelStyle={{color:color.darkBlue}} containerStyle={{backgroundColor:'transparent',borderColor:color.darkBlue,borderWidth:1}} />
+                 </ScrollView>
         </ImageBackground>
       </SafeAreaView>
       <SafeAreaView backgroundColor={color.white} />

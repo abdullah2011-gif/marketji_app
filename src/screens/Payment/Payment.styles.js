@@ -14,12 +14,5 @@ const styles = StyleSheet.create({
   backgroundColor:color.white,
   marginHorizontal:height(0.3)
   },
-  line:{
-    width:width(90),
-    alignSelf:'center',
-    borderBottomColor:color.white,
-    borderBottomWidth:0.7,
-    marginVertical:height(5)
-  },
 });
 export default styles;

@@ -18,6 +18,7 @@ import color from '../../utills/Colors';
 import {width, height} from 'react-native-dimension';
 import {SliderBox} from 'react-native-image-slider-box';
 export default function Dashboard({navigation}) {
+  const [data,setData] = useState([{key:1,quantity:1}, {key:2,quantity:1}, {key:6,quantity:1}, {key:4,quantity:1}])
   const user = useSelector(state => state.Auth.user);
   const dispatch = useDispatch();
   const renderItem = ({item}) => {
@@ -40,11 +41,15 @@ export default function Dashboard({navigation}) {
             flexDirection: 'row',
             justifyContent: 'space-between',
           }}>
-          <TouchableOpacity>
-            <Image
+          <TouchableOpacity onPress={()=>setData(data.map(ite=>ite==item?({...ite,selected:!ite.selected}):ite))}>
+            {!item.selected?<Image
               source={require('../../assets/heart.png')}
               style={{width: width(5), height: width(5), resizeMode: 'contain'}}
-            />
+            />:
+            <Image
+              source={require('../../assets/fillheart.png')}
+              style={{width: width(5), height: width(5), resizeMode: 'contain'}}
+            />}
           </TouchableOpacity>
           <TouchableOpacity
             style={{
@@ -96,7 +101,7 @@ export default function Dashboard({navigation}) {
           source={require('../../assets/upper_.png')}
           style={{flex: 1,justifyContent:'space-between'}}>
           <FlatList
-            data={[{}, {}, {}, {}]}
+            data={data}
             renderItem={renderItem}
             contentContainerStyle={{marginTop: height(18)}}
             ItemSeparatorComponent={() => (
@@ -114,7 +119,7 @@ export default function Dashboard({navigation}) {
                       JD
                     </Text>
                    </Text>
-                   <Image style={{width:width(7),height:height(4)}} source={require('../../assets/hide.png')} />
+                   <Image style={{width:width(5),height:height(3.5)}} resizeMode='stretch' source={require('../../assets/shopping-cart.png')} />
                  </View>
           </View>
         </ImageBackground>
