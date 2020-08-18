@@ -29,7 +29,7 @@ export default function Dashboard() {
       <SafeAreaView style={{flex:1}} >
       <ImageBackground style={{flex:1}} resizeMode='stretch' source={require('../../assets/loginbackground.png')}>
       <View style={styles.titleContainer}>
-        <Text style={{textAlign:'center'}}>Al-Esah</Text>
+        <Text style={{textAlign:'center',color:color.orange}}>Al-Esah</Text>
         </View> 
 <View style={styles.touchableview}>
   <TouchableOpacity style={styles.touchable} >
