@@ -21,13 +21,45 @@ export default function Dashboard() {
   // const user = useSelector(state => state.Auth.user);
   // const dispatch = useDispatch();
   return (
+    
     <React.Fragment>
-      <SafeAreaView backgroundColor={color.white} />
+      <SafeAreaView />
+      
       <StatusBar barStyle={'dark-content'} backgroundColor={color.white} />
-      <SafeAreaView style={{flex: 1}}>
-       
+      <SafeAreaView style={{flex:1}} >
+      <ImageBackground style={{flex:1}} resizeMode='stretch' source={require('../../assets/loginbackground.png')}>
+      <View style={styles.titleContainer}>
+        <Text style={{textAlign:'center',color:color.orange}}>Al-Esah</Text>
+        </View> 
+<View style={styles.touchableview}>
+  <TouchableOpacity style={styles.touchable} >
+  <Text >1</Text>
+  </TouchableOpacity>
+  <TouchableOpacity style={styles.touchable}>
+<Text >1</Text>
+</TouchableOpacity>
+</View>
+<View style={styles.cart}> 
+<Text style={styles.textcart}>Cart</Text>
+ <View style={{flexDirection:'column'}}>
+                               <View style={styles.dot}/>
+                               <View style={styles.dot}/>
+                               <View style={styles.dot}/>
+                               <View style={styles.dot}/>
+                           </View>
+<Text style={styles.payment}>Payment</Text>
+</View>
+<View style={styles.inputtext}>
+<TextInput placeholder='Name'/>
+<TextInput placeholder='Phone No'/>
+<TextInput placeholder='Gender'/>
+<TextInput placeholder='Title'/>
+</View>
+
+</ImageBackground>
       </SafeAreaView>
-      <SafeAreaView backgroundColor={color.white} />
+     
+      <SafeAreaView />
     </React.Fragment>
   );
 }

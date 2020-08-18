@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
   backgroundColor:color.orange,
   margin:height(0.3)
   },
+  
   signupHeadingText:{
     paddingRight:width(1),
     fontSize:width(4.2),
