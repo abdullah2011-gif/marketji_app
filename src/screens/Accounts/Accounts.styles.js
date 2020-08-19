@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
 },
 inputtext:{height:height(30),justifyContent:'space-between',marginTop:height(5)},
 textcart:{ fontSize:width(5),textAlign:'center',width:'45%'},
-titleContainer:{backgroundColor:color.white,height:height(5),width:width(45),borderRadius:width(1),alignSelf:'center',marginVertical:height(2),justifyContent:'center'},
+titleContainer:{backgroundColor:color.white,height:height(5),width:width(45),borderRadius:width(1),alignSelf:'center',marginBottom:height(2),justifyContent:'center'},
  touchableview:{flexDirection:'row',alignItems:'center',justifyContent:'space-between',alignSelf:'center',width:width(40)}
 });
 export default styles;

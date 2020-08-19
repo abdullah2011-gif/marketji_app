@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from '../screens/Login/Login.screen';
@@ -34,9 +34,15 @@ export default function Routes() {
 const Drawer = createDrawerNavigator();
 
 function MyDrawer() {
+    const [time,setTime] = useState(true)
     const dispatch = useDispatch()
+    useEffect(()=>{
+           setInterval(()=>{
+                 setTime(false)
+           },5000)
+    },[])
   return (
-  <Drawer.Navigator drawerPosition='right' drawerContent={(props)=>drawerContainer({...props,dispatch:dispatch})}>
+  <Drawer.Navigator drawerPosition='right' drawerStyle={{backgroundColor:time?'transparent':'#ffffff'}} drawerContent={(props)=>(time?null: drawerContainer({...props,dispatch:dispatch}))}>
          <Drawer.Screen name="Dashboard" component={Dashboard} />
                         <Drawer.Screen name="Cart" component={Cart} />
                         <Drawer.Screen name="Products" component={Products} />

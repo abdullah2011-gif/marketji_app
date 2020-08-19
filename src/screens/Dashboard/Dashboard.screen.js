@@ -20,9 +20,17 @@ import {SliderBox} from 'react-native-image-slider-box';
 export default function Dashboard({navigation}) {
   const [images, setImages] = useState([
     'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-    'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-    'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-    'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+    'https://images.unsplash.com/photo-1546630392-db5b1f04874a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+    'https://images.unsplash.com/photo-1428515613728-6b4607e44363?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+    'https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+  ]);
+  const [data, setData] = useState([
+    {key: 1, quantity: 1,title:'Strawbery',image:'https://images.unsplash.com/photo-1485962398705-ef6a13c41e8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'},
+    {key: 2, quantity: 1,title:'Strawbery',image:'https://images.unsplash.com/photo-1519638051208-f73939d9a63f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'},
+    {key: 3, quantity: 1,title:'Strawbery',image:'https://images.unsplash.com/photo-1582029310909-21b059f91e87?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'},
+    {key: 4, quantity: 1,title:'Strawbery',image:'https://images.unsplash.com/photo-1582029310975-4cbc6e1334b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'},
+    {key: 4, quantity: 1,title:'Strawbery',image:'https://images.unsplash.com/photo-1506395308321-904a71783d60?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'},
+    {key: 4, quantity: 1,title:'Strawbery',image:'https://images.unsplash.com/photo-1493770348161-369560ae357d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'},
   ]);
   const user = useSelector(state => state.Auth.user);
   const [search,setSearch] = useState(false)
@@ -98,7 +106,7 @@ export default function Dashboard({navigation}) {
           {/* <View style={{height: height(55)}}> */}
             <FlatList
               numColumns={2}
-              data={[{}, {}, {}, {}, {}, {}, {}, {}, {}]}
+              data={data}
               columnWrapperStyle={{
                 marginBottom: height(2),
                 justifyContent: 'space-between',
@@ -125,9 +133,7 @@ export default function Dashboard({navigation}) {
                         borderBottomLeftRadius: index % 2 != 0 ? width(5) : 0,
                       }}
                       source={{
-                        uri:
-                          'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-                      }}
+                        uri:item.image}}
                     />
                     </TouchableOpacity>
                     <Text

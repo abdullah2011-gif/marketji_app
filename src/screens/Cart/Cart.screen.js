@@ -20,7 +20,12 @@ import {SliderBox} from 'react-native-image-slider-box';
 export default function Dashboard({navigation}) {
   
   const user = useSelector(state => state.Auth.user);
-  const [data,setData] = useState([{key:1,quantity:1}, {key:2,quantity:1}, {key:3,quantity:1}, {key:4,quantity:1}])
+  const [data, setData] = useState([
+    {key: 1, quantity: 1,title:'Strawbery',image:'https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'},
+    {key: 2, quantity: 1,title:'Strawbery',image:'https://images.unsplash.com/photo-1562347810-18a0d370ba36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'},
+    {key: 3, quantity: 1,title:'Strawbery',image:'https://images.unsplash.com/photo-1577041249022-26cc744ddda3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'},
+    {key: 4, quantity: 1,title:'Strawbery',image:'https://images.unsplash.com/photo-1513612254505-fb553147a2e8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'},
+  ]);
   const dispatch = useDispatch();
   const renderItem = ({item}) => {
     return (
@@ -103,8 +108,8 @@ export default function Dashboard({navigation}) {
         <View style={{flexDirection:'row',alignItems:'flex-end'}}>
           <View style={{marginRight:width(2)}}>
             <View style={{flexDirection: 'row',alignItems:'flex-end'}}>
-              <Text style={{fontSize:width(3),color:color.orange}}>(5kg)</Text>
-              <Text style={{fontSize:width(3.7),color:color.darkBlue}}>Banana</Text>
+              <Text style={{fontSize:width(3),color:color.orange,marginRight:4}}>(5kg)</Text>
+              <Text style={{fontSize:width(3.7),color:color.darkBlue}}>{item.title}</Text>
             </View>
             <Text style={{fontSize:width(4.2),fontWeight:'bold',color:color.darkBlue,textAlign:'center'}}>
               5.99<Text style={{fontSize:width(2.5),color:color.darkBlue}}>  JD</Text>
@@ -115,10 +120,7 @@ export default function Dashboard({navigation}) {
           <Image
           
               style={{width: width(15), height: width(15),borderRadius:width(15)}}
-              source={{
-                uri:
-                  'https://images.unsplash.com/photo-1560522361-23b37e4ad4a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
-              }}
+              source={{uri:item.image}}
             />
             </View>
         </View>

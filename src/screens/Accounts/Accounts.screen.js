@@ -24,10 +24,17 @@ export default function Dashboard() {
     
     <React.Fragment>
       <SafeAreaView />
-      
       <StatusBar barStyle={'dark-content'} backgroundColor={color.white} />
       <SafeAreaView style={{flex:1}} >
       <ImageBackground style={{flex:1}} resizeMode='stretch' source={require('../../assets/loginbackground.png')}>
+        <ImageBackground style={{alignSelf:'center',width:width(80),height:height(37),alignItems:'center',justifyContent:'center'}} source={require('../../assets/back_header.png')} >
+              <View style={{width:width(28),height:width(28),borderRadius:width(20),alignItems:'center',justifyContent:'center',backgroundColor:color.white,borderWidth:1,borderColor:color.white}}>
+                  <Image style={{tintColor:'black',width:width(20),height:height(20),resizeMode:'contain'}} source={require('../../assets/person.png')} />
+             <TouchableOpacity style={{width:width(7),position:'absolute',bottom:0,right:0,alignItems:'center',justifyContent:'center',height:width(7),borderRadius:width(7),backgroundColor:color.orange}}>
+             <Image style={{tintColor:'white',width:width(4),height:width(4),resizeMode:'contain'}} source={require('../../assets/plus.png')} />
+             </TouchableOpacity>
+              </View>
+        </ImageBackground>
       <View style={styles.titleContainer}>
         <Text style={{textAlign:'center',color:color.orange}}>Al-Esah</Text>
         </View> 
