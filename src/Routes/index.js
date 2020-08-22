@@ -1,27 +1,37 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, {  useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from '../screens/Login/Login.screen';
 import {useDispatch} from 'react-redux'
 import {logout} from '../Redux/Actions/Auth'
+import {setCAtegoriesAndProduct} from '../Redux/Actions/App'
 import Dashboard from '../screens/Dashboard/Dashboard.screen';
 import Cart from '../screens/Cart/Cart.screen';
 import Products from '../screens/Products/Products.screen';
 import Orders from '../screens/Orders/Orders';
 import Accounts from '../screens/Accounts/Accounts.screen';
 import Payment from '../screens/Payment/Payment.screen';
+import PhoneVerify from '../screens/PhoneVerify/PhoneVerify.screen';
 import { connect, useSelector } from 'react-redux';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { View, Image, TouchableOpacity,Text } from 'react-native';
 import { width, height } from 'react-native-dimension';
+import Apimanager from '../ApiFunctions/ApiFunctions';
 const Stack = createStackNavigator();
 export default function Routes() {
+    const dispatch = useDispatch()
+    useEffect(()=>{
+        new Apimanager().getCatAndProducts().then(res=>{
+            dispatch(setCAtegoriesAndProduct(res))
+        })
+    },[])
     const isLogin = useSelector(state=>state.Auth.isLogin)
         return (
             <NavigationContainer>
                 {!isLogin ?
                     <Stack.Navigator initialRouteName="Login" headerMode="none">
                         <Stack.Screen name="Login" component={Login} />
+                        <Stack.Screen name="PhoneVerify" component={PhoneVerify} />
                     </Stack.Navigator>
                     :
                     <Stack.Navigator initialRouteName="Dashboard" headerMode="none">

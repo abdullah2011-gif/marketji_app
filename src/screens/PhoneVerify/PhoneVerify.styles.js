@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     width: width(80),
     alignSelf: 'center',
     flexDirection: 'row',
-    marginTop: height(2.5),
+    marginTop: height(4),
     marginBottom: height(3),
   },
   activeView: {
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderBottomColor: color.white,
     borderBottomWidth: 0.7,
-    marginVertical: height(4),
+    marginVertical: height(5),
   },
   forgot: {
     paddingLeft: width(10),
@@ -67,14 +67,6 @@ const styles = StyleSheet.create({
     fontSize: width(4.3),
     color: color.darkBlue,
     paddingTop: height(4.5),
-    fontWeight: 'bold',
-  },
-  warning: {
-    alignSelf: 'center',
-    fontSize: width(3.5),
-    color: color.darkBlue,
-    paddingTop: 10,
-    paddingBottom: -height(2.5),
     fontWeight: 'bold',
   },
   signupHeading: {
@@ -109,14 +101,17 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderBottomColor: color.white,
     borderBottomWidth: 0.7,
-    marginTop: height(1),
-    marginBottom: height(2),
+    marginTop: height(2),
+    marginBottom: height(3),
   },
   signupWith: {
     alignSelf: 'center',
     fontSize: width(4.3),
     color: color.darkBlue,
     fontWeight: 'bold',
+    marginTop:height(15),
+    textAlign:'center',
+    width:width(75)
   },
   logoContainer: {
     width: width(30),
@@ -128,5 +123,42 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   logo: {width: width(15), height: height(5), resizeMode: 'contain'},
+  otpContainer: {
+    width: width(90),
+    alignSelf: 'center',
+    flexDirection: 'row',
+    marginTop: height(5),
+},
+otpViewContainer: {
+    width: width(75),
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    textAlign:'left'
+},
+underlineStyleBase: {
+  borderColor: '#ffffff',
+  padding: 2,
+  borderRadius: 5,
+  width: width(10),
+  height: height(7.5),
+  fontSize: totalSize(2.25),
+  fontWeight: 'bold',
+  color: color.darkBlue,
+  backgroundColor:'#ffffff'
+},
+underlineStyleHighLighted: {
+  borderColor: 'transparent',
+  color: 'transparent',
+  fontSize: totalSize(2.5),
+},
+warning: {
+  alignSelf: 'center',
+  fontSize: width(3.5),
+  color: color.darkBlue,
+  paddingTop: 10,
+  paddingBottom: -height(2.5),
+  fontWeight: 'bold',
+},
 });
 export default styles;

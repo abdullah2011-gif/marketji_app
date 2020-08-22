@@ -1,15 +1,14 @@
-import { LOGIN } from '../Types';
+import { GETPRODUCTANDCATEGORIES } from '../Types';
 const intialState = {
-    
+    categoriesAndProduct:[]
 }
 const reducer = (state = intialState, action) => {
     // console.log(action)
     switch (action.type) {
-        case LOGIN: {
+        case GETPRODUCTANDCATEGORIES: {
             return {
                 ...state,
-                user: action.payload,
-                isLogin: true
+                categoriesAndProduct: action.payload
             }
         }
         default:

@@ -1,5 +1,6 @@
 import { LOGIN, LOGOUT } from '../Types';
 export const login = payload => {
+    console.log(login)
     return {
         type: LOGIN,
         payload: payload
