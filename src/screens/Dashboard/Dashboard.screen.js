@@ -1,8 +1,7 @@
 import React, {Component, useState} from 'react';
 import {
   View,
-  Text,
-  ImageBackground,
+   ImageBackground,
   TouchableOpacity,
   SafeAreaView,
   StatusBar,
@@ -17,6 +16,7 @@ import {login, logout} from '../../Redux/Actions/Auth';
 import color from '../../utills/Colors';
 import {width, height} from 'react-native-dimension';
 import {SliderBox} from 'react-native-image-slider-box';
+import Text from '../../components/Text/Text.component';
 export default function Dashboard({navigation}) {
   const [images, setImages] = useState([
     'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',

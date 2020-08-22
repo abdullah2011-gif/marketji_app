@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react';
 import {
   View,
-  Text,
+ 
   ImageBackground,
   TouchableOpacity,
   SafeAreaView,
@@ -17,6 +17,7 @@ import { login, logout } from '../../Redux/Actions/Auth';
 import color from '../../utills/Colors';
 import { width, height } from 'react-native-dimension';
 import { SliderBox } from 'react-native-image-slider-box';
+import Text from '../../components/Text/Text.component';
 export default function Dashboard({ navigation }) {
 
   const user = useSelector(state => state.Auth.user);

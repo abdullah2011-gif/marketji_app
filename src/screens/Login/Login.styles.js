@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
     backgroundColor: color.white,
     marginBottom: 4,
     color: color.orange,
-    fontSize:width(4.5)
+    fontSize:width(4.5),
+    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular'
   },
   inactiveView: {
     width: '50%',
@@ -40,7 +41,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     marginBottom: 4,
     color: color.darkBlue,
-    fontSize:width(4.5)
+    fontSize:width(4.5),
+    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular'
   },
   label:{
     paddingLeft:width(10),

@@ -1,7 +1,8 @@
 import React, { Component, useState } from 'react';
-import { View, Text, ImageBackground,TouchableOpacity,SafeAreaView, StatusBar, Image } from 'react-native';
+import { View, ImageBackground,TouchableOpacity,SafeAreaView, StatusBar, Image } from 'react-native';
 import styles from './Login.styles';
 import Button from '../../components/Button/Button.component';
+import Text from '../../components/Text/Text.component';
 import TextInput from '../../components/TextInput/TextInput.component';
 import { useDispatch,useSelector } from 'react-redux';
 import { login, logout } from '../../Redux/Actions/Auth';

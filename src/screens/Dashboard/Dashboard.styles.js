@@ -37,10 +37,10 @@ const styles = StyleSheet.create({
   image:{
     width: '100%',
     height: '100%',
-    borderTopRightRadius: index % 2 == 0 ? width(5) : 0,
-    borderBottomRightRadius: index % 2 == 0 ? width(5) : 0,
-    borderTopLeftRadius: index % 2 != 0 ? width(5) : 0,
-    borderBottomLeftRadius: index % 2 != 0 ? width(5) : 0,
+    // borderTopRightRadius: index % 2 == 0 ? width(5) : 0,
+    // borderBottomRightRadius: index % 2 == 0 ? width(5) : 0,
+    // borderTopLeftRadius: index % 2 != 0 ? width(5) : 0,
+    // borderBottomLeftRadius: index % 2 != 0 ? width(5) : 0,
   },
 });
 export default styles;

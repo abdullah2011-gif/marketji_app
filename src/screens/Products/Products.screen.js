@@ -1,7 +1,7 @@
 import React, {Component, useState} from 'react';
 import {
   View,
-  Text,
+  
   ImageBackground,
   TouchableOpacity,
   SafeAreaView,
@@ -16,6 +16,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {login, logout} from '../../Redux/Actions/Auth';
 import color from '../../utills/Colors';
 import {width, height} from 'react-native-dimension';
+import Text from '../../components/Text/Text.component';
 import {SliderBox} from 'react-native-image-slider-box';
 export default function Dashboard({navigation}) {
   const [data, setData] = useState([

@@ -1,7 +1,8 @@
 import React, {Component, useState} from 'react';
+import Text from '../../components/Text/Text.component';
 import {
   View,
-  Text,
+
   ImageBackground,
   TouchableOpacity,
   SafeAreaView,

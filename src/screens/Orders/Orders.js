@@ -1,10 +1,12 @@
 import React, { Component, Fragment } from 'react';
-import { View, Text,Modal, SafeAreaView, StyleSheet, TouchableOpacity,
+import { View,
+    Modal, SafeAreaView, StyleSheet, TouchableOpacity,
     ActivityIndicator, Image, FlatList, ImageBackground, LayoutAnimation, Alert } from 'react-native';
 import { width, height, totalSize } from 'react-native-dimension';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 import StepIndicator from 'react-native-step-indicator';
 import color from '../../utills/Colors';
+import Text from '../../components/Text/Text.component';
 
 // import {
 //   all_trips,

@@ -104,10 +104,11 @@ const styles = StyleSheet.create({
   footer: {
     color: Colors.dark,
     fontSize: 12,
-    fontWeight: '600',
+    fontWeight: 'bold',
     padding: 4,
     paddingRight: 12,
     textAlign: 'right',
+    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular'
   },
 });
 

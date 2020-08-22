@@ -15,10 +15,11 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "white",
-    fontSize: 20,
+    fontSize: width(7),
     textShadowRadius: 0.1,
     textShadowColor: Colors.darkGreen,
-    textShadowOffset: { width: 1.2, height: 1.2 }
+    textShadowOffset: { width: 1.2, height: 1.2 },
+    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular'
   }
 });
 export default styles;
