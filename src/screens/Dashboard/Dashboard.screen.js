@@ -73,26 +73,10 @@ export default function Dashboard({navigation}) {
             <View style={{flexDirection: 'row'}}>
               <View style={styles.dot} />
               <View
-                style={{
-                  width: width(7),
-                  height: height(1.5),
-                  marginRight: width(1),
-                  borderTopColor: color.white,
-                  borderTopWidth: 2,
-                  borderRightColor: color.white,
-                  borderRightWidth: 2,
-                }}
+                style={styles.upperview}
               />
               <View
-                style={{
-                  width: width(7),
-                  height: height(1.5),
-                  marginLeft: width(1),
-                  borderTopColor: color.white,
-                  borderTopWidth: 2,
-                  borderLeftColor: color.white,
-                  borderLeftWidth: 2,
-                }}
+                style={styles.upperview}
               />
 
               <View style={styles.dot} />
@@ -124,14 +108,7 @@ export default function Dashboard({navigation}) {
                       height: '75%',
                     }}>
                     <Image
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        borderTopRightRadius: index % 2 == 0 ? width(5) : 0,
-                        borderBottomRightRadius: index % 2 == 0 ? width(5) : 0,
-                        borderTopLeftRadius: index % 2 != 0 ? width(5) : 0,
-                        borderBottomLeftRadius: index % 2 != 0 ? width(5) : 0,
-                      }}
+                      style={styles.image}
                       source={{
                         uri:item.image}}
                     />
@@ -167,26 +144,10 @@ export default function Dashboard({navigation}) {
             <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
               <View style={styles.dot} />
               <View
-                style={{
-                  width: width(7),
-                  height: height(1.5),
-                  marginRight: width(1),
-                  borderBottomColor: color.white,
-                  borderBottomWidth: 2,
-                  borderRightColor: color.white,
-                  borderRightWidth: 2,
-                }}
+                style={styles.view}
               />
               <View
-                style={{
-                  width: width(7),
-                  height: height(1.5),
-                  marginLeft: width(1),
-                  borderBottomColor: color.white,
-                  borderBottomWidth: 2,
-                  borderLeftColor: color.white,
-                  borderLeftWidth: 2,
-                }}
+                style={styles.view}
               />
 
               <View style={styles.dot} />
