@@ -116,14 +116,7 @@ export default function Dashboard({navigation}) {
                       height: '75%',
                     }}>
                     <Image
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        borderTopRightRadius: index % 2 == 0 ? width(5) : 0,
-                        borderBottomRightRadius: index % 2 == 0 ? width(5) : 0,
-                        borderTopLeftRadius: index % 2 != 0 ? width(5) : 0,
-                        borderBottomLeftRadius: index % 2 != 0 ? width(5) : 0,
-                      }}
+                      style={styles.image}
                       source={{
                         uri: `${config.url}public/images/${item.category&&item.category.image}`,
                       }}
