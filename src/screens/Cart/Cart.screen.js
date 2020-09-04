@@ -24,28 +24,28 @@ export default function Dashboard({navigation}) {
     {
       key: 1,
       quantity: 1,
-      title: 'Strawbery',
+      title: 'الفراولة',
       image:
         'https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
     },
     {
       key: 2,
       quantity: 1,
-      title: 'Strawbery',
+      title: 'الفراولة',
       image:
         'https://images.unsplash.com/photo-1562347810-18a0d370ba36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
     },
     {
       key: 3,
       quantity: 1,
-      title: 'Strawbery',
+      title: 'الفراولة',
       image:
         'https://images.unsplash.com/photo-1577041249022-26cc744ddda3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
     },
     {
       key: 4,
       quantity: 1,
-      title: 'Strawbery',
+      title: 'الفراولة',
       image:
         'https://images.unsplash.com/photo-1513612254505-fb553147a2e8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
     },
@@ -255,7 +255,7 @@ export default function Dashboard({navigation}) {
             </View>
             <View style={styles.line} />
             <Button
-              title="Proceed"
+              title="تقدم"
               labelStyle={{color: color.darkBlue}}
               containerStyle={{
                 backgroundColor: 'transparent',

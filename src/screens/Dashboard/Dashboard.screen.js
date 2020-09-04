@@ -65,7 +65,7 @@ export default function Dashboard({navigation}) {
                     style={styles.backImage}
                   />
                 </TouchableOpacity>
-                <TextInput placeholder="Search" />
+                <TextInput placeholder="بحث" />
               </View>
             )}
           </View>

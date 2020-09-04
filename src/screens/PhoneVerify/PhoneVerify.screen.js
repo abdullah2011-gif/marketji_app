@@ -46,7 +46,7 @@ export default function Login({route}) {
   },[])
   const signUp = () => {
     if(code!=otpVer){
-      setWarning('Wrong otp')
+      setWarning('otp خاطئ')
       return
     }
     new Apimanager()
@@ -59,7 +59,7 @@ export default function Login({route}) {
       })
       .then(res => {
         if (res.status == 202) {
-          setWarning('User already exist');
+          setWarning('المستخدم موجود اصلا');
         } else if (res.status == 200) {
           dispatch(login({...res.data.user, token: res.data.token}));
         } else {
@@ -94,7 +94,7 @@ export default function Login({route}) {
                             }
                         />
                     </View>
-                    <Button onPress={signUp} containerStyle={{marginTop:height(10)}} title='Verify' />
+                    <Button onPress={signUp} containerStyle={{marginTop:height(10)}} title='تحقق' />
                     <Text style={styles.warning}>
                   {warning}
                 </Text>

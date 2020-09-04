@@ -28,7 +28,7 @@ import config from '../../../config'
 //     selected_item,
 //   } from '../../Redux/Actions/Categories';
 
-const labels = ["Requested", "Request Approved", "In Process", "Completed"];
+const labels = ["طلب", "تمت الموافقة على الطلب", "تحت المعالجة", "منجز"];
 const customStyles = {
     stepIndicatorSize: 22,
     currentStepIndicatorSize: 22,
@@ -69,41 +69,41 @@ export default class Trips extends Component {
                 {
                     key: '0',
                     image: 'https://images.unsplash.com/photo-1542737579-ba0a385f3b84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-                    label: 'Order 1',
-                    location: 'To Los Angeles',
-                    description: 'Extended Stay America',
+                    label: 'طلب 1',
+                    location: 'الى لوس انجليس',
+                    description: 'إكستندد ستاي أمريكا',
                     expanded: true
                 },
                 {
                     key: '1',
                     image: 'https://images.unsplash.com/photo-1544413660-299165566b1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-                    label: 'Order 2',
-                    location: 'To Los Angeles',
-                    description: 'Libra Hotel',
+                    label: 'طلب 2',
+                    location: 'الى لوس انجليس',
+                    description: 'فندق ليبرا',
                     expanded: false
                 },
                 {
                     key: '2',
                     image: 'https://images.unsplash.com/photo-1429554429301-1c7d5ae2d42e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-                    label: 'Order 3',
-                    location: 'To Los Angeles',
-                    description: 'Luxury Los Angeles Hotel',
+                    label: 'طلب 3',
+                    location: 'الى لوس انجليس',
+                    description: 'فندق فاخر في لوس أنجلوس',
                     expanded: false
                 },
                 {
                     key: '3',
                     image: 'https://images.unsplash.com/photo-1554143091-c41d76e3da15?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-                    label: 'Order 4',
-                    location: 'To Los Angeles',
-                    description: 'The New USC Hotel',
+                    label: ' 4 طلب',
+                    location: 'الى لوس انجليس',
+                    description: 'فندق نيو يو إس سي',
                     expanded: false
                 },
                 {
                     key: '4',
                     image: 'https://images.unsplash.com/photo-1471039497385-b6d6ba609f9c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-                    label: 'Order 5',
-                    location: 'To Los Angeles',
-                    description: 'Embassy Suites by Hilton',
+                    label: 'طلب 5',
+                    location: 'الى لوس انجليس',
+                    description: 'أجنحة إمباسي من هيلتون',
                     expanded: false
                 },
             ]
@@ -319,8 +319,8 @@ export default class Trips extends Component {
                         </View>
                         <SegmentedControlTab
                             values={[
-                                'Current Orders',
-                                'Previous Orders',
+                                'الطلبات الحالية',
+                                'الطلبات السابقة',
                             ]}
                             selectedIndex={this.state.selectedIndex}
                             onTabPress={this.handleIndexChange}

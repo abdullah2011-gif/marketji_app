@@ -70,10 +70,10 @@ export default function Dashboard() {
             <Text style={styles.payment}>Payment</Text>
           </View>
           <View style={styles.inputtext}>
-            <TextInput placeholder="Name" />
-            <TextInput placeholder="Phone No" />
-            <TextInput placeholder="Gender" />
-            <TextInput placeholder="Title" />
+            <TextInput placeholder="اسم" />
+            <TextInput placeholder="هاتف" />
+            <TextInput placeholder="جنس" />
+            <TextInput placeholder="عنوان" />
           </View>
         </ImageBackground>
       </SafeAreaView>
