@@ -1,13 +1,8 @@
-import { LOGIN, LOGOUT } from '../Types';
-export const login = payload => {
+import { GETPRODUCTANDCATEGORIES } from '../Types';
+export const setCAtegoriesAndProduct = payload => {
+    // console.log(payload)
     return {
-        type: LOGIN,
+        type: GETPRODUCTANDCATEGORIES,
         payload: payload
-    }
-};
-export const logout = () => {
-    return {
-        type: LOGOUT,
-        payload: { uid: '' }
     }
 };
