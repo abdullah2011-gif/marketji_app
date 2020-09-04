@@ -1,7 +1,8 @@
-import React, {Component, useState, useReducer} from 'react';
+import React, {Component, useState} from 'react';
+import Text from '../../components/Text/Text.component';
 import {
   View,
-  Text,
+
   ImageBackground,
   TouchableOpacity,
   SafeAreaView,
@@ -10,7 +11,7 @@ import {
   Image,TextInput
 } from 'react-native';
 import styles from './Payment.styles';
-import ModalDropdown from 'react-native-modal-dropdown';
+// import ModalDropdown from 'react-native-modal-dropdown';
 import Button from '../../components/Button/Button.component';
 import arrowdownImage from '../../assets/back.png';
 import {useDispatch, useSelector} from 'react-redux';
@@ -115,7 +116,7 @@ export default function Payment({navigation}) {
            <TextInput value={cardAddress} onChangeText={setCardAddress} placeholder='العنوان' style={{color:color.darkBlue,textAlign:'right',fontWeight:'bold',height:height(6),width:'90%',alignSelf:'center'}} />
          </View>
          <View style={{width:'90%',flexDirection:'row',alignItems:'center',alignSelf:'center',justifyContent:'space-between',marginTop:height(3)}}>
-         <ModalDropdown
+         {/* <ModalDropdown
                   options={['عمان', 'زرقاء ','اربد ','مادبا','عجلون','البقعه']}
                   dropdownStyle={styles.genderDropDown}
                   showsVerticalScrollIndicator={false}
@@ -136,8 +137,8 @@ export default function Payment({navigation}) {
                     <Text style={styles.genderText}>{selectedValue}</Text>
                    
                   </View>
-                </ModalDropdown>
-         <Button title={'Select location'} labelStyle={{fontSize:width(4)}} containerStyle={{width:'50%',borderRadius:4,height:height(5)}} />
+                </ModalDropdown> */}
+         <Button title={'اختر موقعا'} labelStyle={{fontSize:width(4)}} containerStyle={{width:'50%',borderRadius:4,height:height(5)}} />
          </View>
        </View>
        <View style={{flexDirection:'row',alignItems:'center',alignSelf:'center',justifyContent:'space-between',marginTop:height(3)}}>

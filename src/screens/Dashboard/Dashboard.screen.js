@@ -92,7 +92,7 @@ export default function Dashboard({navigation}) {
                     style={styles.backImage}
                   />
                 </TouchableOpacity>
-                <TextInput value={searchTerm} onChangeText={setSearchTerm} placeholder="Search" />
+                <TextInput value={searchTerm} onChangeText={setSearchTerm} placeholder="بحث" />
               </View>
             )}
           </View>

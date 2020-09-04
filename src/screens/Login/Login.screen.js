@@ -117,7 +117,7 @@ export default function Login({navigation}) {
         }
       },
       function(error) {
-        console.log('Login fail with error: ' + error);
+        console.log('فشل تسجيل الدخول مع وجود خطأ: ' + error);
       },
     );
     dispatch(setLoading(false))
@@ -128,9 +128,9 @@ export default function Login({navigation}) {
   //  console.log(otp)
   await new Apimanager().sentOtp({username:phone,otp}).then(res=>{
      if(res.status==201){
-       setWarning('Please try again')
+       setWarning('حاول مرة اخرى')
      }else if(res.status==202){
-       setWarning('A user with this phone number already exist!')
+       setWarning('مستخدم برقم الهاتف هذا موجود بالفعل!')
      }else if(res.status==200){
       navigation.navigate('PhoneVerify',{
         username: phone,
@@ -162,7 +162,7 @@ export default function Login({navigation}) {
        dispatch(login({...res.data.user, token: res.data.token}));
       }else{
         if(res=='Unauthorized')
-        setWarning('Invalid phone or password!')
+        setWarning('الهاتف أو كلمة المرور غير صحيحة!')
         else
         setWarning(res)
       }
@@ -221,13 +221,13 @@ export default function Login({navigation}) {
                 <Text style={styles.label}>Phone Number</Text>
                 <TextInput
                   value={loginPhoen}
-                  placeholder={'Confirm password'}
+                  placeholder={'تأكيد كلمة المرور'}
                   onChangeText={setLoginPhone}
                 />
                 <Text style={styles.label}>Password</Text>
                 <TextInput
                   value={loginPassword}
-                  placeholder={'Confirm password'}
+                  placeholder={'تأكيد كلمة المرور'}
                   onChangeText={setLoginPassword}
                   secureTextEntry
                 />
@@ -236,7 +236,7 @@ export default function Login({navigation}) {
                   {warning}
                 </Text>
                 <Button
-                  title="Login"
+                  title="تسجيل الدخول"
                   onPress={loginUser}
                 />
                 <Text style={styles.forgot}>Forgot Your Password?</Text>
@@ -265,27 +265,27 @@ export default function Login({navigation}) {
                 <Text style={styles.signupLabel}>Name</Text>
                 <TextInput
                   value={name}
-                  placeholder={'Name'}
+                  placeholder={'اسم'}
                   onChangeText={setName}
                 />
                 <Text style={styles.signupLabel}>Password</Text>
                 <TextInput
                   value={password}
-                  placeholder={'Password'}
+                  placeholder={'كلمه السر'}
                   onChangeText={setPassword}
                   secureTextEntry
                 />
                 <Text style={styles.signupLabel}>Confirm password</Text>
                 <TextInput
                   value={cpassword}
-                  placeholder={'Confirm password'}
+                  placeholder={'تأكيد كلمة المرور'}
                   onChangeText={setCPassword}
                   secureTextEntry
                 />
                 <Text style={styles.signupLabel}>Phone number</Text>
                 <TextInput
                   value={phone}
-                  placeholder={'Phone number'}
+                  placeholder={'رقم الهاتف'}
                   onChangeText={setPhone}
                 />
                  <Text style={styles.warning}>
@@ -315,7 +315,7 @@ export default function Login({navigation}) {
                   </TouchableOpacity>
                 </View>
                 <View style={{width: width(50), alignSelf: 'center'}}>
-                  <Button title="Signup" onPress={signUp} />
+                  <Button title="سجل" onPress={signUp} />
                 </View>
               </View>
             )}

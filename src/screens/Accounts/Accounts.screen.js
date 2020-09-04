@@ -1,7 +1,8 @@
 import React, {Component, useState} from 'react';
+import Text from '../../components/Text/Text.component';
 import {
   View,
-  Text,
+
   ImageBackground,
   TouchableOpacity,
   SafeAreaView,
@@ -116,10 +117,10 @@ export default function Dashboard() {
           </View> */}
           
           <View style={styles.inputtext}>
-            <TextInput value={name} onChangeText={setName} defaultValue={user.fullName} placeholder="Name" />
-            <TextInput value={phone} onChangeText={setPhone} defaultValue={user.contact} placeholder="Phone No" />
-            <TextInput value={gender} onChangeText={setGender} defaultValue={user.gender} placeholder="Gender" />
-            <TextInput value={title} onChangeText={setTtitle} defaultValue={user.title} placeholder="Title" />
+            <TextInput value={name} onChangeText={setName} defaultValue={user.fullName} placeholder="اسم" />
+            <TextInput value={phone} onChangeText={setPhone} defaultValue={user.contact}placeholder="هاتف" />
+            <TextInput value={gender} onChangeText={setGender} defaultValue={user.gender} placeholder="جنس" />
+            <TextInput value={title} onChangeText={setTtitle} defaultValue={user.title} placeholder="عنوان" />
           </View>
           </KeyboardAvoidingView>
           <Button onPress={saveUser} title='Save' />

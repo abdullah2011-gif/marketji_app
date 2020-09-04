@@ -1,10 +1,12 @@
 import React, { Component, Fragment } from 'react';
-import { View, Text,Modal, SafeAreaView, StyleSheet, TouchableOpacity,
+import { View,
+    Modal, SafeAreaView, StyleSheet, TouchableOpacity,
     ActivityIndicator, Image, FlatList, ImageBackground, LayoutAnimation, Alert } from 'react-native';
 import { width, height, totalSize } from 'react-native-dimension';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 import StepIndicator from 'react-native-step-indicator';
 import color from '../../utills/Colors';
+import Text from '../../components/Text/Text.component';
 
 // import {
 //   all_trips,
@@ -26,7 +28,7 @@ import config from '../../../config'
 //     selected_item,
 //   } from '../../Redux/Actions/Categories';
 
-const labels = ["Requested", "Request Approved", "In Process", "Completed"];
+const labels = ["طلب", "تمت الموافقة على الطلب", "تحت المعالجة", "منجز"];
 const customStyles = {
     stepIndicatorSize: 22,
     currentStepIndicatorSize: 22,
@@ -309,8 +311,8 @@ class Trips extends Component {
                         </View>
                         <SegmentedControlTab
                             values={[
-                                'Current Orders',
-                                'Previous Orders',
+                                'الطلبات الحالية',
+                                'الطلبات السابقة',
                             ]}
                             selectedIndex={this.state.selectedIndex}
                             onTabPress={this.handleIndexChange}
