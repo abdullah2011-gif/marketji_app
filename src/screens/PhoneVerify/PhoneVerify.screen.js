@@ -13,7 +13,7 @@ import styles from './PhoneVerify.styles';
 import Button from '../../components/Button/Button.component';
 import TextInput from '../../components/TextInput/TextInput.component';
 import {useDispatch, useSelector} from 'react-redux';
-import {login, logout} from '../../Redux/Actions/Auth';
+import {login, logout, setLoading} from '../../Redux/Actions/Auth';
 import color from '../../utills/Colors';
 import {width, height} from 'react-native-dimension';
 import {LoginManager} from 'react-native-fbsdk';
@@ -44,12 +44,13 @@ export default function Login({route}) {
      setName(route.params.fullName)
      setPassword(route.params.password)
   },[])
-  const signUp = () => {
+  const signUp = async() => {
+    dispatch(setLoading(true))
     if(code!=otpVer){
       setWarning('Wrong otp')
       return
     }
-    new Apimanager()
+   await new Apimanager()
       .signUp({
         type: 'customer',
         username: phone.toString(),
@@ -66,6 +67,7 @@ export default function Login({route}) {
           setWarning(res);
         }
       });
+      dispatch(setLoading(false))
   };
   return (
     <React.Fragment>

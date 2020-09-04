@@ -13,7 +13,7 @@ import styles from './Login.styles';
 import Button from '../../components/Button/Button.component';
 import TextInput from '../../components/TextInput/TextInput.component';
 import {useDispatch, useSelector} from 'react-redux';
-import {login, logout} from '../../Redux/Actions/Auth';
+import {login, logout, setLoading} from '../../Redux/Actions/Auth';
 import color from '../../utills/Colors';
 import {width, height} from 'react-native-dimension';
 import {LoginManager} from 'react-native-fbsdk';
@@ -21,10 +21,12 @@ import {LoginButton, AccessToken} from 'react-native-fbsdk';
 import {GoogleSignin, statusCodes} from '@react-native-community/google-signin';
 import axios from 'axios';
 import Apimanager from '../../ApiFunctions/ApiFunctions';
+import { setProducts, setCart, setPendingOrders, setCompletedOrders } from '../../Redux/Actions/App';
+import config from '../../../config';
 GoogleSignin.configure({
   offlineAccess: false,
-  webClientId:
-    '350261003171-marocch5lta2id8bohbp0n78473vv1j8.apps.googleusercontent.com',
+  androidClientId:'350261003171-nuv576fq3sgvk5bd0dpcklco6or2l0lb.apps.googleusercontent.com',
+  webClientId:'350261003171-marocch5lta2id8bohbp0n78473vv1j8.apps.googleusercontent.com',
 });
 export default function Login({navigation}) {
   const [isLogin, setIsLogin] = useState(true);
@@ -41,7 +43,30 @@ export default function Login({navigation}) {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
       console.log('abc' + JSON.stringify(userInfo.user));
+      dispatch(setLoading(true))
+     await axios
+      .post(`${config.url}google`,userInfo.user)
+      .then(async(res) => {
+           if(res.status==200){
+              await new Apimanager().getFavorites(res.data.user.customerId).then(res=>{
+                 dispatch(setProducts(res))
+               })
+              await new Apimanager().getcart(res.data.user.customerId).then(res=>{
+                 dispatch(setCart(res))
+               })
+              await new Apimanager().getOrders(res.data.user._id).then(res=>{
+                 dispatch(setPendingOrders(res.pendingOrder))
+                 dispatch(setCompletedOrders(res.orders))
+               })
+                dispatch(login({...res.data.user, token: res.data.token}));
+               
+           }else{
+             setWarning('Unable to authenticate your account please try again')
+           }
+      })
+      .catch(e =>console.log(e.response))
     } catch (error) {
+      console.log(JSON.stringify(error))
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
       } else if (error.code === statusCodes.IN_PROGRESS) {
       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
@@ -49,40 +74,59 @@ export default function Login({navigation}) {
         // some other error happened
       }
     }
+    dispatch(setLoading(false))
   };
-  const facebookLogin = () => {
-    LoginManager.logInWithPermissions(['public_profile']).then(
-      function(result) {
+  const facebookLogin = async() => {
+   await LoginManager.logInWithPermissions(['public_profile']).then(
+     async function(result) {
         if (result.isCancelled) {
-          console.log('Login cancelled');
+          // console.log('Login cancelled');
         } else {
-          AccessToken.getCurrentAccessToken().then(data => {
-            console.log(data.accessToken.toString() + 'access token');
-            axios
-              .post(`http://192.168.43.43:3000/facebook`, {
+         await AccessToken.getCurrentAccessToken().then(async(data) => {
+            console.log(`Bearer ${data.accessToken.toString()}`);
+            dispatch(setLoading(true))
+           await axios
+              .post(`${config.url}facebook`,null, {
                 headers: {
-                  access_token: data.accessToken.toString(),
+                  "Authorization": `Bearer ${data.accessToken.toString()}`,
                 },
               })
-              .then(res => {
-                console.log(res);
+              .then(async(res) => {
+                   if(res.status==200){
+                      await new Apimanager().getFavorites(res.data.user.customerId).then(res=>{
+                         dispatch(setProducts(res))
+                       })
+                      await new Apimanager().getcart(res.data.user.customerId).then(res=>{
+                         dispatch(setCart(res))
+                       })
+                      await new Apimanager().getOrders(res.data.user._id).then(res=>{
+                         dispatch(setPendingOrders(res.pendingOrder))
+                         dispatch(setCompletedOrders(res.orders))
+                       })
+                        dispatch(login({...res.data.user, token: res.data.token}));
+                       
+                   }else{
+                     setWarning('Unable to authenticate your account please try again')
+                   }
               })
-              .catch(e => console.log(e));
+              .catch(e =>console.log(e.response))//setWarning('Unable to authenticate your account please try again'));
           });
-          console.log(
-            'Login success with permissions: ' + JSON.stringify(result),
-          );
+          // console.log(
+          //   'Login success with permissions: ' + JSON.stringify(result),
+          // );
         }
       },
       function(error) {
         console.log('Login fail with error: ' + error);
       },
     );
+    dispatch(setLoading(false))
   };
-  const signUp = () => {
+  const signUp = async() => {
+    dispatch(setLoading(true))
    const otp = Math.floor(100000 + Math.random() * 900000);
-   console.log(otp)
-   new Apimanager().sentOtp({username:phone,otp}).then(res=>{
+  //  console.log(otp)
+  await new Apimanager().sentOtp({username:phone,otp}).then(res=>{
      if(res.status==201){
        setWarning('Please try again')
      }else if(res.status==202){
@@ -96,31 +140,25 @@ export default function Login({navigation}) {
         otp
       })
      }else{
-       console.log(res)
+      //  console.log(res)
      }
    })
- 
-    // new Apimanager()
-    //   .signUp({
-    //     type: 'customer',
-    //     username: phone,
-    //     contact: phone,
-    //     fullName: name,
-    //     password: password,
-    //   })
-    //   .then(res => {
-    //     if (res.status == 202) {
-    //       setWarning('User already exist');
-    //     } else if (res.status == 200) {
-    //       dispatch(login({...res.data.user, token: res.data.token}));
-    //     } else {
-    //       setWarning(res);
-    //     }
-    //   });
+   dispatch(setLoading(false))
   };
-  const loginUser=()=>{
-    new Apimanager().Login({username:loginPhoen,password:loginPassword}).then(res=>{
+  const loginUser=async()=>{
+    dispatch(setLoading(true))
+  await  new Apimanager().Login({username:loginPhoen,password:loginPassword}).then(async(res)=>{
      if(res.status==200){
+     await new Apimanager().getFavorites(res.data.user.customerId).then(res=>{
+        dispatch(setProducts(res))
+      })
+     await new Apimanager().getcart(res.data.user.customerId).then(res=>{
+        dispatch(setCart(res))
+      })
+     await new Apimanager().getOrders(res.data.user._id).then(res=>{
+        dispatch(setPendingOrders(res.pendingOrder))
+        dispatch(setCompletedOrders(res.orders))
+      })
        dispatch(login({...res.data.user, token: res.data.token}));
       }else{
         if(res=='Unauthorized')
@@ -129,6 +167,7 @@ export default function Login({navigation}) {
         setWarning(res)
       }
     })
+    dispatch(setLoading(false))
   }
   return (
     <React.Fragment>

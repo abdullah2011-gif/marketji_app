@@ -1,3 +1,3 @@
 export default {
-    url:'http://172.20.10.3:3000/'
+    url:'https://marketjibackend.herokuapp.com/'
 }

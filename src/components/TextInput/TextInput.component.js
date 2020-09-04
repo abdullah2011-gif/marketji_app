@@ -14,7 +14,7 @@ const Component = (
     editable,
     formatText,
     onSubmit,
-    returnKeyType,
+    returnKeyType,defaultValue
   },
   ref,
 ) => {
@@ -34,7 +34,7 @@ const Component = (
         // disabled={onIconPress?true:false}
         onChangeText={onChangeText}
         onSubmitEditing={onSubmit}
-        defaultValue={value}
+        defaultValue={defaultValue}
         ref={ref}
         returnKeyType={returnKeyType ? returnKeyType : 'done'}
         editable={editable}

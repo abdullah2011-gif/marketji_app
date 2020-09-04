@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, {Component, useState, useReducer} from 'react';
 import {
   View,
   Text,
@@ -14,14 +14,68 @@ import ModalDropdown from 'react-native-modal-dropdown';
 import Button from '../../components/Button/Button.component';
 import arrowdownImage from '../../assets/back.png';
 import {useDispatch, useSelector} from 'react-redux';
-import {login, logout} from '../../Redux/Actions/Auth';
+import {login, logout, setUser, setLoading} from '../../Redux/Actions/Auth';
 import color from '../../utills/Colors';
 import {width, height} from 'react-native-dimension';
 import {SliderBox} from 'react-native-image-slider-box';
 import { ScreenStackHeaderBackButtonImage } from 'react-native-screens';
-export default function Payment() { 
+import stripe from 'tipsi-stripe';
+import Apimanager from '../../ApiFunctions/ApiFunctions';
+
+stripe.setOptions({
+  publishableKey: 'pk_test_51HJaYLGOCFGuuf2kA5DJQXhGccfi0vQ9zZZrTgK0PmMBkIzOUZyM9TmjQd8UnAQShK5cCIxOh1nSR3bdwmradYO400nnAralVl',
+});
+
+export default function Payment({navigation}) { 
   const [selectedValue, setSelectedValue] = useState('عمان');
   const [check, setCheck] = useState(false);
+  const user = useSelector(state => state.Auth.user);
+  const dispatch = useDispatch();
+  const [cardNumber,setCardNumber] = useState('')
+  const [cardCvv,setCardCvv] = useState('')
+  const [cardExpDate,setCardExpDate] = useState('')
+  const [cardName,setCardName] = useState('')
+  const [cardAddress,setCardAddress] = useState('')
+  const [warning, setWarning] = useState('');
+ const requestPayment = async() => {
+  dispatch(setLoading(true))
+   if(cardExpDate.match('/')){
+     console.log(cardExpDate.split('/'))
+   }
+  try {
+    // this.setState({ loading: true, token: null, error: null })
+     var cardNum =cardExpDate.split('/')
+    // const params = shouldPass ? this.state.params : this.state.errorParams
+    const token = await stripe.createTokenWithCard({
+      number: cardNumber,
+      expMonth: parseInt(cardNum[0]),
+      expYear: parseInt(cardNum[1]),
+      cvc: cardCvv,
+      name: cardName,
+      currency: 'usd',
+      addressCity: cardAddress,
+      addressState: selectedValue
+    })
+    console.log(token)
+    if((token.card.brand.match('Visa')||token.card.brand.match('MasterCard')||token.card.brand.match('Discover'))&&token.tokenId){
+   await  new Apimanager().addCards({phone:user.contact,name:user.fullName,customerId:user.customerId,token:token.tokenId,title:cardName,brand:token.card.brand})
+     .then(res=>{
+       if(res){
+        dispatch(setUser(res))
+         navigation.goBack()
+       }else{
+         setWarning('Only test card will be acceptable in test mode')
+       }
+     })
+    }
+    // this.setState({ loading: false, error: undefined, token })
+  } catch (error) {
+    setWarning('network error')
+    // this.setState({ loading: false, error })
+  }
+  dispatch(setLoading(false))
+  };
+
   // const user = useSelector(state => state.Auth.user);
   // const dispatch = useDispatch();
   return (
@@ -42,20 +96,23 @@ export default function Payment() {
            </View>
            <Text style={{fontSize:width(3.3),fontWeight:'bold'}}>Adl Istalam</Text>
        </View>
-       <View style={{height:height(40),width:width(90),alignSelf:'center',borderRadius:width(3),padding:width(2),marginTop:height(2),backgroundColor:'rgba(252,235,225,0.9)'}}>
+       <View style={{height:height(47),width:width(90),alignSelf:'center',borderRadius:width(3),padding:width(2),marginTop:height(2),backgroundColor:'rgba(252,235,225,0.9)'}}>
          <View style={{borderBottomWidth:1,borderBottomColor:'#decec5',marginTop:height(2)}}>
-           <TextInput placeholder='رقم البطاقه' style={{color:color.darkBlue,textAlign:'right',fontWeight:'bold',height:height(6),width:'90%',alignSelf:'center'}} />
+           <TextInput value={cardName} onChangeText={setCardName} placeholder='name' style={{color:color.darkBlue,textAlign:'right',fontWeight:'bold',height:height(6),width:'90%',alignSelf:'center'}} />
+         </View>
+         <View style={{borderBottomWidth:1,borderBottomColor:'#decec5',marginTop:height(2)}}>
+           <TextInput value={cardNumber} onChangeText={setCardNumber} placeholder='رقم البطاقه' style={{color:color.darkBlue,textAlign:'right',fontWeight:'bold',height:height(6),width:'90%',alignSelf:'center'}} />
          </View>
          <View style={{width:'90%',flexDirection:'row',alignSelf:'center',justifyContent:'space-between',marginTop:height(2)}}>
          <View style={{borderBottomWidth:1,width:'40%',borderBottomColor:'#decec5'}}>
-           <TextInput placeholder='CVV' style={{color:color.darkBlue,textAlign:'left',fontWeight:'bold',height:height(6),width:'100%',alignSelf:'center'}} />
+           <TextInput value={cardCvv} onChangeText={setCardCvv} placeholder='CVV' style={{color:color.darkBlue,textAlign:'left',fontWeight:'bold',height:height(6),width:'100%',alignSelf:'center'}} />
            </View>
            <View style={{borderBottomWidth:1,width:'40%',borderBottomColor:'#decec5'}}>
-           <TextInput placeholder='تاريخ الانتهاء' style={{color:color.darkBlue,textAlign:'right',fontWeight:'bold',height:height(6),width:'100%',alignSelf:'center'}} />
+           <TextInput value={cardExpDate} onChangeText={setCardExpDate} placeholder='تاريخ الانتهاء' style={{color:color.darkBlue,textAlign:'right',fontWeight:'bold',height:height(6),width:'100%',alignSelf:'center'}} />
            </View>
          </View>
          <View style={{borderBottomWidth:1,borderBottomColor:'#decec5',marginTop:height(2)}}>
-           <TextInput placeholder='العنوان' style={{color:color.darkBlue,textAlign:'right',fontWeight:'bold',height:height(6),width:'90%',alignSelf:'center'}} />
+           <TextInput value={cardAddress} onChangeText={setCardAddress} placeholder='العنوان' style={{color:color.darkBlue,textAlign:'right',fontWeight:'bold',height:height(6),width:'90%',alignSelf:'center'}} />
          </View>
          <View style={{width:'90%',flexDirection:'row',alignItems:'center',alignSelf:'center',justifyContent:'space-between',marginTop:height(3)}}>
          <ModalDropdown
@@ -90,7 +147,10 @@ export default function Payment() {
          </TouchableOpacity>
         
 </View>
-<Button title={'التحقق والدفع'} containerStyle={{width:'50%',height:height(6.5),marginTop:height(9)}} />
+<Button title={'التحقق والدفع'} disabled={!check} onPress={requestPayment} containerStyle={{width:'50%',height:height(6.5),marginTop:height(3)}} />
+<Text style={styles.warning}>
+                  {warning}
+                </Text>
 </ImageBackground>
       </SafeAreaView>
       <SafeAreaView backgroundColor={color.white} />

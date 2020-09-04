@@ -6,17 +6,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  dot:
-  {
-  width:3,
-  height:3,
-  borderRadius:3,
-  backgroundColor:color.white,
-  marginHorizontal:height(0.3)
+  line: {
+    width: width(90),
+    alignSelf: 'center',
+    borderBottomColor: color.white,
+    borderBottomWidth: 0.7,
+    marginVertical: height(5),
   },
   genderDropDown:{
-    height: height(25),
-    width:'20%'
+    height: height(15),
+    width:width(30),
   },
   genderDropDownItemContainer:{
     paddingVertical: height(2),
@@ -32,7 +31,8 @@ const styles = StyleSheet.create({
     borderRadius: width(1),
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: width(2),
+    width: width(30),
+    paddingHorizontal:width(2),
     paddingVertical: height(1)
   },
 genderText:{
@@ -45,12 +45,5 @@ arrowdownImage: {
   width: width(4.5),
   resizeMode: 'contain'
 },
-warning: {
-  alignSelf: 'center',
-  fontSize: width(3.5),
-  color: color.darkBlue,
-  paddingTop: 3,
-  fontWeight: 'bold',
-}
 });
 export default styles;

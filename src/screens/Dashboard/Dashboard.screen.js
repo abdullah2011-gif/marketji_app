@@ -9,16 +9,22 @@ import {
   FlatList,
   Image,
   ScrollView,
+  ActivityIndicator,
 } from 'react-native';
 import styles from './Dashboard.styles';
 import Button from '../../components/Button/Button.component';
 import TextInput from '../../components/TextInput/TextInput.component';
+import  { createFilter } from 'react-native-search-filter';
 import {useDispatch, useSelector} from 'react-redux';
 import {login, logout} from '../../Redux/Actions/Auth';
 import color from '../../utills/Colors';
 import {width, height} from 'react-native-dimension';
 import {SliderBox} from 'react-native-image-slider-box';
+import {setCAtegoriesAndProduct} from '../../Redux/Actions/App'
+
 import config from '../../../config';
+import Apimanager from '../../ApiFunctions/ApiFunctions';
+const KEYS_TO_FILTERS = ['category.name'];
 export default function Dashboard({navigation}) {
   const [images, setImages] = useState([
     'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
@@ -28,15 +34,36 @@ export default function Dashboard({navigation}) {
   ]);
   const categoriesAndProduct = useSelector(state => state.App.categoriesAndProduct);
   const user = useSelector(state => state.Auth.user);
-  const [data, setData] = useState(categoriesAndProduct);
+  const [data, setData] = useState([]);
+  const [data1, setData1] = useState([]);
   const [search, setSearch] = useState(false);
-  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const cart = useSelector(state => state.App.cart);
+  var totalPrice = null;
+  cart.map(item=>{
+    totalPrice = totalPrice+(item.orderQuantity*item.product.price)
+  })
+  const dispatch = useDispatch()
+    useEffect(()=>{
+      setLoading(true)
+        new Apimanager().getCatAndProducts().then(res=>{
+          setLoading(false)
+            dispatch(setCAtegoriesAndProduct(res))
+            setData(res)
+            setData1(res)
+
+        })
+    },[])
+    const dataProfiles = data1.filter(createFilter(searchTerm, KEYS_TO_FILTERS))
+
   return (
     <React.Fragment>
       <SafeAreaView backgroundColor={color.white} />
       <StatusBar barStyle={'dark-content'} backgroundColor={color.white} />
       <SafeAreaView style={{flex: 1, backgroundColor: color.orange}}>
         <ScrollView style={{height: height(89)}}>
+          {/* {console.log(user)} */}
           <View
             style={styles.header}>
             {!search && (
@@ -59,13 +86,13 @@ export default function Dashboard({navigation}) {
             )}
             {search && (
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <TouchableOpacity onPress={() => setSearch(false)}>
+                <TouchableOpacity onPress={() =>{ setSearchTerm('');setSearch(false)}}>
                   <Image
                     source={require('../../assets/back.png')}
                     style={styles.backImage}
                   />
                 </TouchableOpacity>
-                <TextInput placeholder="Search" />
+                <TextInput value={searchTerm} onChangeText={setSearchTerm} placeholder="Search" />
               </View>
             )}
           </View>
@@ -100,12 +127,13 @@ export default function Dashboard({navigation}) {
             </View>
           </View>
           {/* <View style={{height: height(55)}}> */}
-          <FlatList
+        {loading? <ActivityIndicator size={width(10)} style={{marginTop:height(15)}} color={'#ffffff'} />:<FlatList
             numColumns={2}
-            data={data}
+            data={search?dataProfiles:data}
             columnWrapperStyle={styles.flatlistContainer}
             contentContainerStyle={{marginTop: height(1)}}
             renderItem={({item, index}) => {
+              // console.log(item)
               return (
                 <View style={styles.flatlistMain}>
                   <TouchableOpacity
@@ -113,10 +141,18 @@ export default function Dashboard({navigation}) {
                     onPress={() => navigation.navigate('Products',{products:item.products})}
                     style={{
                       width: '100%',
-                      height: '75%',
+                      height: '80%',
                     }}>
+                      {/* {console.log(item.category.image)} */}
                     <Image
-                      style={styles.image}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        borderTopRightRadius: index % 2 == 0 ? width(5) : 0,
+                        borderBottomRightRadius: index % 2 == 0 ? width(5) : 0,
+                        borderTopLeftRadius: index % 2 != 0 ? width(5) : 0,
+                        borderBottomLeftRadius: index % 2 != 0 ? width(5) : 0,
+                      }}
                       source={{
                         uri: `${config.url}public/images/${item.category&&item.category.image}`,
                       }}
@@ -129,7 +165,7 @@ export default function Dashboard({navigation}) {
                 </View>
               );
             }}
-          />
+          />}
         </ScrollView>
         <View
           style={styles.horizintalDotContainer}>
@@ -166,7 +202,7 @@ export default function Dashboard({navigation}) {
           <View style={{flexDirection: 'row'}}>
             <Text
               style={styles.payment}>
-              100 <Text style={{fontSize: width(3)}}>JD</Text>
+              {totalPrice} <Text style={{fontSize: width(3)}}>JD</Text>
             </Text>
             <Image
               style={styles.cartImage}

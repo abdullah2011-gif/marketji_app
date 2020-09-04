@@ -51,7 +51,7 @@ const customStyles = {
     currentStepLabelColor: '#F7B519'
 }
 
-export default class Trips extends Component {
+class Trips extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -63,48 +63,7 @@ export default class Trips extends Component {
             selectedIndex: 0,
             selectedTab: 0,
             expanded: false,
-            listData: [
-                {
-                    key: '0',
-                    image: 'https://images.unsplash.com/photo-1542737579-ba0a385f3b84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-                    label: 'Order 1',
-                    location: 'To Los Angeles',
-                    description: 'Extended Stay America',
-                    expanded: true
-                },
-                {
-                    key: '1',
-                    image: 'https://images.unsplash.com/photo-1544413660-299165566b1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-                    label: 'Order 2',
-                    location: 'To Los Angeles',
-                    description: 'Libra Hotel',
-                    expanded: false
-                },
-                {
-                    key: '2',
-                    image: 'https://images.unsplash.com/photo-1429554429301-1c7d5ae2d42e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-                    label: 'Order 3',
-                    location: 'To Los Angeles',
-                    description: 'Luxury Los Angeles Hotel',
-                    expanded: false
-                },
-                {
-                    key: '3',
-                    image: 'https://images.unsplash.com/photo-1554143091-c41d76e3da15?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-                    label: 'Order 4',
-                    location: 'To Los Angeles',
-                    description: 'The New USC Hotel',
-                    expanded: false
-                },
-                {
-                    key: '4',
-                    image: 'https://images.unsplash.com/photo-1471039497385-b6d6ba609f9c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-                    label: 'Order 5',
-                    location: 'To Los Angeles',
-                    description: 'Embassy Suites by Hilton',
-                    expanded: false
-                },
-            ]
+            listData: this.props.pendingOrders.map(i=>({...i,expanded:false}))
         };
     }
     setTab = tab => {
@@ -115,9 +74,16 @@ export default class Trips extends Component {
     }
     setChecked = (key) => {
         this.setState({listData:this.state.listData.map(item=>{
+            // console.log(item._id+' '+key)
+            if(item._id==key)
             return{
                 ...item,
-                expanded:key==item.key?!item.expanded:false
+                expanded:!item.expanded
+            }
+            else
+            return{
+                ...item,
+                expanded:false
             }
         })})
     }
@@ -125,13 +91,14 @@ export default class Trips extends Component {
       this.setState({selectedIndex:item})
     }
     _currentTripslist = ({ item }) => {
+        console.log(item)
         return (
             <View
                 style={{
                     backgroundColor: '#ffffff',
                     marginTop: height(2),
                 }}>
-                    {console.log(item)}
+                    {/* {console.log(item)} */}
                 <View
                     style={{
                         backgroundColor: '#ffffff',
@@ -139,10 +106,10 @@ export default class Trips extends Component {
                         width: width(90),
                         alignSelf: 'center',
                     }}>
-                    <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => { this.setChecked(item.key) }}>
+                    <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => { this.setChecked(item._id) }}>
                         <View style={{ width: width(30) }}>
                             <ImageBackground
-                                source={{ uri: item.image  }}
+                                source={{ uri: `${config.url}public/images/${item.products[0]&&item.products[0].product.image}`  }}
                                 imageStyle={{ borderRadius: 15 }}
                                 style={{
                                     height: height(13),
@@ -170,7 +137,23 @@ export default class Trips extends Component {
                                     color: '#000000',
                                     marginTop: height(.5)
                                 }}>
-                                Products:  4{/* {item.items.length}*/}
+                                Products:  {item.products.length}
+                            </Text>
+                            <Text
+                                style={{
+                                    fontSize: totalSize(1.75),
+                                    color: '#000000',
+                                    marginTop: height(.5)
+                                }}>
+                                Status:  Pending
+                            </Text>
+                            <Text
+                                style={{
+                                    fontSize: totalSize(1.75),
+                                    color: '#000000',
+                                    marginTop: height(.5)
+                                }}>
+                                Payment method:  {item.paymentMethod}
                             </Text>
                         </View>
                         <View
@@ -190,6 +173,7 @@ export default class Trips extends Component {
                                 }}
                                 direction='vertical'
                                 stepCount={4}
+                                currentPosition={item.status=='dataentry'?1:2}
                                 customStyles={customStyles}
                                 // currentPosition={!item.status?1:item.cus_return_order?4:3}
                                 labels={labels}
@@ -226,7 +210,7 @@ export default class Trips extends Component {
                     <View style={{ flexDirection: 'row' }}>
 
                         <ImageBackground
-                            source={{ uri: item.image }}
+                            source={{ uri: `${config.url}public/images/${item.products[0]&&item.products[0].product.image}`  }}
                             imageStyle={{ borderRadius: 15 }}
                             style={{
                                 height: height(13),
@@ -254,7 +238,15 @@ export default class Trips extends Component {
                                     color: '#000000',
                                     marginTop: height(.5)
                                 }}>
-                                Items:  4{/* {item.items.length} */}
+                                Items:  {item.products.length} 
+                            </Text>
+                            <Text
+                                style={{
+                                    fontSize: totalSize(1.75),
+                                    color: '#000000',
+                                    marginTop: height(.5)
+                                }}>
+                                Items:  {item.status} 
                             </Text>
                         </View>
                     </View>
@@ -356,12 +348,19 @@ export default class Trips extends Component {
                                         marginTop: height(1),
                                     }}>
                                         {/* {console.log(this.props.currenttrip+"haha")} */}
-                                    <FlatList
+                                 {this.state.listData&&this.state.listData.length>0?<FlatList
                                         data={this.state.listData}
                                         contentContainerStyle={{ paddingBottom: height(5) }}
                                         renderItem={this._currentTripslist}
                                         showsVerticalScrollIndicator={false}
-                                    />
+                                    />:<Text
+                                    style={{
+                                        fontSize: totalSize(1.75),
+                                        color: '#000000',
+                                        marginTop: height(.5)
+                                    }}>
+                                   No current orders
+                                </Text>}
                                 </View>
                             </View>
                         )}
@@ -373,12 +372,19 @@ export default class Trips extends Component {
                                         alignSelf: 'center',
                                         marginTop: height(1),
                                     }}>
-                                    <FlatList
-                                        data={this.state.listData}
+                                   {this.props.completedOrders&&this.props.completedOrders.length>0? <FlatList
+                                        data={this.props.completedOrders}
                                         contentContainerStyle={{ paddingBottom: height(5) }}
                                         renderItem={this._previousTripslist}
                                         showsVerticalScrollIndicator={false}
-                                    />
+                                    />: <Text
+                                    style={{
+                                        fontSize: totalSize(1.75),
+                                        color: '#000000',
+                                        marginTop: height(.5)
+                                    }}>
+                                   No completed orders
+                                </Text>}
                                 </View>
                             </View>
                         )}
@@ -396,41 +402,18 @@ const styles = StyleSheet.create({
     },
 });
 
-// const mapStateToProps = state => {
-//     // console.log(state.auth.name);
-//     return {
-//       alltrips:state.Trips.alltrips,
-//       currenttrip:state.Trips.currenttrip,
-//       previoustrip:state.Trips.previoustrip,
-//       allmemberships: state.Categories.allmemberships,
-//       allclosets: state.Categories.allclosets,
-//       selectedcloset: state.Categories.selectedcloset,
-//       selectedmembership: state.Categories.selectedmembership,
-//       user_data: state.Categories.user_data,
-//       allcategories: state.Categories.allcategories,
-//       selectedcategories: state.Categories.selectedcategories,
-//       allitems: state.Categories.allitems,
-//       selecteditem: state.Categories.selecteditem,
-//     };
-//   };
-//   const actions = {
-//     all_trips,
-//   current_trip,
-//   previous_trip,
-//   membership,
-//   closets,
-//   selected_closet,
-//   selected_membership,
-//   user,
-//   all_categories,
-//   selected_categories,
-//   all_items,
-//   selected_item,
-//   };
-//   export default connect(
-//     mapStateToProps,
-//     actions,
-//   )(Trips);
+const mapStateToProps = state => {
+    return {
+        pendingOrders:state.App.pendingOrders,
+        completedOrders:state.App.completedOrders,
+    };
+  };
+  const actions = {
+  };
+  export default connect(
+    mapStateToProps,
+    actions,
+  )(Trips);
   
 
 

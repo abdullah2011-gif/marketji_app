@@ -41,9 +41,9 @@ const styles = StyleSheet.create({
     marginLeft: '3%',
   },
   inputtext: {
-    height: height(30),
+    height: height(33),
     justifyContent: 'space-between',
-    marginTop: height(5),
+    marginVertical: height(2.5),
   },
   textcart: {fontSize: width(5), textAlign: 'center', width: '45%'},
   titleContainer: {
@@ -80,9 +80,9 @@ const styles = StyleSheet.create({
     borderColor: color.white,
   },
   person: {
-    tintColor: 'black',
-    width: width(20),
-    height: height(20),
+    width: '100%',
+    height: '100%',
+    borderRadius:width(30),
     resizeMode: 'contain',
   },
   whiteBack: {

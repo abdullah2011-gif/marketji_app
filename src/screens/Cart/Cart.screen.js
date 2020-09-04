@@ -14,12 +14,23 @@ import styles from './Cart.styles';
 import Button from '../../components/Button/Button.component';
 import TextInput from '../../components/TextInput/TextInput.component';
 import {useDispatch, useSelector} from 'react-redux';
-import {login, logout} from '../../Redux/Actions/Auth';
+import {login, logout, setLoading} from '../../Redux/Actions/Auth';
 import color from '../../utills/Colors';
 import {width, height} from 'react-native-dimension';
 import {SliderBox} from 'react-native-image-slider-box';
+import config from '../../../config';
+import Apimanager from '../../ApiFunctions/ApiFunctions';
+import { setProducts, setCart, setOrderQuantity, resetOrderQuantity } from '../../Redux/Actions/App';
 export default function Dashboard({navigation}) {
   const user = useSelector(state => state.Auth.user);
+  const cart = useSelector(state => state.App.cart);
+  var totalQuantity = null;
+  var totalPrice = null;
+  cart.map(item=>{
+    totalPrice = totalPrice+(item.orderQuantity*item.product.price)
+    totalQuantity=item.orderQuantity+totalQuantity
+  })
+  const favorites = useSelector(state => state.App.favorites);
   const [data, setData] = useState([
     {
       key: 1,
@@ -50,8 +61,43 @@ export default function Dashboard({navigation}) {
         'https://images.unsplash.com/photo-1513612254505-fb553147a2e8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
     },
   ]);
+  const addAndDeleteToFav=async(itemId,fav)=>{
+dispatch(setLoading(true))
+    if(!fav){
+   await new Apimanager().addingFavorites(itemId,user.customerId).then(res=>{
+          //  console.log(res)
+           new Apimanager().getFavorites(user.customerId).then(res=>{
+             dispatch(setProducts(res))
+           })
+    })}
+    else{
+      await  new Apimanager().deleteFavorite(itemId,user.customerId).then(res=>{
+        new Apimanager().getFavorites(user.customerId).then(res=>{
+          dispatch(setProducts(res))
+        })
+      })
+    }
+    dispatch(setLoading(false))
+  }
+ const deleteCart=async(itemId)=>{
+  dispatch(setLoading(true))
+ await new Apimanager().deleteCart(itemId,user.customerId).then(async(res)=>{
+  await  new Apimanager().getcart(user.customerId).then(res=>{
+      dispatch(setCart(res))
+    })
+  })
+  dispatch(setLoading(false))
+  }
   const dispatch = useDispatch();
   const renderItem = ({item}) => {
+    var fav = false;
+    var favId= null;
+    favorites.map(ite=>{
+      favId = ite._id
+      if(ite.product._id==item.product._id)
+        fav=true
+     })
+     console.log(fav)
     return (
       <View
         style={styles.flatListCont}>
@@ -60,33 +106,20 @@ export default function Dashboard({navigation}) {
           <View
             style={styles.heartCont}>
             <TouchableOpacity
-              onPress={() =>
-                setData(
-                  data.map(ite =>
-                    ite == item ? {...ite, selected: !ite.selected} : ite,
-                  ),
-                )
-              }>
-              {!item.selected ? (
-                <Image
-                  source={require('../../assets/heart.png')}
-                  style={styles.heart}
-                />
-              ) : (
-                <Image
-                  source={require('../../assets/fillheart.png')}
-                  style={styles.heart}
-                />
-              )}
+             onPress={()=>addAndDeleteToFav(!fav?item.product.productId:favId,fav)}>
+             {!fav?<Image
+              source={require('../../assets/heart.png')}
+              style={styles.heart}
+            />:
+            <Image
+              source={require('../../assets/fillheart.png')}
+              style={styles.heart}
+            />}
             </TouchableOpacity>
             <TouchableOpacity
-              disabled={item.quantity < 2 ? true : false}
+              disabled={item.orderQuantity < 2 ? true : false}
               onPress={() =>
-                setData(
-                  data.map(ite =>
-                    ite == item ? {...ite, quantity: ite.quantity - 1} : ite,
-                  ),
-                )
+               dispatch(resetOrderQuantity(item._id))
               }
               style={{
                 backgroundColor: color.orange,
@@ -104,18 +137,15 @@ export default function Dashboard({navigation}) {
                   resizeMode: 'contain',
                 }}
               />
+              {console.log(item.orderQuantity)}
             </TouchableOpacity>
             <Text style={{fontSize: width(4), color: color.darkBlue}}>
-              {item.quantity}
+              {item.orderQuantity}
             </Text>
             <TouchableOpacity
-              onPress={() =>
-                setData(
-                  data.map(ite =>
-                    ite == item ? {...ite, quantity: ite.quantity + 1} : ite,
-                  ),
-                )
-              }
+               onPress={() =>
+                dispatch(setOrderQuantity(item._id))
+               }
               style={{
                 backgroundColor: color.green,
                 width: width(5),
@@ -143,7 +173,7 @@ export default function Dashboard({navigation}) {
                     color: color.orange,
                     marginRight: 4,
                   }}>
-                  (5kg)
+                  ({item.product.quantity}kg)
                 </Text>
                 <Text style={{fontSize: width(3.7), color: color.darkBlue}}>
                   {item.title}
@@ -156,7 +186,7 @@ export default function Dashboard({navigation}) {
                   color: color.darkBlue,
                   textAlign: 'center',
                 }}>
-                5.99
+                {item.product.price}
                 <Text style={{fontSize: width(2.5), color: color.darkBlue}}>
                   {' '}
                   JD
@@ -171,13 +201,13 @@ export default function Dashboard({navigation}) {
                   height: width(15),
                   borderRadius: width(15),
                 }}
-                source={{uri: item.image}}
+                source={{uri: `${config.url}public/images/${item.product.image}`}}
               />
             </View>
           </View>
         </View>
         <TouchableOpacity
-          onPress={() => setData(data.filter(ite => ite != item))}>
+          onPress={() => deleteCart(item._id)}>
           <Image
             style={{
               width: width(4),
@@ -203,13 +233,14 @@ export default function Dashboard({navigation}) {
             showsVerticalScrollIndicator={false}
             style={{marginTop: height(10)}}>
             <FlatList
-              data={data}
+              data={cart}
               renderItem={renderItem}
               contentContainerStyle={{marginTop: height(6)}}
               ItemSeparatorComponent={() => (
                 <View style={{height: height(2.5)}} />
               )}
             />
+          {totalPrice&&  <View>
             <View style={styles.line} />
             <Text
               onPress={() => navigation.navigate('Cart')}
@@ -225,7 +256,7 @@ export default function Dashboard({navigation}) {
                 textAlign: 'center',
                 paddingVertical: height(1.5),
               }}>
-              AlTabah (6)
+              AlTabah ({totalQuantity})
             </Text>
             <View
               style={{
@@ -243,7 +274,7 @@ export default function Dashboard({navigation}) {
                   color: color.darkBlue,
                   textAlign: 'center',
                 }}>
-                5.99
+                {totalPrice}
                 <Text style={{fontSize: width(3.5), color: color.darkBlue}}>
                   {' '}
                   JD
@@ -255,6 +286,7 @@ export default function Dashboard({navigation}) {
             </View>
             <View style={styles.line} />
             <Button
+            onPress={()=>navigation.navigate('FinalPayment')}
               title="Proceed"
               labelStyle={{color: color.darkBlue}}
               containerStyle={{
@@ -263,6 +295,7 @@ export default function Dashboard({navigation}) {
                 borderWidth: 1,
               }}
             />
+            </View>}
           </ScrollView>
         </ImageBackground>
       </SafeAreaView>

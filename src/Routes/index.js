@@ -4,29 +4,32 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from '../screens/Login/Login.screen';
 import {useDispatch} from 'react-redux'
 import {logout} from '../Redux/Actions/Auth'
-import {setCAtegoriesAndProduct} from '../Redux/Actions/App'
 import Dashboard from '../screens/Dashboard/Dashboard.screen';
 import Cart from '../screens/Cart/Cart.screen';
 import Products from '../screens/Products/Products.screen';
 import Orders from '../screens/Orders/Orders';
 import Accounts from '../screens/Accounts/Accounts.screen';
+import Favorites from '../screens/Favotites/Favotites.screen';
 import Payment from '../screens/Payment/Payment.screen';
+import FinalPayment from '../screens/FinalPayment/FinalPayment.screen';
 import PhoneVerify from '../screens/PhoneVerify/PhoneVerify.screen';
 import { connect, useSelector } from 'react-redux';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { View, Image, TouchableOpacity,Text } from 'react-native';
+import { View, Image, TouchableOpacity,Text,Keyboard,Platform } from 'react-native';
 import { width, height } from 'react-native-dimension';
 import Apimanager from '../ApiFunctions/ApiFunctions';
+import Alert from '../components/PopUp/PopUp.Component'
 const Stack = createStackNavigator();
 export default function Routes() {
-    const dispatch = useDispatch()
-    useEffect(()=>{
-        new Apimanager().getCatAndProducts().then(res=>{
-            dispatch(setCAtegoriesAndProduct(res))
-        })
-    },[])
+    // useEffect(()=>{
+
+    //     return(()=>{
+
+    //     })
+    // },[])
     const isLogin = useSelector(state=>state.Auth.isLogin)
-        return (
+        return (<>
+            <Alert/>
             <NavigationContainer>
                 {!isLogin ?
                     <Stack.Navigator initialRouteName="Login" headerMode="none">
@@ -38,7 +41,7 @@ export default function Routes() {
                         <Stack.Screen name="Dashboard" component={MyDrawer} />
                     </Stack.Navigator>
                 }
-            </NavigationContainer>
+            </NavigationContainer></>
         )
 };
 const Drawer = createDrawerNavigator();
@@ -59,6 +62,8 @@ function MyDrawer() {
                         <Drawer.Screen name="Orders" component={Orders} />
                         <Drawer.Screen name="Accounts" component={Accounts} />
                         <Drawer.Screen name="Payment" component={Payment} />
+                        <Drawer.Screen name="Favorites" component={Favorites} />
+                        <Drawer.Screen name="FinalPayment" component={FinalPayment} />
     </Drawer.Navigator>
   );
 }
@@ -69,11 +74,11 @@ return(
      <Image style={{width:25,height:25}} source={require('../assets/menu.png')} />
  </TouchableOpacity>
      {state.routes.map(item=>{
-         if(item.name=='Dashboard'||item.name=='Products')
+         if(item.name=='Dashboard'||item.name=='Products'||item.name=='FinalPayment')
          return null
          else
          return(<TouchableOpacity onPress={()=>navigation.navigate(item.name)} style={{width:'90%',flexDirection:'row',alignSelf:'center',justifyContent:'space-between',height:height(8),alignItems:'center',paddingHorizontal:'5%',borderRadius:10,backgroundColor:'#ee8318',marginTop:height(2)}}>
-           <Image style={{width:width(6),height:height(5),resizeMode:'center',tintColor:'#FFFFFF'}} source={item.name=='Cart'?require('../assets/shopping-cart.png'):item.name=='Orders'?require('../assets/diagram.png'):item.name=='Accounts'?require('../assets/person.png'):require('../assets/pay.png')} />
+           <Image style={{width:width(6),height:height(5),resizeMode:'center',tintColor:'#FFFFFF'}} source={item.name=='Cart'?require('../assets/shopping-cart.png'):item.name=='Orders'?require('../assets/diagram.png'):item.name=='Accounts'?require('../assets/person.png'):item.name=='Favorites'?require('../assets/list.png'):require('../assets/pay.png')} />
            <Text style={{color:'#ffffff',fontSize:width(4)}}>{item.name=='Payment'?'Add Card':item.name}</Text>
            <View />
          </TouchableOpacity>)

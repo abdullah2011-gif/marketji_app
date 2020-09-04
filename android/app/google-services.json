@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "350261003171-eps50d57udtrq1nq0es0itek9e56lrhj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.marketji",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
           "client_id": "350261003171-marocch5lta2id8bohbp0n78473vv1j8.apps.googleusercontent.com",
           "client_type": 3
         }
