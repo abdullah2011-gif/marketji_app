@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     fontSize: width(4.5),
   },
   label: {
-    paddingLeft: width(10),
+    paddingRight: width(10),
     fontSize: width(3.5),
     color: color.darkBlue,
     paddingVertical: height(1),
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     color: color.darkBlue,
   },
   signupLabel: {
-    paddingLeft: width(10),
+    paddingRight: width(10),
     fontSize: width(3.5),
     color: color.darkBlue,
     paddingBottom: height(1),

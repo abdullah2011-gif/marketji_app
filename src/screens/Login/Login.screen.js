@@ -48,17 +48,12 @@ export default function Login({navigation}) {
       .post(`${config.url}google`,userInfo.user)
       .then(async(res) => {
            if(res.status==200){
-              await new Apimanager().getFavorites(res.data.user.customerId).then(res=>{
-                 dispatch(setProducts(res))
-               })
-              await new Apimanager().getcart(res.data.user.customerId).then(res=>{
-                 dispatch(setCart(res))
-               })
               await new Apimanager().getOrders(res.data.user._id).then(res=>{
                  dispatch(setPendingOrders(res.pendingOrder))
                  dispatch(setCompletedOrders(res.orders))
                })
                 dispatch(login({...res.data.user, token: res.data.token}));
+                navigation.navigate('Dashboard')
                
            }else{
              setWarning('Unable to authenticate your account please try again')
@@ -93,17 +88,12 @@ export default function Login({navigation}) {
               })
               .then(async(res) => {
                    if(res.status==200){
-                      await new Apimanager().getFavorites(res.data.user.customerId).then(res=>{
-                         dispatch(setProducts(res))
-                       })
-                      await new Apimanager().getcart(res.data.user.customerId).then(res=>{
-                         dispatch(setCart(res))
-                       })
                       await new Apimanager().getOrders(res.data.user._id).then(res=>{
                          dispatch(setPendingOrders(res.pendingOrder))
                          dispatch(setCompletedOrders(res.orders))
                        })
                         dispatch(login({...res.data.user, token: res.data.token}));
+                        navigation.navigate('Dashboard')
                        
                    }else{
                      setWarning('Unable to authenticate your account please try again')
@@ -149,17 +139,12 @@ export default function Login({navigation}) {
     dispatch(setLoading(true))
   await  new Apimanager().Login({username:loginPhoen,password:loginPassword}).then(async(res)=>{
      if(res.status==200){
-     await new Apimanager().getFavorites(res.data.user.customerId).then(res=>{
-        dispatch(setProducts(res))
-      })
-     await new Apimanager().getcart(res.data.user.customerId).then(res=>{
-        dispatch(setCart(res))
-      })
      await new Apimanager().getOrders(res.data.user._id).then(res=>{
         dispatch(setPendingOrders(res.pendingOrder))
         dispatch(setCompletedOrders(res.orders))
       })
-       dispatch(login({...res.data.user, token: res.data.token}));
+       dispatch(login({...res?.data?.user, token: res.data.token}));
+       navigation.navigate('Dashboard')
       }else{
         if(res=='Unauthorized')
         setWarning('الهاتف أو كلمة المرور غير صحيحة!')
@@ -203,7 +188,7 @@ export default function Login({navigation}) {
                 style={!isLogin ? styles.activeView : styles.inactiveView}>
                 <Text
                   style={!isLogin ? styles.activeText : styles.inactiveText}>
-                  Sign Up
+                  سجل
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
@@ -211,20 +196,22 @@ export default function Login({navigation}) {
                 onPress={() => setIsLogin(true)}
                 style={isLogin ? styles.activeView : styles.inactiveView}>
                 <Text style={isLogin ? styles.activeText : styles.inactiveText}>
-                  Login
+                تسجيل الدخول
                 </Text>
               </TouchableOpacity>
             </View>
             {/* ------------------------------------------login-------------------------------------------------- */}
             {isLogin && (
               <View>
-                <Text style={styles.label}>Phone Number</Text>
+                <Text style={styles.label}>رقم الهاتف</Text>
                 <TextInput
+                type={'phone'}
                   value={loginPhoen}
+                  keyboardType='numeric'
                   placeholder={'تأكيد كلمة المرور'}
                   onChangeText={setLoginPhone}
                 />
-                <Text style={styles.label}>Password</Text>
+                <Text style={styles.label}>كلمه السر</Text>
                 <TextInput
                   value={loginPassword}
                   placeholder={'تأكيد كلمة المرور'}
@@ -242,7 +229,7 @@ export default function Login({navigation}) {
                 <Text style={styles.forgot}>Forgot Your Password?</Text>
                 
                 <Text onPress={() => setIsLogin(false)} style={styles.signup}>
-                  Sign Up
+                سجل
                 </Text>
               </View>
             )}
@@ -256,34 +243,35 @@ export default function Login({navigation}) {
                     <View style={styles.dot} />
                     <View style={styles.dot} />
                   </View>
-                  <Text style={styles.signupHeadingText}>Some Dummy Text</Text>
+                  <Text style={styles.signupHeadingText}>سجل حسابك</Text>
                   <View style={styles.dot} />
                   <View style={styles.dot} />
                   <View style={styles.dot} />
                   <View style={styles.dot} />
                 </View>
-                <Text style={styles.signupLabel}>Name</Text>
+                <Text style={styles.signupLabel}>اسم</Text>
                 <TextInput
                   value={name}
                   placeholder={'اسم'}
                   onChangeText={setName}
                 />
-                <Text style={styles.signupLabel}>Password</Text>
+                <Text style={styles.signupLabel}>كلمه السر</Text>
                 <TextInput
                   value={password}
                   placeholder={'كلمه السر'}
                   onChangeText={setPassword}
                   secureTextEntry
                 />
-                <Text style={styles.signupLabel}>Confirm password</Text>
+                <Text style={styles.signupLabel}>تأكيد كلمة المرور</Text>
                 <TextInput
                   value={cpassword}
                   placeholder={'تأكيد كلمة المرور'}
                   onChangeText={setCPassword}
                   secureTextEntry
                 />
-                <Text style={styles.signupLabel}>Phone number</Text>
+                <Text style={styles.signupLabel}>رقم الهاتف</Text>
                 <TextInput
+                type='هاتف'
                   value={phone}
                   placeholder={'رقم الهاتف'}
                   onChangeText={setPhone}
@@ -292,7 +280,7 @@ export default function Login({navigation}) {
                   {warning}
                 </Text>
                 <View style={styles.signupLine} />
-                <Text style={styles.signupWith}>Sign Up with</Text>
+                <Text style={styles.signupWith}>سجل مع</Text>
                 <View style={styles.logoContainer}>
                   <TouchableOpacity onPress={googleSignIn}>
                     <Image

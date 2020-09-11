@@ -138,7 +138,7 @@ export default function Payment({navigation}) {
                    
                   </View>
                 </ModalDropdown> */}
-         <Button title={'اختر موقعا'} labelStyle={{fontSize:width(4)}} containerStyle={{width:'50%',borderRadius:4,height:height(5)}} />
+         {/* <Button title={'اختر موقعا'} labelStyle={{fontSize:width(4)}} containerStyle={{width:'50%',borderRadius:4,height:height(5)}} /> */}
          </View>
        </View>
        <View style={{flexDirection:'row',alignItems:'center',alignSelf:'center',justifyContent:'space-between',marginTop:height(3)}}>

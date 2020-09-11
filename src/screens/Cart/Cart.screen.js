@@ -61,32 +61,18 @@ export default function Dashboard({navigation}) {
         'https://images.unsplash.com/photo-1513612254505-fb553147a2e8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
     },
   ]);
-  const addAndDeleteToFav=async(itemId,fav)=>{
-dispatch(setLoading(true))
+  const addAndDeleteToFav=async(item,fav)=>{
+    console.log(favorites)
     if(!fav){
-   await new Apimanager().addingFavorites(itemId,user.customerId).then(res=>{
-          //  console.log(res)
-           new Apimanager().getFavorites(user.customerId).then(res=>{
-             dispatch(setProducts(res))
-           })
-    })}
-    else{
-      await  new Apimanager().deleteFavorite(itemId,user.customerId).then(res=>{
-        new Apimanager().getFavorites(user.customerId).then(res=>{
-          dispatch(setProducts(res))
-        })
-      })
+             dispatch(setProducts([...favorites,{product:item.product}]))
     }
-    dispatch(setLoading(false))
+    else{
+      console.log(item.product?._id)
+      dispatch(setProducts(favorites.filter(ite=>ite.product?._id!=item.product._id)))
+    }
   }
- const deleteCart=async(itemId)=>{
-  dispatch(setLoading(true))
- await new Apimanager().deleteCart(itemId,user.customerId).then(async(res)=>{
-  await  new Apimanager().getcart(user.customerId).then(res=>{
-      dispatch(setCart(res))
-    })
-  })
-  dispatch(setLoading(false))
+ const deleteCart=async(item)=>{
+  dispatch(setCart(cart.filter(ite=>ite.product?._id!=item.product._id)))
   }
   const dispatch = useDispatch();
   const renderItem = ({item}) => {
@@ -97,7 +83,6 @@ dispatch(setLoading(true))
       if(ite.product._id==item.product._id)
         fav=true
      })
-     console.log(fav)
     return (
       <View
         style={styles.flatListCont}>
@@ -106,7 +91,7 @@ dispatch(setLoading(true))
           <View
             style={styles.heartCont}>
             <TouchableOpacity
-             onPress={()=>addAndDeleteToFav(!fav?item.product.productId:favId,fav)}>
+             onPress={()=>addAndDeleteToFav(!fav?item:item,fav)}>
              {!fav?<Image
               source={require('../../assets/heart.png')}
               style={styles.heart}
@@ -119,12 +104,12 @@ dispatch(setLoading(true))
             <TouchableOpacity
               disabled={item.orderQuantity < 2 ? true : false}
               onPress={() =>
-               dispatch(resetOrderQuantity(item._id))
+               dispatch(resetOrderQuantity(item.product?._id))
               }
               style={{
                 backgroundColor: color.orange,
-                width: width(5),
-                height: width(5),
+                width: width(5.5),
+                height: width(5.5),
                 justifyContent: 'center',
                 alignItems: 'center',
                 borderRadius: width(5),
@@ -132,24 +117,23 @@ dispatch(setLoading(true))
               <Image
                 source={require('../../assets/minus.png')}
                 style={{
-                  height: width(0.01),
-                  height: width(0.3),
+                  height: width(0.02),
+                  height: width(0.4),
                   resizeMode: 'contain',
                 }}
               />
-              {console.log(item.orderQuantity)}
             </TouchableOpacity>
             <Text style={{fontSize: width(4), color: color.darkBlue}}>
               {item.orderQuantity}
             </Text>
             <TouchableOpacity
                onPress={() =>
-                dispatch(setOrderQuantity(item._id))
+                dispatch(setOrderQuantity(item.product?._id))
                }
               style={{
                 backgroundColor: color.green,
-                width: width(5),
-                height: width(5),
+                width: width(5.5),
+                height: width(5.5),
                 justifyContent: 'center',
                 alignItems: 'center',
                 borderRadius: width(5),
@@ -176,7 +160,7 @@ dispatch(setLoading(true))
                   ({item.product.quantity}kg)
                 </Text>
                 <Text style={{fontSize: width(3.7), color: color.darkBlue}}>
-                  {item.title}
+                  {item.product?.name}
                 </Text>
               </View>
               <Text
@@ -186,7 +170,7 @@ dispatch(setLoading(true))
                   color: color.darkBlue,
                   textAlign: 'center',
                 }}>
-                {item.product.price}
+                {item.product?.price}
                 <Text style={{fontSize: width(2.5), color: color.darkBlue}}>
                   {' '}
                   JD
@@ -201,13 +185,13 @@ dispatch(setLoading(true))
                   height: width(15),
                   borderRadius: width(15),
                 }}
-                source={{uri: `${config.url}public/images/${item.product.image}`}}
+                source={{uri: `${config.url}public/images/${item.product?.image}`}}
               />
             </View>
           </View>
         </View>
         <TouchableOpacity
-          onPress={() => deleteCart(item._id)}>
+          onPress={() => deleteCart(item)}>
           <Image
             style={{
               width: width(4),
@@ -232,14 +216,17 @@ dispatch(setLoading(true))
           <ScrollView
             showsVerticalScrollIndicator={false}
             style={{marginTop: height(10)}}>
-            <FlatList
+         {cart.length>0?<FlatList
               data={cart}
               renderItem={renderItem}
               contentContainerStyle={{marginTop: height(6)}}
               ItemSeparatorComponent={() => (
                 <View style={{height: height(2.5)}} />
               )}
-            />
+            />:
+            <Text style={{fontSize: width(5),marginTop:100, color: color.darkBlue,textAlign:'center'}}>
+            لا توجد عناصر في سلة التسوق
+          </Text> }
           {totalPrice&&  <View>
             <View style={styles.line} />
             <Text
@@ -281,7 +268,7 @@ dispatch(setLoading(true))
                 </Text>
               </Text>
               <Text style={{fontSize: width(4), color: color.darkBlue}}>
-                Almajmuah
+              مجموع
               </Text>
             </View>
             <View style={styles.line} />

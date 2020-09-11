@@ -55,25 +55,12 @@ export default function Dashboard({navigation}) {
         'https://images.unsplash.com/photo-1513612254505-fb553147a2e8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
     },
   ]);
-  const addAndDeleteToFav=async(itemId,fav)=>{
-    dispatch(setLoading(true))
-    await  new Apimanager().deleteFavorite(itemId,user.customerId).then(async(res)=>{
-     await   new Apimanager().getFavorites(user.customerId).then(res=>{
-          dispatch(setProducts(res))
-        })
-      })
-      dispatch(setLoading(false))
+  const addAndDeleteToFav=async(item)=>{
+    dispatch(setProducts(favorites.filter(ite=>ite.product?._id!=item.product._id)))
   }
-  const addToCart=async(itemId)=>{
-    dispatch(setLoading(true))
-  await  new Apimanager().addingCart(itemId,user.customerId).then(async(res)=>{
-      // console.log(res)
-    await  new Apimanager().getcart(user.customerId).then(res=>{
-        dispatch(setCart(res))
-      })
-})
-dispatch(setLoading(false))
-  }
+  const addToCart=async(item)=>{
+    dispatch(setCart([...cart,{product:item}]))
+}
   const dispatch = useDispatch();
   const renderItem = ({item}) => {
     var cartValid = false
@@ -85,7 +72,7 @@ dispatch(setLoading(false))
        fav=true
     })
    cart.map(ite=>{
-     if(ite.product._id==item.product._id)
+     if(ite.product._id==item?.product._id)
      cartValid=true
     })
     return (
@@ -96,19 +83,19 @@ dispatch(setLoading(false))
           <View
             style={styles.heartCont}>
             {!cartValid&&<TouchableOpacity
-         onPress={()=>addToCart(item.product.productId)}
+         onPress={()=>addToCart(item.product)}
             style={{
               backgroundColor: color.orange,
               // width: width(5),
               // height: width(5),
-              marginLeft:width(1),
-              paddingHorizontal:width(1.5),
-              paddingVertical:height(0.5),
+              marginLeft:width(2),
+              paddingHorizontal:width(2.3),
+              paddingVertical:height(0.8),
               justifyContent: 'center',
               alignItems: 'center',
               borderRadius: width(5),
             }}>
-           <Text style={{fontSize:width(2.5),color:color.white}} >Add to cart</Text>
+           <Text style={{fontSize:width(3),color:color.white}} >Add to cart</Text>
           </TouchableOpacity>}
           </View>
           <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
@@ -133,7 +120,7 @@ dispatch(setLoading(false))
                   color: color.darkBlue,
                   textAlign: 'center',
                 }}>
-                {item.product.price}
+                {item.product?.price}
                 <Text style={{fontSize: width(2.5), color: color.darkBlue}}>
                   {' '}
                   JD
@@ -148,13 +135,13 @@ dispatch(setLoading(false))
                   height: width(15),
                   borderRadius: width(15),
                 }}
-                source={{uri: `${config.url}public/images/${item.product.image}`}}
+                source={{uri: `${config.url}public/images/${item.product?.image}`}}
               />
             </View>
           </View>
         </View>
         <TouchableOpacity
-            onPress={()=>addAndDeleteToFav(favId,fav)}>
+            onPress={()=>addAndDeleteToFav(item)}>
           <Image
             style={{
               width: width(4),
@@ -179,14 +166,17 @@ dispatch(setLoading(false))
           <ScrollView
             showsVerticalScrollIndicator={false}
             style={{marginTop: height(10)}}>
-            <FlatList
+            {favorites.length>0?<FlatList
               data={favorites}
               renderItem={renderItem}
               contentContainerStyle={{marginTop: height(6)}}
               ItemSeparatorComponent={() => (
                 <View style={{height: height(2.5)}} />
               )}
-            />
+            />:
+            <Text style={{fontSize: width(5),marginTop:100, color: color.darkBlue,textAlign:'center'}}>
+           لا توجد عناصر في الإعجابات
+          </Text> }
            
           </ScrollView>
         </ImageBackground>

@@ -37,7 +37,7 @@ const reducer = (state = intialState, action) => {
             return {
                 ...state,
                 cart: state.cart.map(item=>{
-                    if(item._id==action.payload){
+                    if(item.product._id==action.payload){
                         return{
                             ...item,
                             orderQuantity:item.orderQuantity+1
@@ -54,7 +54,7 @@ const reducer = (state = intialState, action) => {
             return {
                 ...state,
                 cart: state.cart.map(item=>{
-                    if(item._id==action.payload){
+                    if(item.product._id==action.payload){
                         return{
                             ...item,
                             orderQuantity:item.orderQuantity-1

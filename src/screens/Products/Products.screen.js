@@ -27,7 +27,7 @@ export default function Dashboard({navigation,route}) {
   const cart = useSelector(state => state.App.cart);
   var totalPrice = null;
   cart.map(item=>{
-    totalPrice = totalPrice+(item.orderQuantity*item.product.price)
+    totalPrice = totalPrice+(item?.orderQuantity*item?.product?.price)
   })
   useEffect(()=>{
     if(route.params&&route.params.products)
@@ -36,45 +36,32 @@ export default function Dashboard({navigation,route}) {
       navigation.goBack()
     }
   })
-  const addToCart=async(itemId)=>{
-    dispatch(setLoading(true))
-   await new Apimanager().addingCart(itemId,user.customerId).then(async(res)=>{
-      // console.log(res)
-    await  new Apimanager().getcart(user.customerId).then(res=>{
-        dispatch(setCart(res))
-      })
-      dispatch(setLoading(false))
-})
+  const addToCart=async(item)=>{
+        dispatch(setCart([...cart,{product:item}]))
   }
-  const addAndDeleteToFav=async(itemId,fav)=>{
+  const addAndDeleteToFav=async(item,fav)=>{
+    console.log(favorites)
     if(!fav){
-   await new Apimanager().addingFavorites(itemId,user.customerId).then(async(res)=>{
-          //  console.log(res)
-         await  new Apimanager().getFavorites(user.customerId).then(res=>{
-             dispatch(setProducts(res))
-           })
-    })}
-    else{
-     await new Apimanager().deleteFavorite(itemId,user.customerId).then(async(res)=>{
-      await  new Apimanager().getFavorites(user.customerId).then(res=>{
-          dispatch(setProducts(res))
-        })
-      })
+             dispatch(setProducts([...favorites,{product:item}]))
     }
-    dispatch(setLoading(false))
+    else{
+      console.log(item.product?._id)
+      dispatch(setProducts(favorites.filter(ite=>ite.product?._id!=item._id)))
+    }
   }
   const dispatch = useDispatch();
   const renderItem = ({item}) => {
+    // console.log(item)
    var cartValid = false
    var fav = false;
    var favId= null;
    favorites.map(ite=>{
      favId = ite._id
-     if(ite.product._id==item._id)
+     if(ite.product?._id==item._id)
        fav=true
     })
    cart.map(ite=>{
-     if(ite.product._id==item._id)
+     if(ite.product?._id==item._id)
      cartValid=true
     })
     return (
@@ -96,7 +83,7 @@ export default function Dashboard({navigation,route}) {
             flexDirection: 'row',
             justifyContent: 'space-between',
           }}>
-          <TouchableOpacity   onPress={()=>addAndDeleteToFav(!fav?item.productId:favId,fav)}>
+          <TouchableOpacity   onPress={()=>addAndDeleteToFav(!fav?item:item,fav)}>
             {!fav?<Image
               source={require('../../assets/heart.png')}
               style={{width: width(5), height: width(5), resizeMode: 'contain'}}
@@ -107,19 +94,19 @@ export default function Dashboard({navigation,route}) {
             />}
           </TouchableOpacity>
    {!cartValid&&<TouchableOpacity
-         onPress={()=>addToCart(item.productId)}
+         onPress={()=>addToCart(item)}
             style={{
               backgroundColor: color.orange,
               // width: width(5),
               // height: width(5),
-              marginLeft:width(1),
-              paddingHorizontal:width(1.5),
-              paddingVertical:height(0.5),
+              marginLeft:width(2),
+              paddingHorizontal:width(2.3),
+              paddingVertical:height(0.8),
               justifyContent: 'center',
               alignItems: 'center',
               borderRadius: width(5),
             }}>
-           <Text style={{fontSize:width(2.5),color:color.white}} >Add to cart</Text>
+           <Text style={{fontSize:width(3),color:color.white}} >Add to cart</Text>
           </TouchableOpacity>}
         </View>
         <View style={{flexDirection:'row',alignItems:'flex-end'}}>
@@ -166,7 +153,7 @@ export default function Dashboard({navigation,route}) {
         </Text>}
           <View style={{width:width(100),height:height(6),flexDirection:'row',justifyContent:'space-between',paddingHorizontal:width(5),alignItems:'center',backgroundColor:color.white}}>
                    <Text onPress={()=>navigation.navigate('Cart')} style={{color:color.white,fontSize:width(4.4),backgroundColor:color.orange,overflow:'hidden',borderRadius:width(3),paddingHorizontal:width(3),paddingVertical:height(0.6)}}>
-                 استكمال الشر
+                   استكمال الشراء
                  </Text>
                  <View style={{flexDirection:'row'}}>
                    <Text style={{fontSize:width(4),fontWeight:'bold',color:color.orange,marginRight:width(2)}}>
@@ -175,7 +162,12 @@ export default function Dashboard({navigation,route}) {
                       JD
                     </Text>
                    </Text>
-                   <Image style={{width:width(5),height:height(3.5)}} resizeMode='stretch' source={require('../../assets/shopping-cart.png')} />
+                 <TouchableOpacity  onPress={() => navigation.navigate('Cart')}>
+            <Image
+              style={{width:width(5),height:height(3.5)}}
+              source={require('../../assets/shopping-cart.png')}
+            />
+            </TouchableOpacity>
                  </View>
           </View>
         </ImageBackground>

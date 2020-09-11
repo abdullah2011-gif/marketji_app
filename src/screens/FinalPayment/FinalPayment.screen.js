@@ -7,10 +7,12 @@ import {
   SafeAreaView,
   StatusBar,
   FlatList,
-  Image,TextInput
+  Image,TextInput, ScrollView, KeyboardAvoidingView
 } from 'react-native';
 import styles from './FinalPayment.styles';
 import ModalDropdown from 'react-native-modal-dropdown';
+import CustomTextInput from '../../components/TextInput/TextInput.component';
+import PlacesInput from 'react-native-places-input';
 import Button from '../../components/Button/Button.component';
 import arrowdownImage from '../../assets/back.png';
 import {useDispatch, useSelector} from 'react-redux';
@@ -22,6 +24,7 @@ import { ScreenStackHeaderBackButtonImage } from 'react-native-screens';
 import stripe from 'tipsi-stripe';
 import Apimanager from '../../ApiFunctions/ApiFunctions';
 import { setCart, setPendingOrders, setCompletedOrders } from '../../Redux/Actions/App';
+import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 
 stripe.setOptions({
   publishableKey: 'pk_test_51HJaYLGOCFGuuf2kA5DJQXhGccfi0vQ9zZZrTgK0PmMBkIzOUZyM9TmjQd8UnAQShK5cCIxOh1nSR3bdwmradYO400nnAralVl',
@@ -30,6 +33,9 @@ stripe.setOptions({
 export default function Payment({navigation}) { 
   const [selectedValue, setSelectedValue] = useState('On delevery');
   const [selectedCard, setSelectedCard] = useState(null);
+  const [phone, setPhone] = useState(null);
+  const [address, setAddress] = useState('');
+  const [warning, setWarning] = useState('');
   const dispatch = useDispatch()
   const user = useSelector(state => state.Auth.user);
   const cart = useSelector(state => state.App.cart);
@@ -41,8 +47,16 @@ export default function Payment({navigation}) {
   })
   dispatch(setLoading(false))
   const requestOrder=async()=>{
+    if(address == ''){
+      setWarning('PLease enter address')
+      return
+
+    }else if(!user.contact&&(phone==null&&phone?.length<6)){
+      setWarning('please enter phone')
+      return
+    }
     dispatch(setLoading(true))
-   await new Apimanager().requestOrder({products:cart.map(item=>({quantity:item.orderQuantity,product:item.product._id})),paymentMethod:selectedValue,
+   await new Apimanager().requestOrder({products:cart.map(item=>({quantity:item.orderQuantity,product:item.product._id,address:address})),paymentMethod:selectedValue,
     card:selectedCard,customer:user._id
   }).then(async(res)=>{
     dispatch(setCart([]))
@@ -55,6 +69,10 @@ export default function Payment({navigation}) {
   })
   dispatch(setLoading(false))
   }
+  const getAddress = data => {
+    console.log(data)
+    setAddress(data.description)
+  }
   return (
     <React.Fragment>
       <SafeAreaView backgroundColor={color.white} />
@@ -64,8 +82,13 @@ export default function Payment({navigation}) {
           resizeMode="stretch"
           source={require('../../assets/upper_.png')}
           style={{flex: 1}}>
+            {/* <KeyboardAvoidingView> */}
+            <ScrollView keyboardShouldPersistTaps='always'>
      <View style={{marginTop:height(10)}}>
             <View style={styles.line} />
+            <Text style={styles.warning}>
+                  {warning}
+                </Text>
             <Text
               onPress={() => navigation.navigate('Cart')}
               style={{
@@ -108,13 +131,57 @@ export default function Payment({navigation}) {
                 Almajmuah
               </Text>
             </View>
+            
             <View
               style={{
                 width: width(80),
                 alignSelf: 'center',
-                alignItems: 'center',
-                marginTop: height(4),
-                flexDirection: 'row',
+                alignItems: 'flex-end',
+                marginTop: height(3),
+                justifyContent: 'space-between',
+              }}>
+              <Text style={{fontSize: width(4), color: color.darkBlue}}>
+              عنوان
+           </Text>
+                 <GooglePlacesAutocomplete
+                    minLength={2}
+                    autoFocus={false}
+                    returnKeyType={'search'}
+                    keyboardAppearance={'light'}
+                    keyboardShouldPersistTaps = {'handled'}
+                    // onBlur
+                    fetchDetails={true}
+                    value={address}
+                    onPress={getAddress}
+                    listViewDisplayed={false}
+                    getDefaultValue={() => `${address}`}
+                    query={{
+                      key: 'AIzaSyCOu6VAoXIymLoI-5U5CWh3LFOAoVGXvIQ',
+                      language: 'en',
+                      types: 'address',
+                    }}
+                    styles={{
+                      container:{marginTop:height(3)},
+                      textInputContainer: styles.inputCont,
+                      description: {
+                        fontWeight: 'bold',
+                      },
+                      textInput: {backgroundColor: color.white, borderColor: color.white},
+                      listView: styles.listView,
+                    }}
+                    // enablePoweredByContainer={false}
+                    placeholder="Select location"
+                    nearbyPlacesAPI="GooglePlacesSearch"
+                    debounce={1}
+                  />
+            </View>
+            <View
+              style={{
+                width: width(80),
+                alignSelf: 'center',
+                alignItems: 'flex-end',
+                marginTop: height(3),
+                flexDirection: 'column-reverse',
                 justifyContent: 'space-between',
               }}>
              <ModalDropdown
@@ -140,16 +207,30 @@ export default function Payment({navigation}) {
                   </View>
                 </ModalDropdown>
               <Text style={{fontSize: width(4), color: color.darkBlue}}>
-                Select payment method
+              اختار طريقة الدفع
               </Text>
             </View>
+           {!user.contact&&<View
+              style={{
+                width: width(80),
+                alignSelf: 'center',
+                alignItems: 'flex-end',
+                marginTop: height(3),
+                flexDirection: 'column-reverse',
+                justifyContent: 'space-between',
+              }}>
+            <CustomTextInput containerStyle={{alignSelf:'flex-end',width:width(60),marginTop: height(3),}} keyboardType={'numeric'} type= 'phone' value= {phone} onChangeText={setPhone} />
+              <Text style={{fontSize: width(4), color: color.darkBlue}}>
+              الرجاء إدخال رقم الهاتف
+              </Text>
+            </View>}
             {selectedValue=='Card'&&<><View
               style={{
                 width: width(80),
                 alignSelf: 'center',
-                alignItems: 'center',
+                alignItems: 'flex-end',
                 marginTop: height(4),
-                flexDirection: 'row',
+                flexDirection: 'column-reverse',
                 justifyContent: 'space-between',
               }}>
              <ModalDropdown
@@ -177,20 +258,20 @@ export default function Payment({navigation}) {
                       <Text numberOfLines={1} style={styles.genderDropDownItemText}>
                         {selectedCard.title}
                       </Text>
-                    </View>:<Text style={styles.genderText}>Select card</Text>}
+                    </View>:<Text style={styles.genderText}>اختر البطاقة</Text>}
                   </View>
                 </ModalDropdown>
               <Text style={{fontSize: width(4), color: color.darkBlue}}>
-                Select card
+               اختر البطاقة
               </Text>
             </View>
             <Button containerStyle={{width:width(45),marginTop:height(4)}} onPress={()=>navigation.navigate('Payment')} title='Add new card'/>
             </>}
-            <View style={styles.line} />
+            <View style={[styles.line]} />
             <Button
             disabled={totalQuantity>0?false:true}
             onPress={requestOrder}
-              title="Confirm my order"
+              title="تأكيد طلبي"
               labelStyle={{color: color.darkBlue}}
               containerStyle={{
                 backgroundColor: 'transparent',
@@ -199,6 +280,8 @@ export default function Payment({navigation}) {
               }}
             />
             </View>
+            </ScrollView>
+            {/* </KeyboardAvoidingView> */}
 </ImageBackground>
       </SafeAreaView>
       <SafeAreaView backgroundColor={color.white} />

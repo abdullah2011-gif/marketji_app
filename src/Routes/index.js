@@ -21,32 +21,21 @@ import Apimanager from '../ApiFunctions/ApiFunctions';
 import Alert from '../components/PopUp/PopUp.Component'
 const Stack = createStackNavigator();
 export default function Routes() {
-    // useEffect(()=>{
-
-    //     return(()=>{
-
-    //     })
-    // },[])
-    const isLogin = useSelector(state=>state.Auth.isLogin)
         return (<>
             <Alert/>
             <NavigationContainer>
-                {!isLogin ?
-                    <Stack.Navigator initialRouteName="Login" headerMode="none">
+                    <Stack.Navigator initialRouteName="Dashboard" headerMode="none">
                         <Stack.Screen name="Login" component={Login} />
                         <Stack.Screen name="PhoneVerify" component={PhoneVerify} />
-                    </Stack.Navigator>
-                    :
-                    <Stack.Navigator initialRouteName="Dashboard" headerMode="none">
                         <Stack.Screen name="Dashboard" component={MyDrawer} />
                     </Stack.Navigator>
-                }
             </NavigationContainer></>
         )
 };
 const Drawer = createDrawerNavigator();
 
-function MyDrawer() {
+function MyDrawer({navigation}) {
+    const isLogin = useSelector(state=>state.Auth.isLogin)
     const [time,setTime] = useState(true)
     const dispatch = useDispatch()
     useEffect(()=>{
@@ -59,11 +48,11 @@ function MyDrawer() {
          <Drawer.Screen name="Dashboard" component={Dashboard} />
                         <Drawer.Screen name="Cart" component={Cart} />
                         <Drawer.Screen name="Products" component={Products} />
-                        <Drawer.Screen name="Orders" component={Orders} />
-                        <Drawer.Screen name="Accounts" component={Accounts} />
-                        <Drawer.Screen name="Payment" component={Payment} />
+                     {isLogin?<Drawer.Screen name="Orders" component={Orders} />: <Stack.Screen name="Orders" component={Login} />}
+                      { isLogin? <Drawer.Screen name="Accounts" component={Accounts} />: <Stack.Screen name="Accounts" component={Login} />}
+                      {isLogin?  <Drawer.Screen name="Payment" component={Payment} />: <Stack.Screen name="Payment" component={Login} />}
                         <Drawer.Screen name="Favorites" component={Favorites} />
-                        <Drawer.Screen name="FinalPayment" component={FinalPayment} />
+                      {isLogin?  <Drawer.Screen name="FinalPayment" component={FinalPayment} />: <Stack.Screen name="FinalPayment" component={Login} />}
     </Drawer.Navigator>
   );
 }
@@ -83,9 +72,9 @@ return(
            <View />
          </TouchableOpacity>)
      })}
-   <TouchableOpacity onPress={()=>dispatch(logout())} style={{width:'90%',flexDirection:'row',alignSelf:'center',justifyContent:'space-between',height:height(8),alignItems:'center',paddingHorizontal:'5%',borderRadius:10,backgroundColor:'#ee8318',marginTop:height(2)}}>
+   <TouchableOpacity onPress={()=>{dispatch(logout());navigation.navigate('Login')}} style={{width:'90%',flexDirection:'row',alignSelf:'center',justifyContent:'space-between',height:height(8),alignItems:'center',paddingHorizontal:'5%',borderRadius:10,backgroundColor:'#ee8318',marginTop:height(2)}}>
            <Image style={{width:width(6),height:height(5),resizeMode:'center',tintColor:'#FFFFFF'}} source={require('../assets/logout.png')} />
-           <Text style={{color:'#ffffff',fontSize:width(4)}}>Logout</Text>
+           <Text style={{color:'#ffffff',fontSize:width(4)}}>تسجيل خروج</Text>
            <View />
          </TouchableOpacity>
     </View>)
