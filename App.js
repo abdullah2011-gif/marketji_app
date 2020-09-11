@@ -5,8 +5,9 @@
  * @format
  * @flow
  */
+import SplashScreen from 'react-native-splash-screen';
 
-import React from 'react';
+import React, { Fragment, useEffect } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -23,8 +24,12 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import { create } from 'react-test-renderer';
 
 const App: () => React$Node = () => {
+  useEffect(()=>{
+    SplashScreen.hide();
+  });
   return (
     <>
       <StatusBar barStyle="dark-content" />

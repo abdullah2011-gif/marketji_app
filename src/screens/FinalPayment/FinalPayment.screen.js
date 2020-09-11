@@ -103,7 +103,7 @@ export default function Payment({navigation}) {
                 textAlign: 'center',
                 paddingVertical: height(1.5),
               }}>
-              AlTabah ({totalQuantity})
+              المجموع ({totalQuantity})
             </Text>
             <View
               style={{

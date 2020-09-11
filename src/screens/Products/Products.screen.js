@@ -149,7 +149,7 @@ export default function Dashboard({navigation,route}) {
               <View style={{height: height(2.5)}} />
             )}
           />:<Text style={{fontSize:width(3),textAlign:'center'}}>
-          No product in this category
+          لا يوجد منتج في هذه الفئة
         </Text>}
           <View style={{width:width(100),height:height(6),flexDirection:'row',justifyContent:'space-between',paddingHorizontal:width(5),alignItems:'center',backgroundColor:color.white}}>
                    <Text onPress={()=>navigation.navigate('Cart')} style={{color:color.white,fontSize:width(4.4),backgroundColor:color.orange,overflow:'hidden',borderRadius:width(3),paddingHorizontal:width(3),paddingVertical:height(0.6)}}>
