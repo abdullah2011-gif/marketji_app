@@ -28,7 +28,7 @@ import config from '../../../config'
 //     selected_item,
 //   } from '../../Redux/Actions/Categories';
 
-const labels = ["طلب", "تمت الموافقة على الطلب", "تحت المعالجة", "منجز"];
+const labels = ["طلب", "تمت الموافقة على الطلبات", "تحت المعالجة", "منجز"];
 const customStyles = {
     stepIndicatorSize: 22,
     currentStepIndicatorSize: 22,

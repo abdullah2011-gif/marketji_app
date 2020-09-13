@@ -226,7 +226,7 @@ export default function Login({navigation}) {
                   title="تسجيل الدخول"
                   onPress={loginUser}
                 />
-                <Text style={styles.forgot}>Forgot Your Password?</Text>
+                <Text style={styles.forgot}>نسيت رقمك السري؟</Text>
                 
                 <Text onPress={() => setIsLogin(false)} style={styles.signup}>
                 سجل

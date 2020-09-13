@@ -46,13 +46,13 @@ function MyDrawer({navigation}) {
   return (
   <Drawer.Navigator drawerPosition='right' drawerStyle={{backgroundColor:time?'transparent':'#ffffff'}} drawerContent={(props)=>(time?null: drawerContainer({...props,dispatch:dispatch}))}>
          <Drawer.Screen name="Dashboard" component={Dashboard} />
-                        <Drawer.Screen name="Cart" component={Cart} />
-                        <Drawer.Screen name="Products" component={Products} />
-                     {isLogin?<Drawer.Screen name="Orders" component={Orders} />: <Stack.Screen name="Orders" component={Login} />}
-                      { isLogin? <Drawer.Screen name="Accounts" component={Accounts} />: <Stack.Screen name="Accounts" component={Login} />}
-                      {isLogin?  <Drawer.Screen name="Payment" component={Payment} />: <Stack.Screen name="Payment" component={Login} />}
-                        <Drawer.Screen name="Favorites" component={Favorites} />
-                      {isLogin?  <Drawer.Screen name="FinalPayment" component={FinalPayment} />: <Stack.Screen name="FinalPayment" component={Login} />}
+                        <Drawer.Screen name="عربة التسوق" component={Cart} />
+                        <Drawer.Screen name="منتجات" component={Products} />
+                     {isLogin?<Drawer.Screen name="الطلبات" component={Orders} />: <Stack.Screen name="الطلبات" component={Login} />}
+                      { isLogin? <Drawer.Screen name="حسابي" component={Accounts} />: <Stack.Screen name="حسابي" component={Login} />}
+                      {isLogin?  <Drawer.Screen name="دفع" component={Payment} />: <Stack.Screen name="دفع" component={Login} />}
+                        <Drawer.Screen name="المفضله" component={Favorites} />
+                      {isLogin?  <Drawer.Screen name="الدفعة النهائية" component={FinalPayment} />: <Stack.Screen name="الدفعة النهائية" component={Login} />}
     </Drawer.Navigator>
   );
 }
@@ -63,18 +63,18 @@ return(
      <Image style={{width:25,height:25}} source={require('../assets/menu.png')} />
  </TouchableOpacity>
      {state.routes.map(item=>{
-         if(item.name=='Dashboard'||item.name=='Products'||item.name=='FinalPayment')
+         if(item.name=='Dashboard'||item.name=='منتجات'||item.name=='الدفعة النهائية')
          return null
          else
-         return(<TouchableOpacity onPress={()=>navigation.navigate(item.name)} style={{width:'90%',flexDirection:'row',alignSelf:'center',justifyContent:'space-between',height:height(8),alignItems:'center',paddingHorizontal:'5%',borderRadius:10,backgroundColor:'#ee8318',marginTop:height(2)}}>
-           <Image style={{width:width(6),height:height(5),resizeMode:'center',tintColor:'#FFFFFF'}} source={item.name=='Cart'?require('../assets/shopping-cart.png'):item.name=='Orders'?require('../assets/diagram.png'):item.name=='Accounts'?require('../assets/person.png'):item.name=='Favorites'?require('../assets/list.png'):require('../assets/pay.png')} />
-           <Text style={{color:'#ffffff',fontSize:width(4)}}>{item.name=='Payment'?'Add Card':item.name}</Text>
+         return(<TouchableOpacity onPress={()=>navigation.navigate(item.name)} style={{width:'90%',flexDirection:'row-reverse',alignSelf:'center',justifyContent:'space-between',height:height(8),alignItems:'center',paddingHorizontal:'5%',borderRadius:10,backgroundColor:'#ffffff',marginTop:height(2)}}>
+           <Image style={{width:width(6),height:height(5),resizeMode:'center',tintColor:'#000000'}} source={item.name=='عربة التسوق'?require('../assets/shopping-cart.png'):item.name=='الطلبات'?require('../assets/diagram.png'):item.name=='حسابي'?require('../assets/person.png'):item.name=='المفضله'?require('../assets/list.png'):require('../assets/pay.png')} />
+           <Text style={{color:'#000000',fontSize:width(4)}}>{item.name=='دفع'?'إضافة بطاقة':item.name}</Text>
            <View />
          </TouchableOpacity>)
      })}
-   <TouchableOpacity onPress={()=>{dispatch(logout());navigation.navigate('Login')}} style={{width:'90%',flexDirection:'row',alignSelf:'center',justifyContent:'space-between',height:height(8),alignItems:'center',paddingHorizontal:'5%',borderRadius:10,backgroundColor:'#ee8318',marginTop:height(2)}}>
-           <Image style={{width:width(6),height:height(5),resizeMode:'center',tintColor:'#FFFFFF'}} source={require('../assets/logout.png')} />
-           <Text style={{color:'#ffffff',fontSize:width(4)}}>تسجيل خروج</Text>
+   <TouchableOpacity onPress={()=>{dispatch(logout());navigation.navigate('Login')}} style={{width:'90%',flexDirection:'row-reverse',alignSelf:'center',justifyContent:'space-between',height:height(8),alignItems:'center',paddingHorizontal:'5%',borderRadius:10,backgroundColor:'#ffffff',marginTop:height(2)}}>
+           <Image style={{width:width(6),height:height(5),resizeMode:'center',tintColor:'#000000'}} source={require('../assets/logout.png')} />
+           <Text style={{color:'#000000',fontSize:width(4)}}>تسجيل خروج</Text>
            <View />
          </TouchableOpacity>
     </View>)

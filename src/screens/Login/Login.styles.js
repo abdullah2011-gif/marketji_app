@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     marginVertical: height(4),
   },
   forgot: {
-    paddingLeft: width(10),
+    paddingRight: width(10),
     fontSize: width(3.7),
     color: color.darkBlue,
     paddingTop: height(1),
