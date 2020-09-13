@@ -95,7 +95,7 @@ export default function Payment({navigation}) {
               <Image style={{width:width(7),height:height(4),resizeMode:'contain'}} source={require('../../assets/discover.png')} />
               <Image style={{width:width(20),marginTop:3,height:height(8),resizeMode:'contain'}} source={require('../../assets/paypal.png')} />
            </View>
-           <Text style={{fontSize:width(3.3),fontWeight:'bold'}}>Adl Istalam</Text>
+           <Text style={{fontSize:width(3.3),fontWeight:'bold'}}>علدالاستلام</Text>
        </View>
        <View style={{height:height(47),width:width(90),alignSelf:'center',borderRadius:width(3),padding:width(2),marginTop:height(2),backgroundColor:'rgba(252,235,225,0.9)'}}>
          <View style={{borderBottomWidth:1,borderBottomColor:'#decec5',marginTop:height(2)}}>

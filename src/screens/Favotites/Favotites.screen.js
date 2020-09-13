@@ -95,7 +95,7 @@ export default function Dashboard({navigation}) {
               alignItems: 'center',
               borderRadius: width(5),
             }}>
-           <Text style={{fontSize:width(3),color:color.white}} >Add to cart</Text>
+           <Text style={{fontSize:width(3),color:color.white}} >أضف إلى السلة</Text>
           </TouchableOpacity>}
           </View>
           <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>

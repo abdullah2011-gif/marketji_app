@@ -93,8 +93,8 @@ export default function Dashboard() {
           </ImageBackground>
          
           <View style={styles.titleContainer}>
-            <Text style={{textAlign: 'center', color: color.orange}}>
-              Al-Esah
+            <Text style={{textAlign: 'center' ,  color: color.orange}}>
+            العيسى
             </Text>
           </View>
           {/* <View style={styles.touchableview}>
@@ -123,7 +123,7 @@ export default function Dashboard() {
             <TextInput value={title} onChangeText={setTtitle} defaultValue={user.title} placeholder="عنوان" />
           </View>
           </KeyboardAvoidingView>
-          <Button onPress={saveUser} title='Save' />
+          <Button onPress={saveUser} title='حفظ' />
         </ImageBackground>
       </SafeAreaView>
 

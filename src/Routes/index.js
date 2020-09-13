@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from '../screens/Login/Login.screen';
 import {useDispatch} from 'react-redux'
 import {logout} from '../Redux/Actions/Auth'
+//import SplashScreen from '../screens/SplashScreen'
 import Dashboard from '../screens/Dashboard/Dashboard.screen';
 import Cart from '../screens/Cart/Cart.screen';
 import Products from '../screens/Products/Products.screen';
@@ -19,6 +20,7 @@ import { View, Image, TouchableOpacity,Text,Keyboard,Platform } from 'react-nati
 import { width, height } from 'react-native-dimension';
 import Apimanager from '../ApiFunctions/ApiFunctions';
 import Alert from '../components/PopUp/PopUp.Component'
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 const Stack = createStackNavigator();
 export default function Routes() {
         return (<>
@@ -44,31 +46,42 @@ function MyDrawer({navigation}) {
            },5000)
     },[])
   return (
-  <Drawer.Navigator drawerPosition='right' drawerStyle={{backgroundColor:time?'transparent':'#ffffff'}} drawerContent={(props)=>(time?null: drawerContainer({...props,dispatch:dispatch}))}>
+  <Drawer.Navigator drawerPosition='left' drawerStyle={{backgroundColor:time?'transparent':'#ffffff'}} drawerContent={(props)=>(time?null: drawerContainer({...props,dispatch:dispatch}))}>
          <Drawer.Screen name="Dashboard" component={Dashboard} />
-                        <Drawer.Screen name="عربة التسوق" component={Cart} />
-                        <Drawer.Screen name="منتجات" component={Products} />
-                     {isLogin?<Drawer.Screen name="الطلبات" component={Orders} />: <Stack.Screen name="الطلبات" component={Login} />}
-                      { isLogin? <Drawer.Screen name="حسابي" component={Accounts} />: <Stack.Screen name="حسابي" component={Login} />}
-                      {isLogin?  <Drawer.Screen name="دفع" component={Payment} />: <Stack.Screen name="دفع" component={Login} />}
-                        <Drawer.Screen name="المفضله" component={Favorites} />
-                      {isLogin?  <Drawer.Screen name="الدفعة النهائية" component={FinalPayment} />: <Stack.Screen name="الدفعة النهائية" component={Login} />}
+                        <Drawer.Screen name="Cart" component={Cart} />
+                        <Drawer.Screen name="Products" component={Products} />
+                     {isLogin?<Drawer.Screen name="Orders" component={Orders} />: <Stack.Screen name="Orders" component={Login} />}
+                      { isLogin? <Drawer.Screen name="Accounts" component={Accounts} />: <Stack.Screen name="Accounts" component={Login} />}
+                      {isLogin?  <Drawer.Screen name="Payment" component={Payment} />: <Stack.Screen name="Payment" component={Login} />}
+                        <Drawer.Screen name="Favorites" component={Favorites} />
+                      {isLogin?  <Drawer.Screen name="FinalPayment" component={FinalPayment} />: <Stack.Screen name="FinalPayment" component={Login} />}
     </Drawer.Navigator>
   );
 }
 function drawerContainer({state,navigation,dispatch}){
 return(
 <View style={{width:'100%',height:'100%'}} >
- <TouchableOpacity onPress={()=>navigation.closeDrawer()} style={{marginLeft:height(2),marginBottom:height(1),marginTop:30}}>
+  <View style={{justifyContent:'space-between',flexDirection:'row',alignItems:'center'}}>
+ <TouchableOpacity onPress={()=>navigation.closeDrawer()} style={{marginLeft:height(2),marginBottom:height(1)}}>
      <Image style={{width:25,height:25}} source={require('../assets/menu.png')} />
  </TouchableOpacity>
+          {
+            <View style={{justifyContent:'center',alignItems:'center',marginTop:height(1)}}>
+            <Image style={{width:width(17),height:height(17),borderRadius:height(30),resizeMode:'center',borderColor:'#000000',backgroundColor:'#ffffff'}}  source={require('../assets/userimage.png')} />
+             <Text style={{marginTop:height(1),paddingBottom:20}}>user name</Text>
+             
+            </View>
+          }
+          <View  style={{marginLeft:height(2),marginBottom:height(1),marginTop:30}}/>
+ </View>
+ <View style={{backgroundColor:'#000000',height:height(1),width:width(60),alignSelf:'center'}}></View>
      {state.routes.map(item=>{
-         if(item.name=='Dashboard'||item.name=='منتجات'||item.name=='الدفعة النهائية')
+         if(item.name=='Dashboard'||item.name==''||item.name=='FinalPayment')
          return null
          else
          return(<TouchableOpacity onPress={()=>navigation.navigate(item.name)} style={{width:'90%',flexDirection:'row-reverse',alignSelf:'center',justifyContent:'space-between',height:height(8),alignItems:'center',paddingHorizontal:'5%',borderRadius:10,backgroundColor:'#ffffff',marginTop:height(2)}}>
-           <Image style={{width:width(6),height:height(5),resizeMode:'center',tintColor:'#000000'}} source={item.name=='عربة التسوق'?require('../assets/shopping-cart.png'):item.name=='الطلبات'?require('../assets/diagram.png'):item.name=='حسابي'?require('../assets/person.png'):item.name=='المفضله'?require('../assets/list.png'):require('../assets/pay.png')} />
-           <Text style={{color:'#000000',fontSize:width(4)}}>{item.name=='دفع'?'إضافة بطاقة':item.name}</Text>
+           <Image style={{width:width(6),height:height(5),resizeMode:'center',tintColor:'#000000'}} source={item.name=='Cart'?require('../assets/shopping-cart.png'):item.name=='Products'?require('../assets/list.png'):item.name=='Accounts'?require('../assets/person.png'):item.name=='Payment'?require('../assets/pay.png'):item.name=='Orders'?require('../assets/diagram.png'):require('../assets/fillheart.png')} />
+           <Text style={{color:'#000000',fontSize:width(4)}}>{item.name=='Cart'?'عربة التسوق':item.name=='Products'?'منتجات':item.name=='Orders'?'الطلبات':item.name=='Accounts'?'حسابات':item.name=='Payment'?'دفع':'المفضلة'}</Text>
            <View />
          </TouchableOpacity>)
      })}

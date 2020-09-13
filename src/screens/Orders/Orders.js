@@ -139,7 +139,7 @@ class Trips extends Component {
                                     color: '#000000',
                                     marginTop: height(.5)
                                 }}>
-                                Products:  {item.products.length}
+                                منتجات :  {item.products.length}
                             </Text>
                             <Text
                                 style={{
@@ -147,7 +147,7 @@ class Trips extends Component {
                                     color: '#000000',
                                     marginTop: height(.5)
                                 }}>
-                                Status:  Pending
+                               الحالة:   قيد الانتظار
                             </Text>
                             <Text
                                 style={{
@@ -155,7 +155,7 @@ class Trips extends Component {
                                     color: '#000000',
                                     marginTop: height(.5)
                                 }}>
-                                Payment method:  {item.paymentMethod}
+                               طريقة الدفع او السداد :  {item.paymentMethod}
                             </Text>
                         </View>
                         <View
@@ -302,7 +302,7 @@ class Trips extends Component {
                                         alignItems: 'center',
                                     }}>
                                     <Text style={{ fontSize: totalSize(2.50), color: '#FFFFFF' }}>
-                                        Track Your Order
+                                    أتبع طلبك
                   </Text>
                                 </View>
                                 <View style={{ width: width(10) }}>
@@ -361,7 +361,7 @@ class Trips extends Component {
                                         color: '#000000',
                                         marginTop: height(.5)
                                     }}>
-                                   No current orders
+                                   لا توجد أوامر حالية
                                 </Text>}
                                 </View>
                             </View>
@@ -385,7 +385,7 @@ class Trips extends Component {
                                         color: '#000000',
                                         marginTop: height(.5)
                                     }}>
-                                   No completed orders
+                                  لا توجد أوامر مكتملة
                                 </Text>}
                                 </View>
                             </View>

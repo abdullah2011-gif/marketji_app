@@ -23,12 +23,14 @@ import axios from 'axios';
 import Apimanager from '../../ApiFunctions/ApiFunctions';
 import { setProducts, setCart, setPendingOrders, setCompletedOrders } from '../../Redux/Actions/App';
 import config from '../../../config';
+
 GoogleSignin.configure({
   offlineAccess: false,
   androidClientId:'350261003171-nuv576fq3sgvk5bd0dpcklco6or2l0lb.apps.googleusercontent.com',
   webClientId:'350261003171-marocch5lta2id8bohbp0n78473vv1j8.apps.googleusercontent.com',
 });
 export default function Login({navigation}) {
+
   const [isLogin, setIsLogin] = useState(true);
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');

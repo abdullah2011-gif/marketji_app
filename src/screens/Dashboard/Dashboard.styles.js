@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   header: {
     width: width(100),
     height: height(6),
-    flexDirection: 'row',
+    flexDirection: 'row-reverse',
     justifyContent: 'space-between',
     paddingHorizontal: width(5),
     alignItems: 'center',

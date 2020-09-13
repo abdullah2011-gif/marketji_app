@@ -31,7 +31,7 @@ stripe.setOptions({
 });
 
 export default function Payment({navigation}) { 
-  const [selectedValue, setSelectedValue] = useState('On delevery');
+  const [selectedValue, setSelectedValue] = useState('عند التسليم');
   const [selectedCard, setSelectedCard] = useState(null);
   const [phone, setPhone] = useState(null);
   const [address, setAddress] = useState('');
@@ -103,7 +103,7 @@ export default function Payment({navigation}) {
                 textAlign: 'center',
                 paddingVertical: height(1.5),
               }}>
-              AlTabah ({totalQuantity})
+           عدد العناصر ({totalQuantity})
             </Text>
             <View
               style={{
@@ -128,7 +128,7 @@ export default function Payment({navigation}) {
                 </Text>
               </Text>
               <Text style={{fontSize: width(4), color: color.darkBlue}}>
-                Almajmuah
+              المجموع
               </Text>
             </View>
             
@@ -141,7 +141,7 @@ export default function Payment({navigation}) {
                 justifyContent: 'space-between',
               }}>
               <Text style={{fontSize: width(4), color: color.darkBlue}}>
-              عنوان
+              العنوان
            </Text>
                  <GooglePlacesAutocomplete
                     minLength={2}
@@ -170,7 +170,7 @@ export default function Payment({navigation}) {
                       listView: styles.listView,
                     }}
                     // enablePoweredByContainer={false}
-                    placeholder="Select location"
+                    placeholder="اختر موقعا"
                     nearbyPlacesAPI="GooglePlacesSearch"
                     debounce={1}
                   />
@@ -185,7 +185,7 @@ export default function Payment({navigation}) {
                 justifyContent: 'space-between',
               }}>
              <ModalDropdown
-                  options={['Card','On delevery']}
+                  options={['بطاقة','عند التسليم']}
                   dropdownStyle={styles.genderDropDown}
                   showsVerticalScrollIndicator={false}
                   onSelect={(index, value) => setSelectedValue(value)}
