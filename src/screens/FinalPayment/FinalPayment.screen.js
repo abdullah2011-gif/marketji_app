@@ -1,7 +1,6 @@
 import React, {Component, useState} from 'react';
 import {
   View,
-  Text,
   ImageBackground,
   TouchableOpacity,
   SafeAreaView,
@@ -9,6 +8,7 @@ import {
   FlatList,
   Image,TextInput, ScrollView, KeyboardAvoidingView
 } from 'react-native';
+import Text from '../../components/Text/Text.component'
 import styles from './FinalPayment.styles';
 import ModalDropdown from 'react-native-modal-dropdown';
 import CustomTextInput from '../../components/TextInput/TextInput.component';
@@ -48,11 +48,11 @@ export default function Payment({navigation}) {
   dispatch(setLoading(false))
   const requestOrder=async()=>{
     if(address == ''){
-      setWarning('PLease enter address')
+      setWarning('الرجاء إدخال العنوان')
       return
 
     }else if(!user.contact&&(phone==null&&phone?.length<6)){
-      setWarning('please enter phone')
+      setWarning('الرجاء إدخال الهاتف')
       return
     }
     dispatch(setLoading(true))
@@ -210,7 +210,8 @@ export default function Payment({navigation}) {
               اختار طريقة الدفع
               </Text>
             </View>
-           {!user.contact&&<View
+            {console.log(user.contact)}
+           {user.contact&&<View
               style={{
                 width: width(80),
                 alignSelf: 'center',
@@ -224,7 +225,7 @@ export default function Payment({navigation}) {
               الرجاء إدخال رقم الهاتف
               </Text>
             </View>}
-            {selectedValue=='Card'&&<><View
+            {selectedValue!='عند التسليم'&&<><View
               style={{
                 width: width(80),
                 alignSelf: 'center',
@@ -265,7 +266,7 @@ export default function Payment({navigation}) {
                اختر البطاقة
               </Text>
             </View>
-            <Button containerStyle={{width:width(45),marginTop:height(4)}} onPress={()=>navigation.navigate('Payment')} title='Add new card'/>
+            <Button containerStyle={{width:width(45),marginTop:height(4)}} onPress={()=>navigation.navigate('Payment')} title='أضف بطاقة جديدة'/>
             </>}
             <View style={[styles.line]} />
             <Button
