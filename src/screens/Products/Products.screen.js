@@ -26,7 +26,9 @@ export default function Dashboard({navigation,route}) {
   const favorites = useSelector(state => state.App.favorites);
   const cart = useSelector(state => state.App.cart);
   var totalPrice = null;
+  var totalQuantity = null;
   cart.map(item=>{
+    totalQuantity=item.orderQuantity+totalQuantity
     totalPrice = totalPrice+(item?.orderQuantity*item?.product?.price)
   })
   useEffect(()=>{
@@ -163,8 +165,11 @@ export default function Dashboard({navigation,route}) {
                     </Text>
                    </Text>
                  <TouchableOpacity  onPress={() => navigation.navigate('Cart')}>
+                 <View style={{backgroundColor:color.orange,position:'absolute',zIndex:1,right:-width(2),overflow:'visible',top:-height(0.8),width:width(5),height:width(5),justifyContent:'center',alignItems:'center',borderRadius:width(5)}}>
+          <Text style={{color:'white',fontSize:width(3)}}>{totalQuantity}</Text>
+              </View>
             <Image
-              style={{width:width(5),height:height(3.5)}}
+              style={{width:width(6),height:height(4)}}
               source={require('../../assets/shopping-cart.png')}
             />
             </TouchableOpacity>

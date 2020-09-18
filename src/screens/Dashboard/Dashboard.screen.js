@@ -43,7 +43,9 @@ export default function Dashboard({navigation}) {
   const [searchTerm, setSearchTerm] = useState('');
   const cart = useSelector(state => state.App.cart);
   var totalPrice = null;
+  var totalQuantity = null;
   cart.map(item=>{
+    totalQuantity=item.orderQuantity+totalQuantity
     totalPrice = totalPrice+(item.orderQuantity*item.product?.price)
   })
   const dispatch = useDispatch()
@@ -212,6 +214,9 @@ export default function Dashboard({navigation}) {
               {totalPrice} <Text style={{fontSize: width(3)}}>JD</Text>
             </Text>
             <TouchableOpacity  onPress={() => navigation.navigate('Cart')}>
+              <View style={{backgroundColor:color.orange,position:'absolute',zIndex:1,right:-width(2),overflow:'visible',top:-height(0.8),width:width(5),height:width(5),justifyContent:'center',alignItems:'center',borderRadius:width(5)}}>
+          <Text style={{color:'white',fontSize:width(3)}}>{totalQuantity}</Text>
+              </View>
             <Image
               style={styles.cartImage}
               source={require('../../assets/shopping-cart.png')}

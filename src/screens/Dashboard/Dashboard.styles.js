@@ -116,9 +116,9 @@ const styles = StyleSheet.create({
     marginRight: width(2),
   },
   cartImage: {
-    width: width(5),
+    width: width(6),
     resizeMode: 'contain',
-    height: height(4),
+    height: height(4.5),
   },
   image:{
     width:'100%',
