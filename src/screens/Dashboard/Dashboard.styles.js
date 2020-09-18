@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   },
   bottom: {
     width: width(100),
-    height: height(6),
+    height: height(7),
     marginTop: height(2),
     flexDirection: 'row',
     justifyContent: 'space-between',
