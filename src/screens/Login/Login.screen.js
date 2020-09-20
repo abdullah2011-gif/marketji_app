@@ -287,7 +287,7 @@ export default function Login({navigation}) {
                   <TouchableOpacity onPress={googleSignIn}>
                     <Image
                       source={require('../../assets/Google-Plus-Logo.png')}
-                      style={styles.logo}
+                      style={styles.logoGoogle}
                     />
                   </TouchableOpacity>
                   <View

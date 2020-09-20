@@ -94,7 +94,7 @@ export default function Dashboard() {
          
           <View style={styles.titleContainer}>
             <Text style={{textAlign: 'center' ,  color: color.orange}}>
-            العيسى
+            حسابي
             </Text>
           </View>
           {/* <View style={styles.touchableview}>

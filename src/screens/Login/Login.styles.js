@@ -127,6 +127,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  logoGoogle: {width: width(15), height: height(7), resizeMode: 'contain'},
   logo: {width: width(15), height: height(5), resizeMode: 'contain'},
+  
 });
 export default styles;
