@@ -95,21 +95,21 @@ export default function Payment({navigation}) {
               <Image style={{width:width(7),height:height(4),resizeMode:'contain'}} source={require('../../assets/discover.png')} />
               <Image style={{width:width(20),marginTop:3,height:height(8),resizeMode:'contain'}} source={require('../../assets/paypal.png')} />
            </View>
-           <Text style={{fontSize:width(3.3),fontWeight:'bold'}}>علدالاستلام</Text>
+           <Text style={{fontSize:width(6), fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',}}>علدالاستلام</Text>
        </View>
-       <View style={{height:height(47),width:width(90),alignSelf:'center',borderRadius:width(3),padding:width(2),marginTop:height(2),backgroundColor:'rgba(252,235,225,0.9)'}}>
+       <View style={{height:height(47),width:width(90),alignSelf:'center',borderRadius:width(3),padding:width(2),marginTop:height(2),backgroundColor:'rgba(252,235,225,0.9)',}}>
          <View style={{borderBottomWidth:1,borderBottomColor:'#decec5',marginTop:height(2)}}>
-           <TextInput value={cardName} onChangeText={setCardName} placeholder='name' style={{color:color.darkBlue,textAlign:'right',fontWeight:'bold',height:height(6),width:'90%',alignSelf:'center'}} />
+           <TextInput value={cardName} onChangeText={setCardName} placeholder='اسم' style={{color:color.darkBlue,textAlign:'right',height:height(6),width:'90%',alignSelf:'center'}} />
          </View>
          <View style={{borderBottomWidth:1,borderBottomColor:'#decec5',marginTop:height(2)}}>
-           <TextInput value={cardNumber} onChangeText={setCardNumber} placeholder='رقم البطاقه' style={{color:color.darkBlue,textAlign:'right',fontWeight:'bold',height:height(6),width:'90%',alignSelf:'center'}} />
+           <TextInput value={cardNumber} onChangeText={setCardNumber} placeholder='رقم البطاقه' style={{color:color.darkBlue,textAlign:'right',fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',height:height(6),width:'90%',alignSelf:'center'}} />
          </View>
          <View style={{width:'90%',flexDirection:'row',alignSelf:'center',justifyContent:'space-between',marginTop:height(2)}}>
          <View style={{borderBottomWidth:1,width:'40%',borderBottomColor:'#decec5'}}>
            <TextInput value={cardCvv} onChangeText={setCardCvv} placeholder='CVV' style={{color:color.darkBlue,textAlign:'left',fontWeight:'bold',height:height(6),width:'100%',alignSelf:'center'}} />
            </View>
            <View style={{borderBottomWidth:1,width:'40%',borderBottomColor:'#decec5'}}>
-           <TextInput value={cardExpDate} onChangeText={setCardExpDate} placeholder='تاريخ الانتهاء' style={{color:color.darkBlue,textAlign:'right',fontWeight:'bold',height:height(6),width:'100%',alignSelf:'center'}} />
+           <TextInput value={cardExpDate} onChangeText={setCardExpDate} placeholder='تاريخ الانتهاء' style={{color:color.darkBlue,textAlign:'right',fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',height:height(6),width:'100%',alignSelf:'center'}} />
            </View>
          </View>
          <View style={{borderBottomWidth:1,borderBottomColor:'#decec5',marginTop:height(2)}}>

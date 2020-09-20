@@ -90,12 +90,12 @@ export default function Dashboard({navigation}) {
               // height: width(5),
               marginLeft:width(2),
               paddingHorizontal:width(2.3),
-              paddingVertical:height(0.8),
+              paddingVertical:height(1.5),
               justifyContent: 'center',
               alignItems: 'center',
               borderRadius: width(5),
             }}>
-           <Text style={{fontSize:width(3),color:color.white}} >أضف إلى السلة</Text>
+           <Text style={{fontSize:width(4),color:color.white,fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',}} >أضف إلى السلة</Text>
           </TouchableOpacity>}
           </View>
           <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
@@ -106,10 +106,11 @@ export default function Dashboard({navigation}) {
                     fontSize: width(3),
                     color: color.orange,
                     marginRight: 4,
+                    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
                   }}>
                   ({item.product.quantity}kg)
                 </Text>
-                <Text style={{fontSize: width(3.7), color: color.darkBlue}}>
+                <Text style={{fontSize: width(3.7), color: color.darkBlue,fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',}}>
                   {item.title}
                 </Text>
               </View>
@@ -119,9 +120,10 @@ export default function Dashboard({navigation}) {
                   fontWeight: 'bold',
                   color: color.darkBlue,
                   textAlign: 'center',
+                  fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
                 }}>
                 {item.product?.price}
-                <Text style={{fontSize: width(2.5), color: color.darkBlue}}>
+                <Text style={{fontSize: width(2.5), color: color.darkBlue,fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',}}>
                   {' '}
                   JD
                 </Text>
@@ -174,7 +176,7 @@ export default function Dashboard({navigation}) {
                 <View style={{height: height(2.5)}} />
               )}
             />:
-            <Text style={{fontSize: width(5),marginTop:100, color: color.darkBlue,textAlign:'center'}}>
+            <Text style={{fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',fontSize: width(7),marginTop:100, color: color.darkBlue,textAlign:'center'}}>
            لا توجد عناصر في الإعجابات
           </Text> }
            

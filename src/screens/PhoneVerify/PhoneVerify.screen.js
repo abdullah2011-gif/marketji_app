@@ -78,7 +78,8 @@ export default function Login({route}) {
           source={require('../../assets/loginbackground.png')}
           resizeMode="stretch"
           style={styles.container}>
-                <Text style={styles.signupWith}>Verification code has been sent to your phone number.{'\n\n\n\n'}Please verify your number to continue signup!</Text>
+                <Text style={styles.signupWith}>تم إرسال رمز التحقق إلى رقم هاتفك.{'\n\n\n\n'}يرجى التحقق من رقمك لمواصلة التسجيل!
+</Text>
                 <View style={styles.otpContainer}>
                         <OTPInputView
                             style={styles.otpViewContainer}

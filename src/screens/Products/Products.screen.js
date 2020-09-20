@@ -166,7 +166,7 @@ export default function Dashboard({navigation,route}) {
               alignItems: 'center',
               borderRadius: width(5),
             }}>
-           <Text style={{fontSize:width(3),color:color.white}} >أضف إلى السلة</Text>
+           <Text style={{fontSize:width(3),color:color.white,fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular'}} >أضف إلى السلة</Text>
           </TouchableOpacity>}
         </View>
         <View style={{flexDirection:'row',alignItems:'flex-end'}}>
@@ -211,11 +211,18 @@ export default function Dashboard({navigation,route}) {
             ItemSeparatorComponent={() => (
               <View style={{height: height(2.5)}} />
             )}
-          />:<Text style={{fontSize:width(3),textAlign:'center'}}>
+          />:<Text style={{fontSize:width(4.5),textAlign:'center',fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular'}}>
           لا يوجد منتج في هذه الفئة
         </Text>}
-          <View style={{width:width(100),height:height(6),flexDirection:'row',justifyContent:'space-between',paddingHorizontal:width(5),alignItems:'center',backgroundColor:color.white}}>
-                   <Text onPress={()=>navigation.navigate('Cart')} style={{color:color.white,fontSize:width(4.4),backgroundColor:color.orange,overflow:'hidden',borderRadius:width(3),paddingHorizontal:width(3),paddingVertical:height(0.6)}}>
+          <View style={{width:width(100),height:height(7),flexDirection:'row',justifyContent:'space-between',paddingHorizontal:width(5),alignItems:'center',backgroundColor:color.white}}>
+                   <Text onPress={()=>navigation.navigate('Cart')} style={{color: color.white,
+    fontSize: width(6),
+    backgroundColor: color.orange,
+    overflow: 'hidden',
+    borderRadius: width(1),
+    paddingHorizontal: width(3),
+    paddingVertical: height(0.6),
+    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',}}>
                    استكمال الشراء
                  </Text>
                  <View style={{flexDirection:'row'}}>

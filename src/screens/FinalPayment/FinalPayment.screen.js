@@ -31,7 +31,7 @@ stripe.setOptions({
 });
 
 export default function Payment({navigation}) { 
-  const [selectedValue, setSelectedValue] = useState('عند التسليم');
+  const [selectedValue, setSelectedValue] = useState('عند التسليم',);
   const [selectedCard, setSelectedCard] = useState(null);
   const [phone, setPhone] = useState(null);
   const [address, setAddress] = useState('');
@@ -93,7 +93,7 @@ export default function Payment({navigation}) {
               onPress={() => navigation.navigate('Cart')}
               style={{
                 color: color.white,
-                fontSize: width(4.4),
+                fontSize: width(5.5),
                 width: width(32),
                 backgroundColor: color.orange,
                 overflow: 'hidden',
@@ -102,6 +102,7 @@ export default function Payment({navigation}) {
                 marginRight: width(15),
                 textAlign: 'center',
                 paddingVertical: height(1.5),
+                fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
               }}>
            عدد العناصر ({totalQuantity})
             </Text>
@@ -120,6 +121,7 @@ export default function Payment({navigation}) {
                   fontWeight: 'bold',
                   color: color.darkBlue,
                   textAlign: 'center',
+                  fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
                 }}>
                 {totalPrice}
                 <Text style={{fontSize: width(3.5), color: color.darkBlue}}>
@@ -127,7 +129,7 @@ export default function Payment({navigation}) {
                   JD
                 </Text>
               </Text>
-              <Text style={{fontSize: width(4), color: color.darkBlue}}>
+              <Text style={{fontSize: width(5.5), color: color.darkBlue,fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',}}>
               المجموع
               </Text>
             </View>
@@ -140,7 +142,7 @@ export default function Payment({navigation}) {
                 marginTop: height(3),
                 justifyContent: 'space-between',
               }}>
-              <Text style={{fontSize: width(4), color: color.darkBlue}}>
+              <Text style={{fontSize: width(6), color: color.darkBlue,fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',}}>
               العنوان
            </Text>
                  <GooglePlacesAutocomplete
@@ -166,7 +168,7 @@ export default function Payment({navigation}) {
                       description: {
                         fontWeight: 'bold',
                       },
-                      textInput: {backgroundColor: color.white, borderColor: color.white},
+                      textInput: {backgroundColor: color.white, borderColor: color.white,},
                       listView: styles.listView,
                     }}
                     // enablePoweredByContainer={false}
@@ -187,6 +189,7 @@ export default function Payment({navigation}) {
              <ModalDropdown
                   options={['بطاقة','عند التسليم']}
                   dropdownStyle={styles.genderDropDown}
+                  // textStyle={{fontSize:16}}
                   showsVerticalScrollIndicator={false}
                   onSelect={(index, value) => setSelectedValue(value)}
                   renderRow={(option, index, isSelected) => (
@@ -206,7 +209,7 @@ export default function Payment({navigation}) {
                    
                   </View>
                 </ModalDropdown>
-              <Text style={{fontSize: width(4), color: color.darkBlue}}>
+              <Text style={{fontSize: width(5.5), color: color.darkBlue,fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',}}>
               اختار طريقة الدفع
               </Text>
             </View>
@@ -221,7 +224,7 @@ export default function Payment({navigation}) {
                 justifyContent: 'space-between',
               }}>
             <CustomTextInput containerStyle={{alignSelf:'flex-end',width:width(60),marginTop: height(3),}} keyboardType={'numeric'} type= 'phone' value= {phone} onChangeText={setPhone} />
-              <Text style={{fontSize: width(4), color: color.darkBlue}}>
+              <Text style={{fontSize: width(5.5), color: color.darkBlue,fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',}}>
               الرجاء إدخال رقم الهاتف
               </Text>
             </View>}
@@ -262,7 +265,7 @@ export default function Payment({navigation}) {
                     </View>:<Text style={styles.genderText}>اختر البطاقة</Text>}
                   </View>
                 </ModalDropdown>
-              <Text style={{fontSize: width(4), color: color.darkBlue}}>
+              <Text style={{fontSize: width(5.5), color: color.darkBlue,fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',}}>
                اختر البطاقة
               </Text>
             </View>

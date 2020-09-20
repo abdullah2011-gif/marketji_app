@@ -215,6 +215,7 @@ export default function Login({navigation}) {
                 />
                 <Text style={styles.label}>كلمه السر</Text>
                 <TextInput
+                
                   value={loginPassword}
                   placeholder={'تأكيد كلمة المرور'}
                   onChangeText={setLoginPassword}

@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: color.white,
     fontSize: width(4.2),
+    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
   },
   horizintalDotContainer: {
     flexDirection: 'row',
@@ -102,14 +103,16 @@ const styles = StyleSheet.create({
   },
   cart: {
     color: color.white,
-    fontSize: width(4.4),
+    fontSize: width(6),
     backgroundColor: color.darkBlue,
     overflow: 'hidden',
     borderRadius: width(1),
     paddingHorizontal: width(3),
     paddingVertical: height(0.6),
+    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
   },
   payment: {
+    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
     fontSize: width(4),
     fontWeight: 'bold',
     color: color.orange,

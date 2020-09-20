@@ -123,7 +123,7 @@ export default function Dashboard({navigation}) {
                 }}
               />
             </TouchableOpacity>
-            <Text style={{fontSize: width(4), color: color.darkBlue}}>
+            <Text style={{fontSize: width(4), color: color.darkBlue,fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular'}}>
               {item.orderQuantity}
             </Text>
             <TouchableOpacity
@@ -153,13 +153,14 @@ export default function Dashboard({navigation}) {
               <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
                 <Text
                   style={{
+                    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
                     fontSize: width(3),
                     color: color.orange,
                     marginRight: 4,
                   }}>
                   ({item.product.quantity}kg)
                 </Text>
-                <Text style={{fontSize: width(3.7), color: color.darkBlue}}>
+                <Text style={{fontSize: width(3.7), color: color.darkBlue,fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',}}>
                   {item.product?.name}
                 </Text>
               </View>
@@ -169,9 +170,10 @@ export default function Dashboard({navigation}) {
                   fontWeight: 'bold',
                   color: color.darkBlue,
                   textAlign: 'center',
+                  fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
                 }}>
                 {item.product?.price}
-                <Text style={{fontSize: width(2.5), color: color.darkBlue}}>
+                <Text style={{fontSize: width(2.5), color: color.darkBlue,fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',}}>
                   {' '}
                   JD
                 </Text>
@@ -224,7 +226,7 @@ export default function Dashboard({navigation}) {
                 <View style={{height: height(2.5)}} />
               )}
             />:
-            <Text style={{fontSize: width(5),marginTop:100, color: color.darkBlue,textAlign:'center'}}>
+            <Text style={{fontSize: width(8),marginTop:100, color: color.darkBlue,textAlign:'center',fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',}}>
             لا توجد عناصر في سلة التسوق
           </Text> }
           {totalPrice&&  <View>
@@ -233,7 +235,7 @@ export default function Dashboard({navigation}) {
               onPress={() => navigation.navigate('Cart')}
               style={{
                 color: color.white,
-                fontSize: width(4.4),
+                fontSize: width(6),
                 width: width(32),
                 backgroundColor: color.orange,
                 overflow: 'hidden',
@@ -242,6 +244,7 @@ export default function Dashboard({navigation}) {
                 marginRight: width(15),
                 textAlign: 'center',
                 paddingVertical: height(1.5),
+                fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
               }}>
               المجموع ({totalQuantity})
             </Text>
@@ -256,18 +259,19 @@ export default function Dashboard({navigation}) {
               }}>
               <Text
                 style={{
+                  fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
                   fontSize: width(5),
                   fontWeight: 'bold',
                   color: color.darkBlue,
                   textAlign: 'center',
                 }}>
                 {totalPrice}
-                <Text style={{fontSize: width(3.5), color: color.darkBlue}}>
+                <Text style={{fontSize: width(3.5), color: color.darkBlue,fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',}}>
                   {' '}
                   JD
                 </Text>
               </Text>
-              <Text style={{fontSize: width(4), color: color.darkBlue}}>
+              <Text style={{fontSize: width(6),color: color.darkBlue,fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',paddingRight:width(6)}}>
               مجموع
               </Text>
             </View>

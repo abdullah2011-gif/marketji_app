@@ -86,13 +86,13 @@ return(
          else
          return(<TouchableOpacity onPress={()=>navigation.navigate(item.name)} style={{width:'90%',flexDirection:'row-reverse',alignSelf:'center',justifyContent:'space-between',height:height(7),alignItems:'center',paddingHorizontal:'5%',borderRadius:10,backgroundColor:'#ffffff',marginTop:height(2)}}>
            <Image style={{width:width(6),height:height(5),resizeMode:'center',tintColor:'#000000'}} source={item.name=='Cart'?require('../assets/shopping-cart.png'):item.name=='Products'?require('../assets/list.png'):item.name=='Accounts'?require('../assets/person.png'):item.name=='Payment'?require('../assets/pay.png'):item.name=='Orders'?require('../assets/diagram.png'):require('../assets/fillheart.png')} />
-           <Text style={{color:'#000000',fontSize:width(4)}}>{item.name=='Cart'?'عربة التسوق':item.name=='Products'?'منتجات':item.name=='Orders'?'الطلبات':item.name=='Accounts'?'حسابات':item.name=='Payment'?'دفع':'المفضلة'}</Text>
+           <Text style={{fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',color:'#000000',fontSize:width(6)}}>{item.name=='Cart'?'عربة التسوق':item.name=='Products'?'منتجات':item.name=='Orders'?'الطلبات':item.name=='Accounts'?'حسابات':item.name=='Payment'?'دفع':'المفضلة'}</Text>
            <View />
          </TouchableOpacity>)
      })}
    <TouchableOpacity onPress={()=>{dispatch(logout());navigation.navigate('Login')}} style={{width:'90%',flexDirection:'row-reverse',alignSelf:'center',justifyContent:'space-between',height:height(7),alignItems:'center',paddingHorizontal:'5%',borderRadius:10,backgroundColor:'#ffffff',marginTop:height(2)}}>
            <Image style={{width:width(6),height:height(5),resizeMode:'center',tintColor:'#000000'}} source={require('../assets/logout.png')} />
-           <Text style={{color:'#000000',fontSize:width(4)}}>تسجيل خروج</Text>
+           <Text style={{color:'#000000',fontSize:width(6),fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',}}>تسجيل خروج</Text>
            <View />
          </TouchableOpacity>
     </View>)

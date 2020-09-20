@@ -126,32 +126,37 @@ class Trips extends Component {
                                 }}>
                                 <Text
                                     style={{
-                                        fontSize: totalSize(2.25),
+                                        fontSize: totalSize(3.5),
                                         //fontWeight: 'bold',
                                         color: '#F7B519',
+                                        fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
                                     }}>
                                  {item.label} 
                                 </Text>
                             </View>
                             <Text
                                 style={{
-                                    fontSize: totalSize(1.75),
+                                    fontSize: totalSize(2),
                                     color: '#000000',
-                                    marginTop: height(.5)
+                                    marginTop: height(.5),
+                                    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
+
                                 }}>
                                 منتجات :  {item.products.length}
                             </Text>
                             <Text
                                 style={{
-                                    fontSize: totalSize(1.75),
+                                    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
+                                    fontSize: totalSize(2.3),
                                     color: '#000000',
                                     marginTop: height(.5)
+                                
                                 }}>
                                الحالة:   قيد الانتظار
                             </Text>
                             <Text
-                                style={{
-                                    fontSize: totalSize(1.75),
+                                style={{ fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
+                                fontSize: totalSize(2.5),
                                     color: '#000000',
                                     marginTop: height(.5)
                                 }}>
@@ -227,6 +232,7 @@ class Trips extends Component {
                                 }}>
                                 <Text
                                     style={{
+                                        fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
                                         fontSize: totalSize(2.25),
                                         //fontWeight: 'bold',
                                         color: '#F7B519',
@@ -236,7 +242,8 @@ class Trips extends Component {
                             </View>
                             <Text
                                 style={{
-                                    fontSize: totalSize(1.75),
+                                    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
+                                    fontSize: totalSize(3),
                                     color: '#000000',
                                     marginTop: height(.5)
                                 }}>
@@ -244,7 +251,8 @@ class Trips extends Component {
                             </Text>
                             <Text
                                 style={{
-                                    fontSize: totalSize(1.75),
+                                    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
+                                    fontSize: totalSize(2.5),
                                     color: '#000000',
                                     marginTop: height(.5)
                                 }}>
@@ -301,7 +309,7 @@ class Trips extends Component {
                                         width: width(70),
                                         alignItems: 'center',
                                     }}>
-                                    <Text style={{ fontSize: totalSize(2.50), color: '#FFFFFF' }}>
+                                    <Text style={{ fontSize: totalSize(3.5), color: '#FFFFFF', fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular', }}>
                                     أتبع طلبك
                   </Text>
                                 </View>
@@ -328,7 +336,7 @@ class Trips extends Component {
                                 alignItems: 'center',
                                 marginTop: height(2)
                             }}
-                            tabTextStyle={{ color: '#959595', fontSize: totalSize(2) }}
+                            tabTextStyle={{ color: '#959595', fontSize: totalSize(2.5), fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular', }}
                             activeTabStyle={{ backgroundColor: color.orange }}
                             firstTabStyle={{
                                 marginLeft: width(3),
@@ -357,9 +365,10 @@ class Trips extends Component {
                                         showsVerticalScrollIndicator={false}
                                     />:<Text
                                     style={{
-                                        fontSize: totalSize(1.75),
+                                        fontSize: totalSize(2.5),
                                         color: '#000000',
-                                        marginTop: height(.5)
+                                        marginTop: height(.5),
+                                         fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
                                     }}>
                                    لا توجد أوامر حالية
                                 </Text>}
@@ -381,9 +390,10 @@ class Trips extends Component {
                                         showsVerticalScrollIndicator={false}
                                     />: <Text
                                     style={{
-                                        fontSize: totalSize(1.75),
+                                        fontSize: totalSize(2.5),
                                         color: '#000000',
-                                        marginTop: height(.5)
+                                        marginTop: height(.5),
+                                        fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
                                     }}>
                                   لا توجد أوامر مكتملة
                                 </Text>}

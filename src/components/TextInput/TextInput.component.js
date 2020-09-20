@@ -36,7 +36,7 @@ const Component = (
         keyboardType={keyboardType ? keyboardType : 'default'}
         fontSize={totalSize(1.95)}
         placeholderTextColor={color.black}
-        style={{color: color.black, fontSize: totalSize(1.9), width:type=='phone'?'75%':'90%',textAlign:'right'}}
+        style={{color: color.black, fontSize: totalSize(1.9), width:type=='phone'?'75%':'90%',textAlign:'right',fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',}}
         formatText={formatText}
         secureTextEntry={!pass ? false : secureTextEntry}
         autoCapitalize="none"

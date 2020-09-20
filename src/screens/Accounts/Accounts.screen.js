@@ -93,7 +93,7 @@ export default function Dashboard() {
           </ImageBackground>
          
           <View style={styles.titleContainer}>
-            <Text style={{textAlign: 'center' ,  color: color.orange}}>
+            <Text style={{textAlign: 'center' , fontSize: width(6), color: color.orange,fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular'}}>
             حسابي
             </Text>
           </View>

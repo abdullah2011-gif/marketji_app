@@ -16,14 +16,16 @@ const styles = StyleSheet.create({
   genderDropDown:{
     height: height(15),
     width:width(60),
+    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
   },
   genderDropDownItemContainer:{
     paddingVertical: height(2),
-    paddingHorizontal: width(2)
+    paddingHorizontal: width(2),
   },
   genderDropDownItemText:{
-    fontSize: width(4),
+    fontSize: width(6),
     color: color.darkBlue,
+    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
   },
   genderConainer: {
     justifyContent: "space-between",
@@ -38,8 +40,9 @@ const styles = StyleSheet.create({
   },
 genderText:{
     color:color.darkBlue,
-    fontSize:totalSize(2),
-    marginLeft:width(2)
+    fontSize:totalSize(2.5),
+    marginLeft:width(2),
+    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
 },
 arrowdownImage: {
   height: height(2),
@@ -65,8 +68,9 @@ listView:{
   // right:0
 },
 warning: {
+  fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
   alignSelf: 'center',
-  fontSize: width(3.5),
+  fontSize: width(5),
   color: color.darkBlue,
   paddingTop: 10,
   paddingVertical: height(2.5),
