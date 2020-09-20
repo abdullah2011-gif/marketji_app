@@ -230,7 +230,7 @@ export default function Dashboard({navigation,route}) {
           <Text style={{color:'white',fontSize:width(3)}}>{totalQuantity?totalQuantity:0}</Text>
               </View>
             <Image
-              style={{width:width(6),height:height(4)}}
+              style={{width:width(6),height:height(4),paddingRight:30}}
               source={require('../../assets/shopping-cart.png')}
             />
             </TouchableOpacity>
