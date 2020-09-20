@@ -1,4 +1,4 @@
-import { GETPRODUCTANDCATEGORIES,GETFAVORITES,GETCART,SETORDERCOUNT,RESETORDERCOUNT,COMPLETEDORDERS,PENDINGORDERS } from '../Types';
+import { GETPRODUCTANDCATEGORIES,GETFAVORITES,GETCART,SETORDERCOUNT,RESETORDERCOUNT,RESETPRODUCTCOUNT,COMPLETEDORDERS,PENDINGORDERS } from '../Types';
 const intialState = {
     categoriesAndProduct:[],
     favorites:[],
@@ -70,27 +70,28 @@ const reducer = (state = intialState, action) => {
         case GETCART: {
             return {
                 ...state,
-                cart: action.payload.map(item=>{
-                    var valid=false;
-                    var i=false;
-                    state.cart.map(ite=>{
-                        if(ite._id!=item._id)
-                        {
-                            valid= true
-                            i = ite
-                        }
-                    })
-                    if(!valid)
-                        {
-                             return {
-                            ...item,
-                            orderQuantity:1,
-                            }
-                        }
-                            else{
-                            return {...item,orderQuantity:i.orderQuantity}
-                            }
-                                })
+                cart: action.payload
+                // .map(item=>{
+                //     var valid=false;
+                //     var i=false;
+                //     state.cart.map(ite=>{
+                //         if(ite._id!=item._id)
+                //         {
+                //             valid= true
+                //             i = ite
+                //         }
+                //     })
+                //     if(!valid)
+                //         {
+                //              return {
+                //             ...item,
+                //             orderQuantity:1,
+                //             }
+                //         }
+                //             else{
+                //             return {...item,orderQuantity:i.orderQuantity}
+                //             }
+                //                 })
                             }
                         }
         default:

@@ -215,7 +215,7 @@ export default function Dashboard({navigation}) {
             </Text>
             <TouchableOpacity  onPress={() => navigation.navigate('Cart')}>
               <View style={{backgroundColor:color.orange,position:'absolute',zIndex:1,right:-width(2),overflow:'visible',top:-height(0.8),width:width(5),height:width(5),justifyContent:'center',alignItems:'center',borderRadius:width(5)}}>
-          <Text style={{color:'white',fontSize:width(3)}}>{totalQuantity}</Text>
+          <Text style={{color:'white',fontSize:width(3)}}>{totalQuantity?totalQuantity:0}</Text>
               </View>
             <Image
               style={styles.cartImage}
