@@ -213,7 +213,7 @@ export default function Dashboard({navigation}) {
       <SafeAreaView style={{flex: 1}}>
         <ImageBackground
           resizeMode="stretch"
-          source={require('../../assets/upper_.png')}
+          source={require('../../assets/cart.png')}
           style={{flex: 1}}>
           <ScrollView
             showsVerticalScrollIndicator={false}

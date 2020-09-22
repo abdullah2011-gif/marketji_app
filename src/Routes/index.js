@@ -81,12 +81,12 @@ return(
  </View>
  {isLogin&&<View style={{backgroundColor:'#000000',height:height(1),width:width(60),alignSelf:'center'}}></View>}
      {state.routes.map(item=>{
-         if(item.name=='Dashboard'||item.name==''||item.name=='FinalPayment')
+         if(item.name=='FinalPayment'||item.name=='Products'||item.name=='Payment')
          return null
          else
          return(<TouchableOpacity onPress={()=>navigation.navigate(item.name)} style={{width:'90%',flexDirection:'row-reverse',alignSelf:'center',justifyContent:'space-between',height:height(7),alignItems:'center',paddingHorizontal:'5%',borderRadius:10,backgroundColor:'#ffffff',marginTop:height(2)}}>
-           <Image style={{width:width(6),height:height(5),resizeMode:'center',tintColor:'#000000'}} source={item.name=='Cart'?require('../assets/shopping-cart.png'):item.name=='Products'?require('../assets/list.png'):item.name=='Accounts'?require('../assets/person.png'):item.name=='Payment'?require('../assets/pay.png'):item.name=='Orders'?require('../assets/diagram.png'):require('../assets/fillheart.png')} />
-           <Text style={{fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',color:'#000000',fontSize:width(6)}}>{item.name=='Cart'?'عربة التسوق':item.name=='Products'?'منتجات':item.name=='Orders'?'الطلبات':item.name=='Accounts'?'حسابات':item.name=='Payment'?'دفع':'المفضلة'}</Text>
+           <Image style={{width:width(6),height:height(5),resizeMode:'center',tintColor:'#000000'}} source={item.name=='Cart'?require('../assets/shopping-cart.png'):item.name=='Accounts'?require('../assets/person.png'):item.name=='Orders'?require('../assets/diagram.png'):item.name=='Favorites'?require('../assets/fillheart.png'):item.name=='Dashboard'?require('../assets/home.png'):''} />
+           <Text style={{fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',color:'#000000',fontSize:width(6)}}>{item.name=='Cart'?'عربة التسوق':item.name=='Orders'?'الطلبات':item.name=='Accounts'?'حسابي':item.name=='Favorites'?'المفضلة':item.name=='Dashboard'?'الرئيسيه':''}</Text>
            <View />
          </TouchableOpacity>)
      })}

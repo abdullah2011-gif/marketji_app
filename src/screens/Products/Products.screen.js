@@ -9,6 +9,7 @@ import {
   FlatList,
   Image,
 } from 'react-native';
+import {setCAtegoriesAndProduct} from '../../Redux/Actions/App';
 import styles from './Products.styles';
 import Button from '../../components/Button/Button.component';
 import TextInput from '../../components/TextInput/TextInput.component';
@@ -202,8 +203,19 @@ export default function Dashboard({navigation,route}) {
       <SafeAreaView style={{flex: 1}}>
         <ImageBackground
           resizeMode="stretch"
-          source={require('../../assets/upper_.png')}
+          source={require('../../assets/product.png')}
           style={{flex: 1,justifyContent:'space-between'}}>
+            {/* <View style={{ 
+              alignSelf:'center',
+              backgroundColor: color.orange,
+              height:height(2.5),
+              width:width(17),
+    borderRadius: width(0.4),
+    marginTop:height(4),
+    marginRight:height(10),
+    alignItems:'center',
+    alignContent:'center'
+    }}><Text style={{alignSelf:'center',paddingLeft:5}}>  {item.category&&item.category.name}</Text></View> */}
        {data.length>0?<FlatList
             data={data}
             renderItem={renderItem}
