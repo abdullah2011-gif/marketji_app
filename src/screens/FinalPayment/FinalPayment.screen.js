@@ -80,7 +80,7 @@ export default function Payment({navigation}) {
       <SafeAreaView style={{flex: 1}}>
       <ImageBackground
           resizeMode="stretch"
-          source={require('../../assets/upper_.png')}
+          source={require('../../assets/payment.png')}
           style={{flex: 1}}>
             {/* <KeyboardAvoidingView> */}
             <ScrollView keyboardShouldPersistTaps='always'>

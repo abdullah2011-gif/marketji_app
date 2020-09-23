@@ -86,7 +86,7 @@ export default function Payment({navigation}) {
       <SafeAreaView style={{flex: 1}}>
       <ImageBackground
           resizeMode="stretch"
-          source={require('../../assets/upper_.png')}
+          source={require('../../assets/payment.png')}
           style={{flex: 1}}>
        <View style={{width:width(90),paddingHorizontal:'5%',marginTop:height(17),alignItems:'center',borderRadius:width(8),backgroundColor:color.white,alignSelf:'center',flexDirection:'row',justifyContent:'space-between'}}>
            <View style={{flexDirection:'row',alignItems:'center'}}>
