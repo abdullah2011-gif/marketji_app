@@ -23,8 +23,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: width(2)
   },
   genderDropDownItemText:{
-    fontSize: width(4),
+    fontSize: width(6),
     color: color.darkBlue,
+    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
   },
   genderConainer: {
     justifyContent: "space-between",
@@ -50,7 +51,7 @@ warning: {
   fontSize: width(3.5),
   color: color.darkBlue,
   paddingTop: 3,
-  fontWeight: 'bold',
+  fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
 }
 });
 export default styles;

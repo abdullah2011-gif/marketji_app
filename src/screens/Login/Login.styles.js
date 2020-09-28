@@ -25,7 +25,8 @@ const styles = StyleSheet.create({
     backgroundColor: color.white,
     marginBottom: 4,
     color: color.orange,
-    fontSize: width(4.5),
+    fontSize: width(5.5),
+    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
   },
   inactiveView: {
     width: '50%',
@@ -39,14 +40,16 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     marginBottom: 4,
     color: color.darkBlue,
-    fontSize: width(4.5),
+    fontSize: width(5.5),
+    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
   },
   label: {
-    paddingLeft: width(10),
-    fontSize: width(3.5),
+    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
+    paddingRight: width(10),
+    fontSize: width(6),
     color: color.darkBlue,
     paddingVertical: height(1),
-    fontWeight: 'bold',
+    
   },
   line: {
     width: width(90),
@@ -54,22 +57,25 @@ const styles = StyleSheet.create({
     borderBottomColor: color.white,
     borderBottomWidth: 0.7,
     marginVertical: height(4),
+    
   },
   forgot: {
-    paddingLeft: width(10),
-    fontSize: width(3.7),
+    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
+    paddingRight: width(10),
+    fontSize: width(5),
     color: color.darkBlue,
     paddingTop: height(1),
-    fontWeight: 'bold',
+    
   },
   signup: {
     alignSelf: 'center',
-    fontSize: width(4.3),
+    fontSize: width(7),
     color: color.darkBlue,
     paddingTop: height(4.5),
-    fontWeight: 'bold',
+    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
   },
   warning: {
+    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
     alignSelf: 'center',
     fontSize: width(3.5),
     color: color.darkBlue,
@@ -93,16 +99,19 @@ const styles = StyleSheet.create({
   },
 
   signupHeadingText: {
+    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
     paddingRight: width(1),
-    fontSize: width(4.2),
+    fontSize: width(5.5),
     color: color.darkBlue,
   },
   signupLabel: {
-    paddingLeft: width(10),
-    fontSize: width(3.5),
+    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
+    paddingRight: width(13),
+    fontSize: width(6),
     color: color.darkBlue,
+    paddingVertical:height(0.2),
     paddingBottom: height(1),
-    fontWeight: 'bold',
+    
   },
   signupLine: {
     width: width(90),
@@ -110,13 +119,13 @@ const styles = StyleSheet.create({
     borderBottomColor: color.white,
     borderBottomWidth: 0.7,
     marginTop: height(1),
-    marginBottom: height(2),
+    marginBottom: height(1),
   },
   signupWith: {
     alignSelf: 'center',
-    fontSize: width(4.3),
+    fontSize: width(5),
     color: color.darkBlue,
-    fontWeight: 'bold',
+    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
   },
   logoContainer: {
     width: width(30),
@@ -127,6 +136,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  logoGoogle: {width: width(15), height: height(7), resizeMode: 'contain'},
   logo: {width: width(15), height: height(5), resizeMode: 'contain'},
+  
 });
 export default styles;

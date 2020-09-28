@@ -80,10 +80,10 @@ const styles = StyleSheet.create({
     borderColor: color.white,
   },
   person: {
-    width: '100%',
-    height: '100%',
-    borderRadius:width(30),
-    resizeMode: 'contain',
+    width: width(28),
+    height: width(28),
+    borderRadius: width(20),
+    
   },
   whiteBack: {
     width: width(7),

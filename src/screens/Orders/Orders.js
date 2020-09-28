@@ -1,10 +1,12 @@
 import React, { Component, Fragment } from 'react';
-import { View, Text,Modal, SafeAreaView, StyleSheet, TouchableOpacity,
+import { View,
+    Modal, SafeAreaView, StyleSheet, TouchableOpacity,
     ActivityIndicator, Image, FlatList, ImageBackground, LayoutAnimation, Alert } from 'react-native';
 import { width, height, totalSize } from 'react-native-dimension';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 import StepIndicator from 'react-native-step-indicator';
 import color from '../../utills/Colors';
+import Text from '../../components/Text/Text.component';
 
 // import {
 //   all_trips,
@@ -26,7 +28,7 @@ import config from '../../../config'
 //     selected_item,
 //   } from '../../Redux/Actions/Categories';
 
-const labels = ["Requested", "Request Approved", "In Process", "Completed"];
+const labels = ["طلب", "تم تأكيد الطلبات  ", "تحت المعالجة", "تم التسليم"];
 const customStyles = {
     stepIndicatorSize: 22,
     currentStepIndicatorSize: 22,
@@ -124,36 +126,41 @@ class Trips extends Component {
                                 }}>
                                 <Text
                                     style={{
-                                        fontSize: totalSize(2.25),
+                                        fontSize: totalSize(3.5),
                                         //fontWeight: 'bold',
                                         color: '#F7B519',
+                                        fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
                                     }}>
                                  {item.label} 
                                 </Text>
                             </View>
                             <Text
                                 style={{
-                                    fontSize: totalSize(1.75),
+                                    fontSize: totalSize(2),
                                     color: '#000000',
-                                    marginTop: height(.5)
+                                    marginTop: height(.5),
+                                    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
+
                                 }}>
-                                Products:  {item.products.length}
+                                منتجات :  {item.products.length}
                             </Text>
                             <Text
                                 style={{
-                                    fontSize: totalSize(1.75),
+                                    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
+                                    fontSize: totalSize(2.3),
                                     color: '#000000',
                                     marginTop: height(.5)
+                                
                                 }}>
-                                Status:  Pending
+                               الحالة: قيد العمل  
                             </Text>
                             <Text
-                                style={{
-                                    fontSize: totalSize(1.75),
+                                style={{ fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
+                                fontSize: totalSize(2.5),
                                     color: '#000000',
                                     marginTop: height(.5)
                                 }}>
-                                Payment method:  {item.paymentMethod}
+                               طريقة الدفع او السداد :  {item.paymentMethod}
                             </Text>
                         </View>
                         <View
@@ -225,6 +232,7 @@ class Trips extends Component {
                                 }}>
                                 <Text
                                     style={{
+                                        fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
                                         fontSize: totalSize(2.25),
                                         //fontWeight: 'bold',
                                         color: '#F7B519',
@@ -234,7 +242,8 @@ class Trips extends Component {
                             </View>
                             <Text
                                 style={{
-                                    fontSize: totalSize(1.75),
+                                    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
+                                    fontSize: totalSize(3),
                                     color: '#000000',
                                     marginTop: height(.5)
                                 }}>
@@ -242,7 +251,8 @@ class Trips extends Component {
                             </Text>
                             <Text
                                 style={{
-                                    fontSize: totalSize(1.75),
+                                    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
+                                    fontSize: totalSize(2.5),
                                     color: '#000000',
                                     marginTop: height(.5)
                                 }}>
@@ -299,8 +309,8 @@ class Trips extends Component {
                                         width: width(70),
                                         alignItems: 'center',
                                     }}>
-                                    <Text style={{ fontSize: totalSize(2.50), color: '#FFFFFF' }}>
-                                        Track Your Order
+                                    <Text style={{ fontSize: totalSize(3.5), color: '#FFFFFF', fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular', }}>
+                                    أتبع طلبك
                   </Text>
                                 </View>
                                 <View style={{ width: width(10) }}>
@@ -309,8 +319,8 @@ class Trips extends Component {
                         </View>
                         <SegmentedControlTab
                             values={[
-                                'Current Orders',
-                                'Previous Orders',
+                                'الطلبات الحالية',
+                                'الطلبات السابقة',
                             ]}
                             selectedIndex={this.state.selectedIndex}
                             onTabPress={this.handleIndexChange}
@@ -326,7 +336,7 @@ class Trips extends Component {
                                 alignItems: 'center',
                                 marginTop: height(2)
                             }}
-                            tabTextStyle={{ color: '#959595', fontSize: totalSize(2) }}
+                            tabTextStyle={{ color: '#959595', fontSize: totalSize(2.5), fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular', }}
                             activeTabStyle={{ backgroundColor: color.orange }}
                             firstTabStyle={{
                                 marginLeft: width(3),
@@ -355,11 +365,12 @@ class Trips extends Component {
                                         showsVerticalScrollIndicator={false}
                                     />:<Text
                                     style={{
-                                        fontSize: totalSize(1.75),
+                                        fontSize: totalSize(2.5),
                                         color: '#000000',
-                                        marginTop: height(.5)
+                                        marginTop: height(.5),
+                                         fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
                                     }}>
-                                   No current orders
+                                   لا توجد أوامر حالية
                                 </Text>}
                                 </View>
                             </View>
@@ -379,11 +390,12 @@ class Trips extends Component {
                                         showsVerticalScrollIndicator={false}
                                     />: <Text
                                     style={{
-                                        fontSize: totalSize(1.75),
+                                        fontSize: totalSize(2.5),
                                         color: '#000000',
-                                        marginTop: height(.5)
+                                        marginTop: height(.5),
+                                        fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
                                     }}>
-                                   No completed orders
+                                  لا توجد أوامر مكتملة
                                 </Text>}
                                 </View>
                             </View>

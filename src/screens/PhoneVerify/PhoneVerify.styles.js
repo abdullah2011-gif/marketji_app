@@ -105,10 +105,10 @@ const styles = StyleSheet.create({
     marginBottom: height(3),
   },
   signupWith: {
+    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
     alignSelf: 'center',
-    fontSize: width(4.3),
+    fontSize: width(5.5),
     color: color.darkBlue,
-    fontWeight: 'bold',
     marginTop:height(15),
     textAlign:'center',
     width:width(75)
@@ -124,6 +124,7 @@ const styles = StyleSheet.create({
   },
   logo: {width: width(15), height: height(5), resizeMode: 'contain'},
   otpContainer: {
+    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
     width: width(90),
     alignSelf: 'center',
     flexDirection: 'row',
@@ -154,11 +155,11 @@ underlineStyleHighLighted: {
 },
 warning: {
   alignSelf: 'center',
-  fontSize: width(3.5),
+  fontSize: width(5.5),
   color: color.darkBlue,
   paddingTop: 10,
   paddingBottom: -height(2.5),
-  fontWeight: 'bold',
+  fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
 },
 });
 export default styles;

@@ -35,58 +35,44 @@ export default function Dashboard({navigation}) {
     {
       key: 1,
       quantity: 1,
-      title: 'Strawbery',
+      title: 'الفراولة',
       image:
         'https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
     },
     {
       key: 2,
       quantity: 1,
-      title: 'Strawbery',
+      title: 'الفراولة',
       image:
         'https://images.unsplash.com/photo-1562347810-18a0d370ba36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
     },
     {
       key: 3,
       quantity: 1,
-      title: 'Strawbery',
+      title: 'الفراولة',
       image:
         'https://images.unsplash.com/photo-1577041249022-26cc744ddda3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
     },
     {
       key: 4,
       quantity: 1,
-      title: 'Strawbery',
+      title: 'الفراولة',
       image:
         'https://images.unsplash.com/photo-1513612254505-fb553147a2e8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
     },
   ]);
-  const addAndDeleteToFav=async(itemId,fav)=>{
-dispatch(setLoading(true))
+  const addAndDeleteToFav=async(item,fav)=>{
+    console.log(favorites)
     if(!fav){
-   await new Apimanager().addingFavorites(itemId,user.customerId).then(res=>{
-          //  console.log(res)
-           new Apimanager().getFavorites(user.customerId).then(res=>{
-             dispatch(setProducts(res))
-           })
-    })}
-    else{
-      await  new Apimanager().deleteFavorite(itemId,user.customerId).then(res=>{
-        new Apimanager().getFavorites(user.customerId).then(res=>{
-          dispatch(setProducts(res))
-        })
-      })
+             dispatch(setProducts([...favorites,{product:item.product}]))
     }
-    dispatch(setLoading(false))
+    else{
+      console.log(item.product?._id)
+      dispatch(setProducts(favorites.filter(ite=>ite.product?._id!=item.product._id)))
+    }
   }
- const deleteCart=async(itemId)=>{
-  dispatch(setLoading(true))
- await new Apimanager().deleteCart(itemId,user.customerId).then(async(res)=>{
-  await  new Apimanager().getcart(user.customerId).then(res=>{
-      dispatch(setCart(res))
-    })
-  })
-  dispatch(setLoading(false))
+ const deleteCart=async(item)=>{
+  dispatch(setCart(cart.filter(ite=>ite.product?._id!=item.product._id)))
   }
   const dispatch = useDispatch();
   const renderItem = ({item}) => {
@@ -97,7 +83,6 @@ dispatch(setLoading(true))
       if(ite.product._id==item.product._id)
         fav=true
      })
-     console.log(fav)
     return (
       <View
         style={styles.flatListCont}>
@@ -106,7 +91,7 @@ dispatch(setLoading(true))
           <View
             style={styles.heartCont}>
             <TouchableOpacity
-             onPress={()=>addAndDeleteToFav(!fav?item.product.productId:favId,fav)}>
+             onPress={()=>addAndDeleteToFav(!fav?item:item,fav)}>
              {!fav?<Image
               source={require('../../assets/heart.png')}
               style={styles.heart}
@@ -119,12 +104,12 @@ dispatch(setLoading(true))
             <TouchableOpacity
               disabled={item.orderQuantity < 2 ? true : false}
               onPress={() =>
-               dispatch(resetOrderQuantity(item._id))
+               dispatch(resetOrderQuantity(item.product?._id))
               }
               style={{
                 backgroundColor: color.orange,
-                width: width(5),
-                height: width(5),
+                width: width(5.5),
+                height: width(5.5),
                 justifyContent: 'center',
                 alignItems: 'center',
                 borderRadius: width(5),
@@ -132,24 +117,23 @@ dispatch(setLoading(true))
               <Image
                 source={require('../../assets/minus.png')}
                 style={{
-                  height: width(0.01),
-                  height: width(0.3),
+                  height: width(0.02),
+                  height: width(0.4),
                   resizeMode: 'contain',
                 }}
               />
-              {console.log(item.orderQuantity)}
             </TouchableOpacity>
-            <Text style={{fontSize: width(4), color: color.darkBlue}}>
+            <Text style={{fontSize: width(4), color: color.darkBlue,fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular'}}>
               {item.orderQuantity}
             </Text>
             <TouchableOpacity
                onPress={() =>
-                dispatch(setOrderQuantity(item._id))
+                dispatch(setOrderQuantity(item.product?._id))
                }
               style={{
                 backgroundColor: color.green,
-                width: width(5),
-                height: width(5),
+                width: width(5.5),
+                height: width(5.5),
                 justifyContent: 'center',
                 alignItems: 'center',
                 borderRadius: width(5),
@@ -169,14 +153,15 @@ dispatch(setLoading(true))
               <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
                 <Text
                   style={{
+                    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
                     fontSize: width(3),
                     color: color.orange,
                     marginRight: 4,
                   }}>
                   ({item.product.quantity}kg)
                 </Text>
-                <Text style={{fontSize: width(3.7), color: color.darkBlue}}>
-                  {item.title}
+                <Text style={{fontSize: width(3.7), color: color.darkBlue,fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',}}>
+                  {item.product?.name}
                 </Text>
               </View>
               <Text
@@ -185,9 +170,10 @@ dispatch(setLoading(true))
                   fontWeight: 'bold',
                   color: color.darkBlue,
                   textAlign: 'center',
+                  fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
                 }}>
-                {item.product.price}
-                <Text style={{fontSize: width(2.5), color: color.darkBlue}}>
+                {item.product?.price}
+                <Text style={{fontSize: width(2.5), color: color.darkBlue,fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',}}>
                   {' '}
                   JD
                 </Text>
@@ -201,13 +187,13 @@ dispatch(setLoading(true))
                   height: width(15),
                   borderRadius: width(15),
                 }}
-                source={{uri: `${config.url}public/images/${item.product.image}`}}
+                source={{uri: `${config.url}public/images/${item.product?.image}`}}
               />
             </View>
           </View>
         </View>
         <TouchableOpacity
-          onPress={() => deleteCart(item._id)}>
+          onPress={() => deleteCart(item)}>
           <Image
             style={{
               width: width(4),
@@ -227,26 +213,29 @@ dispatch(setLoading(true))
       <SafeAreaView style={{flex: 1}}>
         <ImageBackground
           resizeMode="stretch"
-          source={require('../../assets/upper_.png')}
+          source={require('../../assets/cart.png')}
           style={{flex: 1}}>
           <ScrollView
             showsVerticalScrollIndicator={false}
             style={{marginTop: height(10)}}>
-            <FlatList
+         {cart.length>0?<FlatList
               data={cart}
               renderItem={renderItem}
               contentContainerStyle={{marginTop: height(6)}}
               ItemSeparatorComponent={() => (
                 <View style={{height: height(2.5)}} />
               )}
-            />
+            />:
+            <Text style={{fontSize: width(8),marginTop:100, color: color.darkBlue,textAlign:'center',fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',}}>
+            لا توجد عناصر في سلة التسوق
+          </Text> }
           {totalPrice&&  <View>
             <View style={styles.line} />
             <Text
               onPress={() => navigation.navigate('Cart')}
               style={{
                 color: color.white,
-                fontSize: width(4.4),
+                fontSize: width(6),
                 width: width(32),
                 backgroundColor: color.orange,
                 overflow: 'hidden',
@@ -255,8 +244,9 @@ dispatch(setLoading(true))
                 marginRight: width(15),
                 textAlign: 'center',
                 paddingVertical: height(1.5),
+                fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
               }}>
-              AlTabah ({totalQuantity})
+              المجموع ({totalQuantity})
             </Text>
             <View
               style={{
@@ -269,25 +259,26 @@ dispatch(setLoading(true))
               }}>
               <Text
                 style={{
+                  fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
                   fontSize: width(5),
                   fontWeight: 'bold',
                   color: color.darkBlue,
                   textAlign: 'center',
                 }}>
                 {totalPrice}
-                <Text style={{fontSize: width(3.5), color: color.darkBlue}}>
+                <Text style={{fontSize: width(3.5), color: color.darkBlue,fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',}}>
                   {' '}
                   JD
                 </Text>
               </Text>
-              <Text style={{fontSize: width(4), color: color.darkBlue}}>
-                Almajmuah
+              <Text style={{fontSize: width(6),color: color.darkBlue,fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',paddingRight:width(6)}}>
+              مجموع
               </Text>
             </View>
             <View style={styles.line} />
             <Button
             onPress={()=>navigation.navigate('FinalPayment')}
-              title="Proceed"
+            title="استكمال عملية الشراء"
               labelStyle={{color: color.darkBlue}}
               containerStyle={{
                 backgroundColor: 'transparent',

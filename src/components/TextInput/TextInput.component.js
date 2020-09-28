@@ -14,19 +14,29 @@ const Component = (
     editable,
     formatText,
     onSubmit,
-    returnKeyType,defaultValue
+    returnKeyType,defaultValue,type,containerStyle
   },
   ref,
 ) => {
   const [pass, setPass] = useState(true);
   return (
-    <View style={[styles.container]}>
+    <View style={[styles.container,containerStyle]}>
+      
+      {secureTextEntry ? (
+        <TouchableOpacity activeOpacity={0.8} onPress={() => setPass(!pass)}>
+        <Image
+          source={pass ? require('../../assets/show.png') : require('../../assets/hide.png')}
+          color={color.black}
+          style={{width:20,height:20}}
+          />
+          </TouchableOpacity>
+      ):<View style={{width:20}} />}
       <TextInput
-        placeholder={placeholder}
+        placeholder={type=='phone'?'07XXXXXXXX':placeholder}
         keyboardType={keyboardType ? keyboardType : 'default'}
         fontSize={totalSize(1.95)}
         placeholderTextColor={color.black}
-        style={{color: color.black, fontSize: totalSize(1.9), width: '90%'}}
+        style={{color: color.black, fontSize: totalSize(1.9), width:type=='phone'?'75%':'90%',textAlign:'right',fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',}}
         formatText={formatText}
         secureTextEntry={!pass ? false : secureTextEntry}
         autoCapitalize="none"
@@ -43,12 +53,12 @@ const Component = (
         tintColor={color.lightBrown}
         inputContainerStyle={styles.inputContainerStyle}
       />
-      {secureTextEntry ? (
+       {type=='phone' ? (
         <TouchableOpacity activeOpacity={0.8} onPress={() => setPass(!pass)}>
         <Image
-          source={pass ? require('../../assets/show.png') : require('../../assets/hide.png')}
+          source={require('../../assets/flag.png')}
           color={color.black}
-          style={{width:20,height:20}}
+          style={{width:20,height:20,marginLeft:5}}
           />
           </TouchableOpacity>
       ):<View style={{width:20}} />}

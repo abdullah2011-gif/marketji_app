@@ -47,7 +47,7 @@ export default function Login({route}) {
   const signUp = async() => {
     dispatch(setLoading(true))
     if(code!=otpVer){
-      setWarning('Wrong otp')
+      setWarning('otp خاطئ')
       return
     }
    await new Apimanager()
@@ -60,7 +60,7 @@ export default function Login({route}) {
       })
       .then(res => {
         if (res.status == 202) {
-          setWarning('User already exist');
+          setWarning('المستخدم موجود اصلا');
         } else if (res.status == 200) {
           dispatch(login({...res.data.user, token: res.data.token}));
         } else {
@@ -78,7 +78,8 @@ export default function Login({route}) {
           source={require('../../assets/loginbackground.png')}
           resizeMode="stretch"
           style={styles.container}>
-                <Text style={styles.signupWith}>Verification code has been sent to your phone number.{'\n\n\n\n'}Please verify your number to continue signup!</Text>
+                <Text style={styles.signupWith}>تم إرسال رمز التحقق إلى رقم هاتفك.{'\n\n\n\n'}يرجى التحقق من رقمك لمواصلة التسجيل!
+</Text>
                 <View style={styles.otpContainer}>
                         <OTPInputView
                             style={styles.otpViewContainer}
@@ -96,7 +97,7 @@ export default function Login({route}) {
                             }
                         />
                     </View>
-                    <Button onPress={signUp} containerStyle={{marginTop:height(10)}} title='Verify' />
+                    <Button onPress={signUp} containerStyle={{marginTop:height(10)}} title='تحقق' />
                     <Text style={styles.warning}>
                   {warning}
                 </Text>

@@ -1,4 +1,4 @@
-import React, {Component, useState, useEffect} from 'react';
+import React, {Component, useState, useEffect, createRef, useRef} from 'react';
 import {
   View,
   Text,
@@ -10,6 +10,7 @@ import {
   Image,
   ScrollView,
   ActivityIndicator,
+  Keyboard
 } from 'react-native';
 import styles from './Dashboard.styles';
 import Button from '../../components/Button/Button.component';
@@ -24,7 +25,7 @@ import {setCAtegoriesAndProduct} from '../../Redux/Actions/App'
 
 import config from '../../../config';
 import Apimanager from '../../ApiFunctions/ApiFunctions';
-const KEYS_TO_FILTERS = ['category.name'];
+const KEYS_TO_FILTERS = ['category.name','products.name'];
 export default function Dashboard({navigation}) {
   const [images, setImages] = useState([
     'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
@@ -37,12 +38,15 @@ export default function Dashboard({navigation}) {
   const [data, setData] = useState([]);
   const [data1, setData1] = useState([]);
   const [search, setSearch] = useState(false);
+  const searchTextInput =useRef(null);
   const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const cart = useSelector(state => state.App.cart);
   var totalPrice = null;
+  var totalQuantity = null;
   cart.map(item=>{
-    totalPrice = totalPrice+(item.orderQuantity*item.product.price)
+    totalQuantity=item.orderQuantity+totalQuantity
+    totalPrice = totalPrice+(item.orderQuantity*item.product?.price)
   })
   const dispatch = useDispatch()
     useEffect(()=>{
@@ -55,8 +59,8 @@ export default function Dashboard({navigation}) {
 
         })
     },[])
-    const dataProfiles = data1.filter(createFilter(searchTerm, KEYS_TO_FILTERS))
 
+    const dataProfiles = data1.filter(createFilter(searchTerm, KEYS_TO_FILTERS))
   return (
     <React.Fragment>
       <SafeAreaView backgroundColor={color.white} />
@@ -68,7 +72,12 @@ export default function Dashboard({navigation}) {
             style={styles.header}>
             {!search && (
               <>
-                <TouchableOpacity onPress={() => setSearch(true)}>
+                <TouchableOpacity onPress={() => {
+                  setSearch(true)
+                  setTimeout(() => {
+                    searchTextInput.current?.focus()
+                  }, 600);
+                  }}>
                   <Image
                     resizeMode="contain"
                     style={styles.headerImage}
@@ -92,7 +101,7 @@ export default function Dashboard({navigation}) {
                     style={styles.backImage}
                   />
                 </TouchableOpacity>
-                <TextInput value={searchTerm} onChangeText={setSearchTerm} placeholder="Search" />
+             <TextInput ref={searchTextInput} value={searchTerm} onChangeText={setSearchTerm} placeholder="بحث" />
               </View>
             )}
           </View>
@@ -197,17 +206,22 @@ export default function Dashboard({navigation}) {
           <Text
             onPress={() => navigation.navigate('Cart')}
             style={styles.cart}>
-            استكمال الشر
+         استكمال الشراء
           </Text>
           <View style={{flexDirection: 'row'}}>
             <Text
               style={styles.payment}>
-              {totalPrice} <Text style={{fontSize: width(3)}}>JD</Text>
+              {totalPrice} <Text style={{fontSize: width(3),fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',}}>JD</Text>
             </Text>
+            <TouchableOpacity  onPress={() => navigation.navigate('Cart')}>
+              <View style={{backgroundColor:color.orange,position:'absolute',zIndex:1,right:-width(2),overflow:'visible',top:-height(0.8),width:width(5),height:width(5),justifyContent:'center',alignItems:'center',borderRadius:width(5)}}>
+          <Text style={{color:'white',fontSize:width(3),fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',}}>{totalQuantity?totalQuantity:0}</Text>
+              </View>
             <Image
               style={styles.cartImage}
               source={require('../../assets/shopping-cart.png')}
             />
+            </TouchableOpacity>
           </View>
         </View>
       </SafeAreaView>

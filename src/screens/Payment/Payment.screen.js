@@ -1,7 +1,8 @@
-import React, {Component, useState, useReducer} from 'react';
+import React, {Component, useState} from 'react';
+import Text from '../../components/Text/Text.component';
 import {
   View,
-  Text,
+
   ImageBackground,
   TouchableOpacity,
   SafeAreaView,
@@ -10,7 +11,7 @@ import {
   Image,TextInput
 } from 'react-native';
 import styles from './Payment.styles';
-import ModalDropdown from 'react-native-modal-dropdown';
+// import ModalDropdown from 'react-native-modal-dropdown';
 import Button from '../../components/Button/Button.component';
 import arrowdownImage from '../../assets/back.png';
 import {useDispatch, useSelector} from 'react-redux';
@@ -64,7 +65,7 @@ export default function Payment({navigation}) {
         dispatch(setUser(res))
          navigation.goBack()
        }else{
-         setWarning('Only test card will be acceptable in test mode')
+         setWarning('ستكون بطاقة الاختبار فقط مقبولة في وضع الاختبار')
        }
      })
     }
@@ -85,7 +86,7 @@ export default function Payment({navigation}) {
       <SafeAreaView style={{flex: 1}}>
       <ImageBackground
           resizeMode="stretch"
-          source={require('../../assets/upper_.png')}
+          source={require('../../assets/payment.png')}
           style={{flex: 1}}>
        <View style={{width:width(90),paddingHorizontal:'5%',marginTop:height(17),alignItems:'center',borderRadius:width(8),backgroundColor:color.white,alignSelf:'center',flexDirection:'row',justifyContent:'space-between'}}>
            <View style={{flexDirection:'row',alignItems:'center'}}>
@@ -94,28 +95,28 @@ export default function Payment({navigation}) {
               <Image style={{width:width(7),height:height(4),resizeMode:'contain'}} source={require('../../assets/discover.png')} />
               <Image style={{width:width(20),marginTop:3,height:height(8),resizeMode:'contain'}} source={require('../../assets/paypal.png')} />
            </View>
-           <Text style={{fontSize:width(3.3),fontWeight:'bold'}}>Adl Istalam</Text>
+           <Text style={{fontSize:width(6), fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',}}>علدالاستلام</Text>
        </View>
-       <View style={{height:height(47),width:width(90),alignSelf:'center',borderRadius:width(3),padding:width(2),marginTop:height(2),backgroundColor:'rgba(252,235,225,0.9)'}}>
+       <View style={{height:height(47),width:width(90),alignSelf:'center',borderRadius:width(3),padding:width(2),marginTop:height(2),backgroundColor:'rgba(252,235,225,0.9)',}}>
          <View style={{borderBottomWidth:1,borderBottomColor:'#decec5',marginTop:height(2)}}>
-           <TextInput value={cardName} onChangeText={setCardName} placeholder='name' style={{color:color.darkBlue,textAlign:'right',fontWeight:'bold',height:height(6),width:'90%',alignSelf:'center'}} />
+           <TextInput value={cardName} onChangeText={setCardName} placeholder='اسم' style={{color:color.darkBlue,textAlign:'right',height:height(6),width:'90%',alignSelf:'center'}} />
          </View>
          <View style={{borderBottomWidth:1,borderBottomColor:'#decec5',marginTop:height(2)}}>
-           <TextInput value={cardNumber} onChangeText={setCardNumber} placeholder='رقم البطاقه' style={{color:color.darkBlue,textAlign:'right',fontWeight:'bold',height:height(6),width:'90%',alignSelf:'center'}} />
+           <TextInput value={cardNumber} onChangeText={setCardNumber} placeholder='رقم البطاقه' style={{color:color.darkBlue,textAlign:'right',fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',height:height(6),width:'90%',alignSelf:'center'}} />
          </View>
          <View style={{width:'90%',flexDirection:'row',alignSelf:'center',justifyContent:'space-between',marginTop:height(2)}}>
          <View style={{borderBottomWidth:1,width:'40%',borderBottomColor:'#decec5'}}>
            <TextInput value={cardCvv} onChangeText={setCardCvv} placeholder='CVV' style={{color:color.darkBlue,textAlign:'left',fontWeight:'bold',height:height(6),width:'100%',alignSelf:'center'}} />
            </View>
            <View style={{borderBottomWidth:1,width:'40%',borderBottomColor:'#decec5'}}>
-           <TextInput value={cardExpDate} onChangeText={setCardExpDate} placeholder='تاريخ الانتهاء' style={{color:color.darkBlue,textAlign:'right',fontWeight:'bold',height:height(6),width:'100%',alignSelf:'center'}} />
+           <TextInput value={cardExpDate} onChangeText={setCardExpDate} placeholder='تاريخ الانتهاء' style={{color:color.darkBlue,textAlign:'right',fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',height:height(6),width:'100%',alignSelf:'center'}} />
            </View>
          </View>
          <View style={{borderBottomWidth:1,borderBottomColor:'#decec5',marginTop:height(2)}}>
            <TextInput value={cardAddress} onChangeText={setCardAddress} placeholder='العنوان' style={{color:color.darkBlue,textAlign:'right',fontWeight:'bold',height:height(6),width:'90%',alignSelf:'center'}} />
          </View>
          <View style={{width:'90%',flexDirection:'row',alignItems:'center',alignSelf:'center',justifyContent:'space-between',marginTop:height(3)}}>
-         <ModalDropdown
+         {/* <ModalDropdown
                   options={['عمان', 'زرقاء ','اربد ','مادبا','عجلون','البقعه']}
                   dropdownStyle={styles.genderDropDown}
                   showsVerticalScrollIndicator={false}
@@ -136,8 +137,8 @@ export default function Payment({navigation}) {
                     <Text style={styles.genderText}>{selectedValue}</Text>
                    
                   </View>
-                </ModalDropdown>
-         <Button title={'Select location'} labelStyle={{fontSize:width(4)}} containerStyle={{width:'50%',borderRadius:4,height:height(5)}} />
+                </ModalDropdown> */}
+         {/* <Button title={'اختر موقعا'} labelStyle={{fontSize:width(4)}} containerStyle={{width:'50%',borderRadius:4,height:height(5)}} /> */}
          </View>
        </View>
        <View style={{flexDirection:'row',alignItems:'center',alignSelf:'center',justifyContent:'space-between',marginTop:height(3)}}>

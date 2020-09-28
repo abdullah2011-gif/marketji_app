@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   header: {
     width: width(100),
     height: height(6),
-    flexDirection: 'row',
+    flexDirection: 'row-reverse',
     justifyContent: 'space-between',
     paddingHorizontal: width(5),
     alignItems: 'center',
@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: color.white,
     fontSize: width(4.2),
+    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
   },
   horizintalDotContainer: {
     flexDirection: 'row',
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
   },
   bottom: {
     width: width(100),
-    height: height(6),
+    height: height(7),
     marginTop: height(2),
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -102,23 +103,25 @@ const styles = StyleSheet.create({
   },
   cart: {
     color: color.white,
-    fontSize: width(4.4),
+    fontSize: width(6),
     backgroundColor: color.darkBlue,
     overflow: 'hidden',
     borderRadius: width(1),
     paddingHorizontal: width(3),
     paddingVertical: height(0.6),
+    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
   },
   payment: {
+    fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',
     fontSize: width(4),
     fontWeight: 'bold',
     color: color.orange,
     marginRight: width(2),
   },
   cartImage: {
-    width: width(5),
+    width: width(6),
     resizeMode: 'contain',
-    height: height(4),
+    height: height(4.5),
   },
   image:{
     width:'100%',
