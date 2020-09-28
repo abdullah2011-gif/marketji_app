@@ -58,7 +58,7 @@ export default function Login({navigation}) {
                 navigation.navigate('Dashboard')
                
            }else{
-             setWarning('Unable to authenticate your account please try again')
+             setWarning('غير قادر على مصادقة حسابك يرجى المحاولة مرة أخرى')
            }
       })
       .catch(e =>console.log(e.response))
@@ -98,7 +98,7 @@ export default function Login({navigation}) {
                         navigation.navigate('Dashboard')
                        
                    }else{
-                     setWarning('Unable to authenticate your account please try again')
+                     setWarning('غير قادر على مصادقة حسابك يرجى المحاولة مرة أخرى')
                    }
               })
               .catch(e =>console.log(e.response))//setWarning('Unable to authenticate your account please try again'));

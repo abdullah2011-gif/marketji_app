@@ -32,7 +32,7 @@ const Component = (
           </TouchableOpacity>
       ):<View style={{width:20}} />}
       <TextInput
-        placeholder={type=='phone'?'07800997333':placeholder}
+        placeholder={type=='phone'?'07XXXXXXXX':placeholder}
         keyboardType={keyboardType ? keyboardType : 'default'}
         fontSize={totalSize(1.95)}
         placeholderTextColor={color.black}

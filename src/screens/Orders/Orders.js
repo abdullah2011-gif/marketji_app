@@ -28,7 +28,7 @@ import config from '../../../config'
 //     selected_item,
 //   } from '../../Redux/Actions/Categories';
 
-const labels = ["طلب", "تمت الموافقة على الطلبات", "تحت المعالجة", "منجز"];
+const labels = ["طلب", "تم تأكيد الطلبات  ", "تحت المعالجة", "تم التسليم"];
 const customStyles = {
     stepIndicatorSize: 22,
     currentStepIndicatorSize: 22,
@@ -152,7 +152,7 @@ class Trips extends Component {
                                     marginTop: height(.5)
                                 
                                 }}>
-                               الحالة:   قيد الانتظار
+                               الحالة: قيد العمل  
                             </Text>
                             <Text
                                 style={{ fontFamily:'Ara-Hamah-Sahet-AlAssi-Regular',

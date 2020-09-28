@@ -65,7 +65,7 @@ export default function Payment({navigation}) {
         dispatch(setUser(res))
          navigation.goBack()
        }else{
-         setWarning('Only test card will be acceptable in test mode')
+         setWarning('ستكون بطاقة الاختبار فقط مقبولة في وضع الاختبار')
        }
      })
     }

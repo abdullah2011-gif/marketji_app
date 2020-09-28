@@ -278,7 +278,7 @@ export default function Dashboard({navigation}) {
             <View style={styles.line} />
             <Button
             onPress={()=>navigation.navigate('FinalPayment')}
-            title="تقدم"
+            title="استكمال عملية الشراء"
               labelStyle={{color: color.darkBlue}}
               containerStyle={{
                 backgroundColor: 'transparent',
